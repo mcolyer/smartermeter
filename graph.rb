@@ -16,7 +16,7 @@ class Sample
   end
 end
 
-data = File.read('dump.html')
+data = File.read('dump2.html')
 document = Nokogiri::HTML(data)
 nodes = document.css('noscript area').to_a.reverse
 
@@ -42,7 +42,7 @@ labels = []
 samples.each_slice(24) do |s|
   i+=24
   labels << [i, s.first.time.strftime("%m-%d")]
-  labels << [i+13, s[12].time.strftime("%H:%M")]
+  labels << [i+13, s[12].time.strftime("%H:%M")] if s[12]
 end
 
 g.labels = Hash[labels]
