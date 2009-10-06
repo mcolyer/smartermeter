@@ -1,22 +1,14 @@
-require 'rubygems'
-require 'nokogiri'
 require 'gruff'
+require 'rubygems'
+require 'lib/fetch'
 require 'date'
 
+USERNAME = $ARGV[0]
+PASSWORD = $ARGV[1]
 
-data = File.read('dump2.html')
-document = Nokogiri::HTML(data)
-nodes = document.css('noscript area').to_a.reverse
-
-# difficult to tell if this information is in UTC or not.
-hour_increment = 1/24.0 
-timestamp = DateTime.new(2009,9,27,0,0,0) - hour_increment + 1/(24.0*60)
-
-samples = nodes.map do |n|
-  kwh = n['alt'].to_f
-  timestamp = timestamp + hour_increment
-  Sample.new(timestamp, kwh)
-end
+api = SmartMeterService.new
+api.login(USERNAME, PASSWORD)
+samples = api.fetch_day(Date.new(2009,9,25))
 
 g = Gruff::Line.new
 g.hide_dots = true
