@@ -17,9 +17,7 @@ terribly useful but an interesting piece of trivia.
 
   git clone smartermeter
   cd smartermeter
-  vi lib/fetch.rb (edit USERNAME and PASSWORD)
-  GEM_HOME=gems ruby lib/fetch.rb
-  cat data.csv
+  GEM_HOME=gems ruby run.rb <USERNAME> <PASSWORD>
 
 == Questions
 

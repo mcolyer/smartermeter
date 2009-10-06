@@ -3,18 +3,6 @@ require 'nokogiri'
 require 'gruff'
 require 'date'
 
-class Sample
-  attr_accessor :time, :kwh
-
-  def initialize(time, kwh)
-    @time = time
-    @kwh = kwh
-  end
-
-  def inspect
-    "<Sample #{@time} #{@kwh}>"
-  end
-end
 
 data = File.read('dump2.html')
 document = Nokogiri::HTML(data)
