@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Draw the optional labels for the x axis and y axis.
+full_name: Gruff::Base#draw_axis_labels
+is_singleton: false
+name: draw_axis_labels
+params: ()
+visibility: protected

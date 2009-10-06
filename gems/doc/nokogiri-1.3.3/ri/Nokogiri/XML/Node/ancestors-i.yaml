@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Get a list of ancestor Node for this Node. If <tt>selector</tt> is given, the ancestors must match <tt>selector</tt>
+full_name: Nokogiri::XML::Node#ancestors
+is_singleton: false
+name: ancestors
+params: (selector = nil)
+visibility: public

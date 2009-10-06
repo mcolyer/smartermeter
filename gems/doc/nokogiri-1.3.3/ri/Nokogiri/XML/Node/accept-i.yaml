@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Accept a visitor. This method calls &quot;visit&quot; on <tt>visitor</tt> with self.
+full_name: Nokogiri::XML::Node#accept
+is_singleton: false
+name: accept
+params: (visitor)
+visibility: public

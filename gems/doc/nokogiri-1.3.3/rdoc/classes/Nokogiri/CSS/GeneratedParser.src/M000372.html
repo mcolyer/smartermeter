@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>_reduce_36 (Nokogiri::CSS::GeneratedParser)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/nokogiri/css/generated_parser.rb, line 477</span>
+<span class="ruby-keyword kw">def</span> <span class="ruby-identifier">_reduce_36</span>(<span class="ruby-identifier">val</span>, <span class="ruby-identifier">_values</span>, <span class="ruby-identifier">result</span>)
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">val</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">'even'</span>
+          <span class="ruby-identifier">val</span> = [<span class="ruby-value str">&quot;2&quot;</span>,<span class="ruby-value str">&quot;n&quot;</span>,<span class="ruby-value str">&quot;+&quot;</span>,<span class="ruby-value str">&quot;0&quot;</span>]
+          <span class="ruby-identifier">result</span> = <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:AN_PLUS_B</span>, <span class="ruby-identifier">val</span>)
+        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">val</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value str">'odd'</span>
+          <span class="ruby-identifier">val</span> = [<span class="ruby-value str">&quot;2&quot;</span>,<span class="ruby-value str">&quot;n&quot;</span>,<span class="ruby-value str">&quot;+&quot;</span>,<span class="ruby-value str">&quot;1&quot;</span>]
+          <span class="ruby-identifier">result</span> = <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:AN_PLUS_B</span>, <span class="ruby-identifier">val</span>)
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-comment cmt"># This is not CSS standard.  It allows us to support this:</span>
+          <span class="ruby-comment cmt"># assert_xpath(&quot;//a[foo(., @href)]&quot;, @parser.parse('a:foo(@href)'))</span>
+          <span class="ruby-comment cmt"># assert_xpath(&quot;//a[foo(., @a, b)]&quot;, @parser.parse('a:foo(@a, b)'))</span>
+          <span class="ruby-comment cmt"># assert_xpath(&quot;//a[foo(., a, 10)]&quot;, @parser.parse('a:foo(a, 10)'))</span>
+          <span class="ruby-identifier">result</span> = <span class="ruby-identifier">val</span>
+        <span class="ruby-keyword kw">end</span>
+      
+    <span class="ruby-identifier">result</span>
+<span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

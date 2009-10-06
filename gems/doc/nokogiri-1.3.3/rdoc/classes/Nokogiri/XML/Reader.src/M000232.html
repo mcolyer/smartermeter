@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>attribute_nodes (Nokogiri::XML::Reader)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *   attribute_nodes
+ *
+ * Get a list of attributes for this Node
+ */
+static VALUE attribute_nodes(VALUE self)
+{
+  xmlTextReaderPtr reader;
+  VALUE attr ;
+
+  Data_Get_Struct(self, xmlTextReader, reader);
+
+  attr = rb_ary_new() ;
+
+  if (! has_attributes(reader))
+    return attr ;
+
+  xmlNodePtr ptr = xmlTextReaderExpand(reader);
+  if(ptr == NULL) return Qnil;
+
+  VALUE enc = rb_iv_get(self, &quot;@encoding&quot;);
+
+  if(enc != Qnil &amp;&amp; NULL == ptr-&gt;doc-&gt;encoding) {
+    ptr-&gt;doc-&gt;encoding = calloc((size_t)RSTRING_LEN(enc), sizeof(char));
+    strncpy(
+      (char *)ptr-&gt;doc-&gt;encoding,
+      StringValuePtr(enc),
+      (size_t)RSTRING_LEN(enc)
+    );
+  }
+
+  Nokogiri_xml_node_properties(ptr, attr);
+
+  return attr ;
+}</pre>
+</body>
+</html>

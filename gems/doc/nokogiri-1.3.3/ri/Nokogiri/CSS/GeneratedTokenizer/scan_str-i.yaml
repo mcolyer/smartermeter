@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Nokogiri::CSS::GeneratedTokenizer#scan_str
+is_singleton: false
+name: scan_str
+params: (str)
+visibility: public

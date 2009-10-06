@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: page if block_given?
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Fetches the URL passed in and returns a page.
+full_name: WWW::Mechanize#get
+is_singleton: false
+name: get
+params: (options, parameters = [], referer = nil) {|page if block_given?| ...}
+visibility: public

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>detect_charset (WWW::Mechanize::Util)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/www/mechanize/util.rb, line 60</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">detect_charset</span>(<span class="ruby-identifier">src</span>)
+          <span class="ruby-identifier">tmp</span> = <span class="ruby-constant">NKF</span>.<span class="ruby-identifier">guess</span>(<span class="ruby-identifier">src</span> <span class="ruby-operator">||</span> <span class="ruby-value str">&quot;&lt;html&gt;&lt;/html&gt;&quot;</span>)
+          <span class="ruby-keyword kw">if</span> <span class="ruby-constant">RUBY_VERSION</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value str">&quot;1.9.0&quot;</span>
+            <span class="ruby-identifier">enc</span> = <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">upcase</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">enc</span> = <span class="ruby-constant">NKF</span>.<span class="ruby-identifier">constants</span>.<span class="ruby-identifier">find</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+              <span class="ruby-constant">NKF</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">c</span>) <span class="ruby-operator">==</span> <span class="ruby-identifier">tmp</span>
+            }
+            <span class="ruby-identifier">enc</span> = <span class="ruby-constant">CODE_DIC</span>[<span class="ruby-identifier">enc</span>.<span class="ruby-identifier">intern</span>]
+          <span class="ruby-keyword kw">end</span>
+          <span class="ruby-identifier">enc</span> <span class="ruby-operator">||</span> <span class="ruby-value str">&quot;ISO-8859-1&quot;</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

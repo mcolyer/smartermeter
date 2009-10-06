@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: "%"
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Search for the first occurrence of <tt>path</tt>. Returns nil if nothing is found, otherwise a Node.
+full_name: Nokogiri::XML::Node#at
+is_singleton: false
+name: at
+params: "(path, ns = document.root ? document.root.namespaces : {})"
+visibility: public

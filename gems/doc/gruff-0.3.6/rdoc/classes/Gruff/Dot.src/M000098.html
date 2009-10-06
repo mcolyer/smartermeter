@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>draw (Gruff::Dot)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/gruff/dot.rb, line 9</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">draw</span>
+    <span class="ruby-ivar">@has_left_labels</span> = <span class="ruby-keyword kw">true</span>
+    <span class="ruby-keyword kw">super</span>
+
+    <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@has_data</span>
+
+    <span class="ruby-comment cmt"># Setup spacing.</span>
+    <span class="ruby-comment cmt">#</span>
+    <span class="ruby-identifier">spacing_factor</span> = <span class="ruby-value">1.0</span>
+
+    <span class="ruby-ivar">@items_width</span> = <span class="ruby-ivar">@graph_height</span> <span class="ruby-operator">/</span> <span class="ruby-ivar">@column_count</span>.<span class="ruby-identifier">to_f</span>
+    <span class="ruby-ivar">@item_width</span> = <span class="ruby-ivar">@items_width</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">spacing_factor</span> <span class="ruby-operator">/</span> <span class="ruby-ivar">@norm_data</span>.<span class="ruby-identifier">size</span>
+    <span class="ruby-ivar">@d</span>         = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">stroke_opacity</span> <span class="ruby-value">0</span><span class="ruby-value">.0</span>
+    <span class="ruby-identifier">height</span>     = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@column_count</span>, <span class="ruby-value">0</span>)
+    <span class="ruby-identifier">length</span>     = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@column_count</span>, <span class="ruby-ivar">@graph_left</span>)
+    <span class="ruby-identifier">padding</span>    = (<span class="ruby-ivar">@items_width</span> <span class="ruby-operator">*</span> (<span class="ruby-value">1</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">spacing_factor</span>)) <span class="ruby-operator">/</span> <span class="ruby-value">2</span>
+
+    <span class="ruby-ivar">@norm_data</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">data_row</span>, <span class="ruby-identifier">row_index</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">data_row</span>[<span class="ruby-constant">DATA_VALUES_INDEX</span>].<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">data_point</span>, <span class="ruby-identifier">point_index</span><span class="ruby-operator">|</span>
+
+        <span class="ruby-identifier">x_pos</span>        = <span class="ruby-ivar">@graph_left</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">data_point</span> <span class="ruby-operator">*</span> <span class="ruby-ivar">@graph_width</span>) <span class="ruby-operator">-</span> (<span class="ruby-ivar">@item_width</span>.<span class="ruby-identifier">to_f</span><span class="ruby-operator">/</span><span class="ruby-value">6.0</span>).<span class="ruby-identifier">round</span>
+        <span class="ruby-identifier">y_pos</span>        = <span class="ruby-ivar">@graph_top</span> <span class="ruby-operator">+</span> (<span class="ruby-ivar">@items_width</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">point_index</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">padding</span> <span class="ruby-operator">+</span> (<span class="ruby-ivar">@item_width</span>.<span class="ruby-identifier">to_f</span><span class="ruby-operator">/</span><span class="ruby-value">2.0</span>).<span class="ruby-identifier">round</span>      
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">row_index</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+          <span class="ruby-ivar">@d</span>           = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">stroke</span>(<span class="ruby-ivar">@marker_color</span>)
+          <span class="ruby-ivar">@d</span>           = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">stroke_width</span> <span class="ruby-value">1.0</span>
+          <span class="ruby-ivar">@d</span>           = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">opacity</span> <span class="ruby-value">0</span><span class="ruby-value">.1</span>
+          <span class="ruby-ivar">@d</span>           = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">line</span>(<span class="ruby-ivar">@graph_left</span>, <span class="ruby-identifier">y_pos</span>, <span class="ruby-ivar">@graph_left</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@graph_width</span>, <span class="ruby-identifier">y_pos</span>)
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-ivar">@d</span>           = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">fill</span> <span class="ruby-identifier">data_row</span>[<span class="ruby-constant">DATA_COLOR_INDEX</span>]
+        <span class="ruby-ivar">@d</span>           = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">stroke</span>(<span class="ruby-value str">'transparent'</span>)
+        <span class="ruby-ivar">@d</span>           = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">circle</span>(<span class="ruby-identifier">x_pos</span>, <span class="ruby-identifier">y_pos</span>, <span class="ruby-identifier">x_pos</span> <span class="ruby-operator">+</span> (<span class="ruby-ivar">@item_width</span>.<span class="ruby-identifier">to_f</span><span class="ruby-operator">/</span><span class="ruby-value">3.0</span>).<span class="ruby-identifier">round</span>, <span class="ruby-identifier">y_pos</span>)
+
+        <span class="ruby-comment cmt"># Calculate center based on item_width and current row</span>
+        <span class="ruby-identifier">label_center</span> = <span class="ruby-ivar">@graph_top</span> <span class="ruby-operator">+</span> (<span class="ruby-ivar">@items_width</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">point_index</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@items_width</span> <span class="ruby-operator">/</span> <span class="ruby-value">2</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">padding</span>
+        <span class="ruby-identifier">draw_label</span>(<span class="ruby-identifier">label_center</span>, <span class="ruby-identifier">point_index</span>)
+      <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">draw</span>(<span class="ruby-ivar">@base_image</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

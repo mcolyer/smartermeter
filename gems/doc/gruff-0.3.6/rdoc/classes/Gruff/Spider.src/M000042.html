@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>draw (Gruff::Spider)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/gruff/spider.rb, line 29</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">draw</span>
+    <span class="ruby-ivar">@hide_line_markers</span> = <span class="ruby-keyword kw">true</span>
+    
+    <span class="ruby-keyword kw">super</span>
+
+    <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@has_data</span>
+
+    <span class="ruby-comment cmt"># Setup basic positioning</span>
+    <span class="ruby-identifier">diameter</span> = <span class="ruby-ivar">@graph_height</span>
+    <span class="ruby-identifier">radius</span> = <span class="ruby-ivar">@graph_height</span> <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>
+    <span class="ruby-identifier">top_x</span> = <span class="ruby-ivar">@graph_left</span> <span class="ruby-operator">+</span> (<span class="ruby-ivar">@graph_width</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">diameter</span>) <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>
+    <span class="ruby-identifier">center_x</span> = <span class="ruby-ivar">@graph_left</span> <span class="ruby-operator">+</span> (<span class="ruby-ivar">@graph_width</span> <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>)
+    <span class="ruby-identifier">center_y</span> = <span class="ruby-ivar">@graph_top</span> <span class="ruby-operator">+</span> (<span class="ruby-ivar">@graph_height</span> <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>) <span class="ruby-operator">-</span> <span class="ruby-value">25</span> <span class="ruby-comment cmt"># Move graph up a bit</span>
+    
+    <span class="ruby-ivar">@unit_length</span> = <span class="ruby-identifier">radius</span> <span class="ruby-operator">/</span> <span class="ruby-ivar">@max_value</span>
+    
+        
+    <span class="ruby-identifier">total_sum</span> = <span class="ruby-identifier">sums_for_spider</span>
+    <span class="ruby-identifier">prev_degrees</span> = <span class="ruby-value">0</span><span class="ruby-value">.0</span>
+    <span class="ruby-identifier">additive_angle</span> = (<span class="ruby-value">2</span> <span class="ruby-operator">*</span> <span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-constant">PI</span>)<span class="ruby-operator">/</span> <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">size</span>
+    
+    <span class="ruby-identifier">current_angle</span> = <span class="ruby-value">0</span><span class="ruby-value">.0</span>
+
+    <span class="ruby-comment cmt"># Draw axes</span>
+    <span class="ruby-identifier">draw_axes</span>(<span class="ruby-identifier">center_x</span>, <span class="ruby-identifier">center_y</span>, <span class="ruby-identifier">radius</span>, <span class="ruby-identifier">additive_angle</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">hide_axes</span>    
+    
+    <span class="ruby-comment cmt"># Draw polygon</span>
+    <span class="ruby-identifier">draw_polygon</span>(<span class="ruby-identifier">center_x</span>, <span class="ruby-identifier">center_y</span>, <span class="ruby-identifier">additive_angle</span>)
+    
+     
+    <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">draw</span>(<span class="ruby-ivar">@base_image</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns true if any member of node set equals <tt>node</tt>.
+full_name: Nokogiri::XML::NodeSet#include?
+is_singleton: false
+name: include?
+params: |
+  include?(node)
+
+visibility: public

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: WWW::Mechanize::Util::build_query_string
+is_singleton: true
+name: build_query_string
+params: (parameters, enc=nil)
+visibility: public

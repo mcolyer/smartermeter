@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Create a new XPathContext with <tt>node</tt> as the reference point.
+full_name: Nokogiri::XML::XPathContext::new
+is_singleton: true
+name: new
+params: |
+  new(node)
+
+visibility: public

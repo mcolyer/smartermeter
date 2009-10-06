@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Validate this Document against it's DTD. Returns a list of errors on the document or <tt>nil</tt> when there is no DTD.
+full_name: Nokogiri::XML::Document#validate
+is_singleton: false
+name: validate
+params: ()
+visibility: public

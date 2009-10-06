@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>setup_graph_measurements (Gruff::Base)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/gruff/base.rb, line 571</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">setup_graph_measurements</span>
+      <span class="ruby-ivar">@marker_caps_height</span> = <span class="ruby-ivar">@hide_line_markers</span> <span class="ruby-operator">?</span> <span class="ruby-value">0</span> <span class="ruby-operator">:</span>
+        <span class="ruby-identifier">calculate_caps_height</span>(<span class="ruby-ivar">@marker_font_size</span>)
+      <span class="ruby-ivar">@title_caps_height</span> = <span class="ruby-ivar">@hide_title</span> <span class="ruby-operator">?</span> <span class="ruby-value">0</span> <span class="ruby-operator">:</span>
+        <span class="ruby-identifier">calculate_caps_height</span>(<span class="ruby-ivar">@title_font_size</span>)
+      <span class="ruby-ivar">@legend_caps_height</span> = <span class="ruby-ivar">@hide_legend</span> <span class="ruby-operator">?</span> <span class="ruby-value">0</span> <span class="ruby-operator">:</span>
+        <span class="ruby-identifier">calculate_caps_height</span>(<span class="ruby-ivar">@legend_font_size</span>)
+
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@hide_line_markers</span>
+        (<span class="ruby-ivar">@graph_left</span>,
+         <span class="ruby-ivar">@graph_right_margin</span>,
+         <span class="ruby-ivar">@graph_bottom_margin</span>) = [<span class="ruby-ivar">@left_margin</span>, <span class="ruby-ivar">@right_margin</span>, <span class="ruby-ivar">@bottom_margin</span>]
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">longest_left_label_width</span> = <span class="ruby-value">0</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@has_left_labels</span>
+          <span class="ruby-identifier">longest_left_label_width</span> =  <span class="ruby-identifier">calculate_width</span>(<span class="ruby-ivar">@marker_font_size</span>,
+                                                      <span class="ruby-identifier">labels</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-value str">''</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">value</span>, <span class="ruby-identifier">memo</span><span class="ruby-operator">|</span> (<span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">memo</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">memo</span> }) <span class="ruby-operator">*</span> <span class="ruby-value">1.25</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">longest_left_label_width</span> = <span class="ruby-identifier">calculate_width</span>(<span class="ruby-ivar">@marker_font_size</span>,
+                                                     <span class="ruby-identifier">label</span>(<span class="ruby-ivar">@maximum_value</span>.<span class="ruby-identifier">to_f</span>))
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-comment cmt"># Shift graph if left line numbers are hidden</span>
+        <span class="ruby-identifier">line_number_width</span> = <span class="ruby-ivar">@hide_line_numbers</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@has_left_labels</span> <span class="ruby-operator">?</span>
+        <span class="ruby-value">0</span><span class="ruby-value">.0</span> <span class="ruby-operator">:</span>
+          (<span class="ruby-identifier">longest_left_label_width</span> <span class="ruby-operator">+</span> <span class="ruby-constant">LABEL_MARGIN</span> <span class="ruby-operator">*</span> <span class="ruby-value">2</span>)
+
+        <span class="ruby-ivar">@graph_left</span> = <span class="ruby-ivar">@left_margin</span> <span class="ruby-operator">+</span>
+          <span class="ruby-identifier">line_number_width</span> <span class="ruby-operator">+</span>
+          (<span class="ruby-ivar">@y_axis_label</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-value">? </span><span class="ruby-value">0</span><span class="ruby-value">.0</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@marker_caps_height</span> <span class="ruby-operator">+</span> <span class="ruby-constant">LABEL_MARGIN</span> <span class="ruby-operator">*</span> <span class="ruby-value">2</span>)
+
+        <span class="ruby-comment cmt"># Make space for half the width of the rightmost column label.</span>
+        <span class="ruby-comment cmt"># Might be greater than the number of columns if between-style bar markers are used.</span>
+        <span class="ruby-identifier">last_label</span> = <span class="ruby-ivar">@labels</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">to_i</span>
+        <span class="ruby-identifier">extra_room_for_long_label</span> = (<span class="ruby-identifier">last_label</span> <span class="ruby-operator">&gt;=</span> (<span class="ruby-ivar">@column_count</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@center_labels_over_point</span>) <span class="ruby-operator">?</span>
+        <span class="ruby-identifier">calculate_width</span>(<span class="ruby-ivar">@marker_font_size</span>, <span class="ruby-ivar">@labels</span>[<span class="ruby-identifier">last_label</span>]) <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span> <span class="ruby-operator">:</span>
+          <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@graph_right_margin</span> = <span class="ruby-ivar">@right_margin</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">extra_room_for_long_label</span>
+
+        <span class="ruby-ivar">@graph_bottom_margin</span> = <span class="ruby-ivar">@bottom_margin</span> <span class="ruby-operator">+</span>
+          <span class="ruby-ivar">@marker_caps_height</span> <span class="ruby-operator">+</span> <span class="ruby-constant">LABEL_MARGIN</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-ivar">@graph_right</span> = <span class="ruby-ivar">@raw_columns</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@graph_right_margin</span>
+      <span class="ruby-ivar">@graph_width</span> = <span class="ruby-ivar">@raw_columns</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@graph_left</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@graph_right_margin</span>
+
+      <span class="ruby-comment cmt"># When @hide title, leave a title_margin space for aesthetics.</span>
+      <span class="ruby-comment cmt"># Same with @hide_legend</span>
+      <span class="ruby-ivar">@graph_top</span> = <span class="ruby-ivar">@top_margin</span> <span class="ruby-operator">+</span>
+        (<span class="ruby-ivar">@hide_title</span>  <span class="ruby-operator">?</span> <span class="ruby-identifier">title_margin</span>  <span class="ruby-operator">:</span> <span class="ruby-ivar">@title_caps_height</span>  <span class="ruby-operator">+</span> <span class="ruby-identifier">title_margin</span> ) <span class="ruby-operator">+</span>
+        (<span class="ruby-ivar">@hide_legend</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">legend_margin</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@legend_caps_height</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">legend_margin</span>)
+
+      <span class="ruby-identifier">x_axis_label_height</span> = <span class="ruby-ivar">@x_axis_label</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-value">? </span><span class="ruby-value">0</span><span class="ruby-value">.0</span> <span class="ruby-operator">:</span>
+        <span class="ruby-ivar">@marker_caps_height</span> <span class="ruby-operator">+</span> <span class="ruby-constant">LABEL_MARGIN</span>
+      <span class="ruby-ivar">@graph_bottom</span> = <span class="ruby-ivar">@raw_rows</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@graph_bottom_margin</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">x_axis_label_height</span>
+      <span class="ruby-ivar">@graph_height</span> = <span class="ruby-ivar">@graph_bottom</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@graph_top</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

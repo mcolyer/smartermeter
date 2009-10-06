@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Set the value for this Attr to <tt>content</tt>
+full_name: Nokogiri::XML::Attr#value=
+is_singleton: false
+name: value=
+params: |
+  value=(content)
+
+visibility: public

@@ -1,0 +1,44 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: This class is used for registering types of events you are interested in handling. All of the methods on this class are available as possible events while parsing an XML document. To register for any particular event, just subclass this class and implement the methods you are interested in knowing about.
+- !ruby/struct:SM::Flow::P 
+  body: "To only be notified about start and end element events, write a class like this:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  class MyDocument &lt; Nokogiri::XML::SAX::Document\n    def start_element name, attrs = []\n      puts &quot;#{name} started!&quot;\n    end\n\n    def end_element name\n      puts &quot;#{name} ended&quot;\n    end\n  end\n"
+- !ruby/struct:SM::Flow::P 
+  body: You can use this event handler for any SAX style parser included with Nokogiri. See Nokogiri::XML::SAX, and Nokogiri::HTML::SAX.
+constants: []
+
+full_name: Nokogiri::XML::SAX::Document
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: cdata_block
+- !ruby/object:RI::MethodSummary 
+  name: characters
+- !ruby/object:RI::MethodSummary 
+  name: comment
+- !ruby/object:RI::MethodSummary 
+  name: end_document
+- !ruby/object:RI::MethodSummary 
+  name: end_element
+- !ruby/object:RI::MethodSummary 
+  name: end_element_namespace
+- !ruby/object:RI::MethodSummary 
+  name: error
+- !ruby/object:RI::MethodSummary 
+  name: start_document
+- !ruby/object:RI::MethodSummary 
+  name: start_element
+- !ruby/object:RI::MethodSummary 
+  name: start_element_namespace
+- !ruby/object:RI::MethodSummary 
+  name: warning
+name: Document
+superclass: Object

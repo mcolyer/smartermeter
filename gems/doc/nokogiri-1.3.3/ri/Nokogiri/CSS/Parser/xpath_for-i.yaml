@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Get the xpath for <tt>string</tt> using <tt>options</tt>
+full_name: Nokogiri::CSS::Parser#xpath_for
+is_singleton: false
+name: xpath_for
+params: (string, options={})
+visibility: public

@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: "%"
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: If path is a string, search this document for <tt>path</tt> returning the first Node. Otherwise, index in to the array with <tt>path</tt>.
+full_name: Nokogiri::XML::NodeSet#at
+is_singleton: false
+name: at
+params: "(path, ns = document.root ? document.root.namespaces : {})"
+visibility: public

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Called at the beginning of an element <tt>name</tt> is the element name <tt>attrs</tt> is a list of attributes <tt>prefix</tt> is the namespace prefix for the element <tt>uri</tt> is the associated namespace URI <tt>ns</tt> is a hash of namespace prefix:urls associated with the element
+full_name: Nokogiri::XML::SAX::Document#start_element_namespace
+is_singleton: false
+name: start_element_namespace
+params: (name, attrs = {})
+visibility: public

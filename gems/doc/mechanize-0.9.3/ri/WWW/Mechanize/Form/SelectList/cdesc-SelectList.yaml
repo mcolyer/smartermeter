@@ -1,0 +1,27 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "This class represents a select list or drop down box in a Form. Set the value for the list by calling SelectList#value=. SelectList contains a list of Option that were found. After finding the correct option, set the select lists value to the option value:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " selectlist.value = selectlist.options.first.value\n"
+- !ruby/struct:SM::Flow::P 
+  body: Options can also be selected by &quot;clicking&quot; or selecting them. See Option
+constants: []
+
+full_name: WWW::Mechanize::Form::SelectList
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: query_value
+- !ruby/object:RI::MethodSummary 
+  name: value
+- !ruby/object:RI::MethodSummary 
+  name: value=
+name: SelectList
+superclass: MultiSelectList

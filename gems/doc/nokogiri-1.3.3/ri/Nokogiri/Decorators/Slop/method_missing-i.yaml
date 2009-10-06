@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: look for node with <tt>name</tt>. See Nokogiri.Slop
+full_name: Nokogiri::Decorators::Slop#method_missing
+is_singleton: false
+name: method_missing
+params: (name, *args, &block)
+visibility: public

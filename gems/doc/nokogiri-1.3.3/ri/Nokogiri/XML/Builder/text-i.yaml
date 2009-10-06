@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Create a Text Node with content of <tt>string</tt>
+full_name: Nokogiri::XML::Builder#text
+is_singleton: false
+name: text
+params: (string)
+visibility: public

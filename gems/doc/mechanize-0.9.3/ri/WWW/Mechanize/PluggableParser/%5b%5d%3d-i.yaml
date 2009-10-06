@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: WWW::Mechanize::PluggableParser#[]=
+is_singleton: false
+name: "[]="
+params: (content_type, klass)
+visibility: public

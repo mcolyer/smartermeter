@@ -1,0 +1,31 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: page
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: response_code
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::H 
+  level: 1
+  text: Synopsis
+- !ruby/struct:SM::Flow::P 
+  body: This error is thrown when Mechanize encounters a response code it does not know how to handle. Currently, this exception will be thrown if Mechanize encounters response codes other than 200, 301, or 302. Any other response code is up to the user to handle.
+constants: []
+
+full_name: WWW::Mechanize::ResponseCodeError
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: inspect
+- !ruby/object:RI::MethodSummary 
+  name: to_s
+name: ResponseCodeError
+superclass: RuntimeError

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Parse the stylesheet in <tt>string</tt>
+full_name: Nokogiri::XSLT::parse
+is_singleton: true
+name: parse
+params: (string)
+visibility: public

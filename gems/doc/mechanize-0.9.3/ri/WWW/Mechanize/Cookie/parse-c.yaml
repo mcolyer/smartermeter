@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: cookie if block_given?
+comment: 
+full_name: WWW::Mechanize::Cookie::parse
+is_singleton: true
+name: parse
+params: (uri, str, log = Mechanize.log) {|cookie if block_given?| ...}
+visibility: public

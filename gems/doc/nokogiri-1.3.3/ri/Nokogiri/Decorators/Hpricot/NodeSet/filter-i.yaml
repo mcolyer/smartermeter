@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Select nodes matching the supplied rule. Note that positional rules (like <tt>:nth()</tt>) aren't currently supported.
+- !ruby/struct:SM::Flow::P 
+  body: "example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  node_set.filter('.ohmy')          # selects nodes from the set with class &quot;ohmy&quot;\n  node_set.filter('a#link2')        # selects nodes from the set with child node &lt;a id='link2'&gt;\n  node_set.filter('a[@id=&quot;link2&quot;]') # selects nodes from the set with child node &lt;a id='link2'&gt;\n"
+full_name: Nokogiri::Decorators::Hpricot::NodeSet#filter
+is_singleton: false
+name: filter
+params: (rule)
+visibility: public

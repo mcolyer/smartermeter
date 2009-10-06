@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Draws a legend with the names of the datasets matched to the colors used to draw them.
+full_name: Gruff::Base#draw_legend
+is_singleton: false
+name: draw_legend
+params: ()
+visibility: protected

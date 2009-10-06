@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Called when document starts parsing
+full_name: Nokogiri::XML::SAX::Document#start_document
+is_singleton: false
+name: start_document
+params: ()
+visibility: public

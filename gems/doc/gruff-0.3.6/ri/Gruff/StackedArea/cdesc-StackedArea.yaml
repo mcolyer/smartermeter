@@ -1,0 +1,20 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: last_series_goes_on_bottom
+  rw: RW
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: Gruff::StackedArea
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: StackedMixin
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: draw
+name: StackedArea
+superclass: Gruff::Base

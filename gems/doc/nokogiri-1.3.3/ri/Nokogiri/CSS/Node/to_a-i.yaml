@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Convert to array
+full_name: Nokogiri::CSS::Node#to_a
+is_singleton: false
+name: to_a
+params: ()
+visibility: public

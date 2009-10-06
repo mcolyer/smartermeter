@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Fetch the Nokogiri::HTML::ElementDescription for this node. Returns nil on XML documents and on unknown tags.
+full_name: Nokogiri::XML::Node#description
+is_singleton: false
+name: description
+params: ()
+visibility: public

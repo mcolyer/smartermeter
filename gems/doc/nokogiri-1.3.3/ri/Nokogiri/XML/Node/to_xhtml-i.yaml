@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Serialize this Node to XHTML using <tt>options</tt>
+- !ruby/struct:SM::Flow::VERB 
+  body: "  doc.to_xhtml(:indent =&gt; 5, :encoding =&gt; 'UTF-8')\n"
+- !ruby/struct:SM::Flow::P 
+  body: See Node#write_to for a list of <tt>options</tt>
+full_name: Nokogiri::XML::Node#to_xhtml
+is_singleton: false
+name: to_xhtml
+params: (options = {})
+visibility: public

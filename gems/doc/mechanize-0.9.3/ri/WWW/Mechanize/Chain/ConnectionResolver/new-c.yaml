@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: WWW::Mechanize::Chain::ConnectionResolver::new
+is_singleton: true
+name: new
+params: ( connection_cache, keep_alive, proxy_addr, proxy_port, proxy_user, proxy_pass )
+visibility: public

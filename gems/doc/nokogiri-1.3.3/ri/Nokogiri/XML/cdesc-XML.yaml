@@ -1,0 +1,30 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: Reader
+- !ruby/object:RI::MethodSummary 
+  name: RelaxNG
+- !ruby/object:RI::MethodSummary 
+  name: Schema
+- !ruby/object:RI::MethodSummary 
+  name: fragment
+- !ruby/object:RI::MethodSummary 
+  name: parse
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "call-seq:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " node_set\n"
+- !ruby/struct:SM::Flow::P 
+  body: Fetch the node set associated with this xpath context.
+constants: []
+
+full_name: Nokogiri::XML
+includes: []
+
+instance_methods: []
+
+name: XML
+superclass: 

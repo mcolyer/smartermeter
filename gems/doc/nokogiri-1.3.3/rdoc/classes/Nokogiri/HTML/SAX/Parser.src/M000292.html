@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>native_parse_memory (Nokogiri::HTML::SAX::Parser)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *  native_parse_memory(data, encoding)
+ *
+ * Parse +data+ with +encoding+
+ */
+static VALUE native_parse_memory(VALUE self, VALUE data, VALUE encoding)
+{
+  xmlSAXHandlerPtr handler;
+  htmlDocPtr hdoc ;
+  Data_Get_Struct(self, xmlSAXHandler, handler);
+  hdoc = htmlSAXParseDoc(  (xmlChar *)StringValuePtr(data),
+                           (const char *)StringValuePtr(encoding),
+                           (htmlSAXHandlerPtr)handler,
+                           (void *)self );
+  xmlFreeDoc(hdoc);
+  return data;
+}</pre>
+</body>
+</html>

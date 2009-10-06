@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Execute <tt>block</tt> without cache
+full_name: Nokogiri::CSS::Parser::without_cache
+is_singleton: true
+name: without_cache
+params: (&block)
+visibility: public

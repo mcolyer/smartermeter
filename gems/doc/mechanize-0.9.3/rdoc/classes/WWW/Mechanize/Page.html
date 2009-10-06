@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: WWW::Mechanize::Page</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">WWW::Mechanize::Page</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/lib/www/mechanize/page_rb.html">
+                lib/www/mechanize/page.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/www/mechanize/page/frame_rb.html">
+                lib/www/mechanize/page/frame.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/www/mechanize/page/meta_rb.html">
+                lib/www/mechanize/page/meta.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/www/mechanize/page/link_rb.html">
+                lib/www/mechanize/page/link.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/www/mechanize/page/base_rb.html">
+                lib/www/mechanize/page/base.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/www/mechanize/monkey_patch_rb.html">
+                lib/www/mechanize/monkey_patch.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="File.html">
+                WWW::Mechanize::File
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Synopsis</h1>
+<p>
+This class encapsulates an HTML page. If <a
+href="../Mechanize.html">Mechanize</a> finds a content type of
+&#8216;text/html&#8217;, this class will be instantiated and returned.
+</p>
+<h2>Example</h2>
+<pre>
+ require 'rubygems'
+ require 'mechanize'
+
+ agent = WWW::Mechanize.new
+ agent.get('http://google.com/').class  #=&gt; WWW::Mechanize::Page
+</pre>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000091">bases</a>&nbsp;&nbsp;
+      <a href="#M000087">content_type</a>&nbsp;&nbsp;
+      <a href="#M000084">encoding</a>&nbsp;&nbsp;
+      <a href="#M000083">encoding=</a>&nbsp;&nbsp;
+      <a href="#M000089">forms</a>&nbsp;&nbsp;
+      <a href="#M000092">frames</a>&nbsp;&nbsp;
+      <a href="#M000093">iframes</a>&nbsp;&nbsp;
+      <a href="#M000088">links</a>&nbsp;&nbsp;
+      <a href="#M000090">meta</a>&nbsp;&nbsp;
+      <a href="#M000081">new</a>&nbsp;&nbsp;
+      <a href="#M000085">parser</a>&nbsp;&nbsp;
+      <a href="#M000086">root</a>&nbsp;&nbsp;
+      <a href="#M000082">title</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Class <a href="Page/Base.html" class="link">WWW::Mechanize::Page::Base</a><br />
+Class <a href="Page/Frame.html" class="link">WWW::Mechanize::Page::Frame</a><br />
+Class <a href="Page/Link.html" class="link">WWW::Mechanize::Page::Link</a><br />
+Class <a href="Page/Meta.html" class="link">WWW::Mechanize::Page::Meta</a><br />
+
+    </div>
+
+
+    <div id="aliases-list">
+      <h3 class="section-bar">External Aliases</h3>
+
+      <div class="name-list">
+                        <table summary="aliases">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">pretty_inspect</td>
+          <td>-&gt;</td>
+          <td class="context-item-value">inspect</td>
+        </tr>
+                        </table>
+      </div>
+    </div>
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">mech</td>
+          <td class="context-item-value">&nbsp;[RW]&nbsp;</td>
+          <td class="context-item-desc"></td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000081" class="method-detail">
+        <a name="M000081"></a>
+
+        <div class="method-heading">
+          <a href="Page.src/M000081.html" target="Code" class="method-signature"
+            onclick="popupCode('Page.src/M000081.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(uri=nil, response=nil, body=nil, code=nil, mech=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000091" class="method-detail">
+        <a name="M000091"></a>
+
+        <div class="method-heading">
+          <a href="Page.src/M000091.html" target="Code" class="method-signature"
+            onclick="popupCode('Page.src/M000091.html');return false;">
+          <span class="method-name">bases</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000087" class="method-detail">
+        <a name="M000087"></a>
+
+        <div class="method-heading">
+          <a href="Page.src/M000087.html" target="Code" class="method-signature"
+            onclick="popupCode('Page.src/M000087.html');return false;">
+          <span class="method-name">content_type</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Get the content type
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000084" class="method-detail">
+        <a name="M000084"></a>
+
+        <div class="method-heading">
+          <a href="Page.src/M000084.html" target="Code" class="method-signature"
+            onclick="popupCode('Page.src/M000084.html');return false;">
+          <span class="method-name">encoding</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000083" class="method-detail">
+        <a name="M000083"></a>
+
+        <div class="method-heading">
+          <a href="Page.src/M000083.html" target="Code" class="method-signature"
+            onclick="popupCode('Page.src/M000083.html');return false;">
+          <span class="method-name">encoding=</span><span class="method-args">(encoding)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000089" class="method-detail">
+        <a name="M000089"></a>
+
+        <div class="method-heading">
+          <a href="Page.src/M000089.html" target="Code" class="method-signature"
+            onclick="popupCode('Page.src/M000089.html');return false;">
+          <span class="method-name">forms</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000092" class="method-detail">
+        <a name="M000092"></a>
+
+        <div class="method-heading">
+          <a href="Page.src/M000092.html" target="Code" class="method-signature"
+            onclick="popupCode('Page.src/M000092.html');return false;">
+          <span class="method-name">frames</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000093" class="method-detail">
+        <a name="M000093"></a>
+
+        <div class="method-heading">
+          <a href="Page.src/M000093.html" target="Code" class="method-signature"
+            onclick="popupCode('Page.src/M000093.html');return false;">
+          <span class="method-name">iframes</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000088" class="method-detail">
+        <a name="M000088"></a>
+
+        <div class="method-heading">
+          <a href="Page.src/M000088.html" target="Code" class="method-signature"
+            onclick="popupCode('Page.src/M000088.html');return false;">
+          <span class="method-name">links</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000090" class="method-detail">
+        <a name="M000090"></a>
+
+        <div class="method-heading">
+          <a href="Page.src/M000090.html" target="Code" class="method-signature"
+            onclick="popupCode('Page.src/M000090.html');return false;">
+          <span class="method-name">meta</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000085" class="method-detail">
+        <a name="M000085"></a>
+
+        <div class="method-heading">
+          <a href="Page.src/M000085.html" target="Code" class="method-signature"
+            onclick="popupCode('Page.src/M000085.html');return false;">
+          <span class="method-name">parser</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000086" class="method-detail">
+        <a name="M000086"></a>
+
+        <div class="method-heading">
+          <span class="method-name">root</span><span class="method-args">()</span>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Alias for <a href="Page.html#M000085">parser</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000082" class="method-detail">
+        <a name="M000082"></a>
+
+        <div class="method-heading">
+          <a href="Page.src/M000082.html" target="Code" class="method-signature"
+            onclick="popupCode('Page.src/M000082.html');return false;">
+          <span class="method-name">title</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

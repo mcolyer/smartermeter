@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Shorten long labels so they will fit on the canvas.
+- !ruby/struct:SM::Flow::VERB 
+  body: "  Department of Hu...\n"
+full_name: Gruff::Mini::Legend#truncate_legend_label
+is_singleton: false
+name: truncate_legend_label
+params: (label)
+visibility: public

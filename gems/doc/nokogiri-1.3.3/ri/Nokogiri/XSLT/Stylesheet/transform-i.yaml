@@ -1,0 +1,18 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Apply an XSLT stylesheet to an XML::Document. <tt>params</tt> is an array of strings used as XSLT parameters. returns Nokogiri::XML::Document
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  doc   = Nokogiri::XML(File.read(ARGV[0]))\n  xslt  = Nokogiri::XSLT(File.read(ARGV[1]))\n  puts xslt.transform(doc, ['key', 'value'])\n"
+full_name: Nokogiri::XSLT::Stylesheet#transform
+is_singleton: false
+name: transform
+params: |
+  transform(document, params = [])
+
+visibility: public

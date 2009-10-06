@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Get the list of decorators given <tt>key</tt>
+full_name: Nokogiri::XML::Document#decorators
+is_singleton: false
+name: decorators
+params: (key)
+visibility: public

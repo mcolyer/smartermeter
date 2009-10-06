@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: The name of this document. Always returns &quot;document&quot;
+full_name: Nokogiri::XML::Document#name
+is_singleton: false
+name: name
+params: ()
+visibility: public

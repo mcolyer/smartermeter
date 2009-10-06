@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: untick
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Unselect this option
+full_name: WWW::Mechanize::Form::Option#unselect
+is_singleton: false
+name: unselect
+params: ()
+visibility: public

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>post (WWW::Mechanize)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/www/mechanize.rb, line 311</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">post</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">query</span>={})
+      <span class="ruby-identifier">node</span> = {}
+      <span class="ruby-comment cmt"># Create a fake form</span>
+      <span class="ruby-keyword kw">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">node</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">search</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>); []; <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">node</span>[<span class="ruby-value str">'method'</span>] = <span class="ruby-value str">'POST'</span>
+      <span class="ruby-identifier">node</span>[<span class="ruby-value str">'enctype'</span>] = <span class="ruby-value str">'application/x-www-form-urlencoded'</span>
+
+      <span class="ruby-identifier">form</span> = <span class="ruby-constant">Form</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">node</span>)
+      <span class="ruby-identifier">query</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">IO</span>)
+          <span class="ruby-identifier">form</span>.<span class="ruby-identifier">enctype</span> = <span class="ruby-value str">'multipart/form-data'</span>
+          <span class="ruby-identifier">ul</span> = <span class="ruby-constant">Form</span><span class="ruby-operator">::</span><span class="ruby-constant">FileUpload</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>,<span class="ruby-operator">::</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">v</span>.<span class="ruby-identifier">path</span>))
+          <span class="ruby-identifier">ul</span>.<span class="ruby-identifier">file_data</span> = <span class="ruby-identifier">v</span>.<span class="ruby-identifier">read</span>
+          <span class="ruby-identifier">form</span>.<span class="ruby-identifier">file_uploads</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">ul</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">form</span>.<span class="ruby-identifier">fields</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Form</span><span class="ruby-operator">::</span><span class="ruby-constant">Field</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>,<span class="ruby-identifier">v</span>)
+        <span class="ruby-keyword kw">end</span>
+      }
+      <span class="ruby-identifier">post_form</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">form</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

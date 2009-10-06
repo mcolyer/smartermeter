@@ -1,0 +1,25 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: New gruff graph type added to enable sideways stacking bar charts (basically looks like a x/y flip of a standard stacking bar chart)
+- !ruby/struct:SM::Flow::P 
+  body: alun.eyre@googlemail.com
+constants: []
+
+full_name: Gruff::SideStackedBar
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: StackedMixin
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: draw
+- !ruby/object:RI::MethodSummary 
+  name: larger_than_max?
+- !ruby/object:RI::MethodSummary 
+  name: max
+name: SideStackedBar
+superclass: Gruff::SideBar

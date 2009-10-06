@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: WWW::Mechanize::History#visited?
+is_singleton: false
+name: visited?
+params: (url)
+visibility: public

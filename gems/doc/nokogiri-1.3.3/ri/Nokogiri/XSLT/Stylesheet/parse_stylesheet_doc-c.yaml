@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Parse a stylesheet from <tt>document</tt>.
+full_name: Nokogiri::XSLT::Stylesheet::parse_stylesheet_doc
+is_singleton: true
+name: parse_stylesheet_doc
+params: |
+  parse_stylesheet_doc(document)
+
+visibility: public

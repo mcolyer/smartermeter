@@ -1,0 +1,22 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "call-seq:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " compare(other)\n"
+- !ruby/struct:SM::Flow::P 
+  body: Compare this Node to <tt>other</tt> with respect to their Document
+constants: []
+
+full_name: Nokogiri::XML::EntityDeclaration
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: attributes
+name: EntityDeclaration
+superclass: Nokogiri::XML::Node

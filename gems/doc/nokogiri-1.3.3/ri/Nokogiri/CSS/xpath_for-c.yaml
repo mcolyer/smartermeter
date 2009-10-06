@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Get the XPath for <tt>selector</tt>.
+full_name: Nokogiri::CSS::xpath_for
+is_singleton: true
+name: xpath_for
+params: (selector, options={})
+visibility: public

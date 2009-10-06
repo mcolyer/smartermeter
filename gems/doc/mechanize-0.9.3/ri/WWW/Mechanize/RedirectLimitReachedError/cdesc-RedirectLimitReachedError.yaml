@@ -1,0 +1,32 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: page
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: redirects
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: response_code
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Thrown when too many redirects are sent
+constants: []
+
+full_name: WWW::Mechanize::RedirectLimitReachedError
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: inspect
+- !ruby/object:RI::MethodSummary 
+  name: to_s
+name: RedirectLimitReachedError
+superclass: RuntimeError

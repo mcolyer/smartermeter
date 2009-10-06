@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Parse a file with <tt>filename</tt>
+full_name: Nokogiri::HTML::SAX::Parser#parse_file
+is_singleton: false
+name: parse_file
+params: (filename, encoding = 'UTF-8')
+visibility: public

@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: set
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Set the attribute <tt>key</tt> to <tt>value</tt> or the return value of <tt>blk</tt> on all Node objects in the NodeSet.
+full_name: Nokogiri::XML::NodeSet#attr
+is_singleton: false
+name: attr
+params: (key, value = nil, &blk)
+visibility: public

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Return a comparable fontsize for the current graph.
+full_name: Gruff::Base#scale_fontsize
+is_singleton: false
+name: scale_fontsize
+params: (value)
+visibility: protected

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns whether or not a url has been visited
+full_name: WWW::Mechanize#visited?
+is_singleton: false
+name: visited?
+params: (url)
+visibility: public

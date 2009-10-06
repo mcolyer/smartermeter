@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Is this element deprecated?
+full_name: Nokogiri::HTML::ElementDescription#deprecated?
+is_singleton: false
+name: deprecated?
+params: |
+  deprecated?
+
+visibility: public

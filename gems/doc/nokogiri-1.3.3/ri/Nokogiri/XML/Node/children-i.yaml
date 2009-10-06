@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Get the list of children for this node as a NodeSet
+full_name: Nokogiri::XML::Node#children
+is_singleton: false
+name: children
+params: |
+  children
+
+visibility: public

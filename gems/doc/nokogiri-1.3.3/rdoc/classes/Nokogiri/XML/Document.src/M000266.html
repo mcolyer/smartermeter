@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>add_child (Nokogiri::XML::Document)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/nokogiri/xml/document.rb, line 80</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_child</span> <span class="ruby-identifier">child</span>
+        <span class="ruby-keyword kw">if</span> [<span class="ruby-constant">Node</span><span class="ruby-operator">::</span><span class="ruby-constant">ELEMENT_NODE</span>, <span class="ruby-constant">Node</span><span class="ruby-operator">::</span><span class="ruby-constant">DOCUMENT_FRAG_NODE</span>].<span class="ruby-identifier">include?</span> <span class="ruby-identifier">child</span>.<span class="ruby-identifier">type</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Document already has a root node&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">root</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">super</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

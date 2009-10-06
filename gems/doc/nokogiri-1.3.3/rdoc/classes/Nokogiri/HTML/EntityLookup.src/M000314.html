@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>get (Nokogiri::HTML::EntityLookup)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *  get(key)
+ *
+ * Get the HTML::EntityDescription for +key+
+ */
+static VALUE get(VALUE self, VALUE key)
+{
+  const htmlEntityDesc * desc =
+    htmlEntityLookup((const xmlChar *)StringValuePtr(key));
+
+  if(NULL == desc) return Qnil;
+  VALUE klass = rb_const_get(mNokogiriHtml, rb_intern(&quot;EntityDescription&quot;));
+
+  return rb_funcall(klass, rb_intern(&quot;new&quot;), 3,
+      INT2NUM((int)desc-&gt;value),
+      NOKOGIRI_STR_NEW2(desc-&gt;name, &quot;UTF-8&quot;),
+      NOKOGIRI_STR_NEW2(desc-&gt;desc, &quot;UTF-8&quot;));
+}</pre>
+</body>
+</html>

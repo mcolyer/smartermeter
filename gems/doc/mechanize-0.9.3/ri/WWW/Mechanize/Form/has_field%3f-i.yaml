@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: has_key?
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns whether or not the form contains a field with <tt>field_name</tt>
+full_name: WWW::Mechanize::Form#has_field?
+is_singleton: false
+name: has_field?
+params: (field_name)
+visibility: public

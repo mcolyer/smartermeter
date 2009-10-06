@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Nokogiri::XML::DocumentFragment#to_xml
+is_singleton: false
+name: to_xml
+params: (*args)
+visibility: public

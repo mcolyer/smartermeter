@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "DELETE to <tt>url</tt> with <tt>query_params</tt>, and setting <tt>options</tt>:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  delete('http://tenderlovemaking.com/', {'q' =&gt; 'foo'}, :headers =&gt; {})\n"
+full_name: WWW::Mechanize#delete
+is_singleton: false
+name: delete
+params: (url, query_params = {}, options = {})
+visibility: public

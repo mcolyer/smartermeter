@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Nokogiri::CSS::GeneratedParser#_reduce_47
+is_singleton: false
+name: _reduce_47
+params: (val, _values, result)
+visibility: public

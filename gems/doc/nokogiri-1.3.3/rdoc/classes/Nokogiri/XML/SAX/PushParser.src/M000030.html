@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>initialize_native (Nokogiri::XML::SAX::PushParser)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *  initialize_native(xml_sax, filename)
+ *
+ * Initialize the push parser with +xml_sax+ using +filename+
+ */
+static VALUE initialize_native(VALUE self, VALUE _xml_sax, VALUE _filename)
+{
+  xmlSAXHandlerPtr sax;
+
+  Data_Get_Struct(_xml_sax, xmlSAXHandler, sax);
+  
+  const char * filename = NULL;
+
+  if(_filename != Qnil) filename = StringValuePtr(_filename);
+
+  xmlParserCtxtPtr ctx = xmlCreatePushParserCtxt(
+      sax,
+      (void *)self,
+      NULL,
+      0,
+      filename
+  );
+  if(ctx == NULL)
+    rb_raise(rb_eRuntimeError, &quot;Could not create a parser context&quot;);
+
+  ctx-&gt;sax2 = 1;
+  DATA_PTR(self) = ctx;
+  return self;
+}</pre>
+</body>
+</html>

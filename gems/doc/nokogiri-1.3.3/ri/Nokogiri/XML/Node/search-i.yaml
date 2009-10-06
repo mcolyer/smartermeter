@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: /
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Search this node for <tt>paths</tt>. <tt>paths</tt> can be XPath or CSS, and an optional hash of namespaces may be appended. See Node#xpath and Node#css.
+full_name: Nokogiri::XML::Node#search
+is_singleton: false
+name: search
+params: (*paths)
+visibility: public

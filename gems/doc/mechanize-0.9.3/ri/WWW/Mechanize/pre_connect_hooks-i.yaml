@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: WWW::Mechanize#pre_connect_hooks
+is_singleton: false
+name: pre_connect_hooks
+params: ()
+visibility: public

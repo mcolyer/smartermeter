@@ -1,0 +1,18 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: The Slop decorator implements method missing such that a methods may be used instead of XPath or CSS. See Nokogiri.Slop
+constants: []
+
+full_name: Nokogiri::Decorators::Slop
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: method_missing
+name: Slop
+superclass: 

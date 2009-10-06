@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the path associated with this Node
+full_name: Nokogiri::XML::Node#path
+is_singleton: false
+name: path
+params: |
+  path
+
+visibility: public

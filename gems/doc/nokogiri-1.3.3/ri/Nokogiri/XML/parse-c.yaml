@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Parse XML. Convenience method for Nokogiri::XML::Document.parse
+full_name: Nokogiri::XML::parse
+is_singleton: true
+name: parse
+params: (thing, url = nil, encoding = nil, options = ParseOptions::DEFAULT_XML, &block)
+visibility: public

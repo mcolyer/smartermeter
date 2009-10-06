@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>draw (Gruff::Pie)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/gruff/pie.rb, line 27</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">draw</span>
+    <span class="ruby-ivar">@hide_line_markers</span> = <span class="ruby-keyword kw">true</span>
+    
+    <span class="ruby-keyword kw">super</span>
+
+    <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@has_data</span>
+
+    <span class="ruby-identifier">diameter</span> = <span class="ruby-ivar">@graph_height</span>
+    <span class="ruby-identifier">radius</span> = ([<span class="ruby-ivar">@graph_width</span>, <span class="ruby-ivar">@graph_height</span>].<span class="ruby-identifier">min</span> <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>) <span class="ruby-operator">*</span> <span class="ruby-value">0</span><span class="ruby-value">.8</span>
+    <span class="ruby-identifier">top_x</span> = <span class="ruby-ivar">@graph_left</span> <span class="ruby-operator">+</span> (<span class="ruby-ivar">@graph_width</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">diameter</span>) <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>
+    <span class="ruby-identifier">center_x</span> = <span class="ruby-ivar">@graph_left</span> <span class="ruby-operator">+</span> (<span class="ruby-ivar">@graph_width</span> <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>)
+    <span class="ruby-identifier">center_y</span> = <span class="ruby-ivar">@graph_top</span> <span class="ruby-operator">+</span> (<span class="ruby-ivar">@graph_height</span> <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>) <span class="ruby-operator">-</span> <span class="ruby-value">10</span> <span class="ruby-comment cmt"># Move graph up a bit</span>
+    <span class="ruby-identifier">total_sum</span> = <span class="ruby-identifier">sums_for_pie</span>()
+    <span class="ruby-identifier">prev_degrees</span> = <span class="ruby-ivar">@zero_degree</span>
+
+    <span class="ruby-comment cmt"># Use full data since we can easily calculate percentages</span>
+    <span class="ruby-identifier">data</span> = (<span class="ruby-ivar">@sort</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">sort</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>[<span class="ruby-constant">DATA_VALUES_INDEX</span>].<span class="ruby-identifier">first</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>[<span class="ruby-constant">DATA_VALUES_INDEX</span>].<span class="ruby-identifier">first</span> } <span class="ruby-operator">:</span> <span class="ruby-ivar">@data</span>)
+    <span class="ruby-identifier">data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">data_row</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">data_row</span>[<span class="ruby-constant">DATA_VALUES_INDEX</span>].<span class="ruby-identifier">first</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+        <span class="ruby-ivar">@d</span> = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">stroke</span> <span class="ruby-identifier">data_row</span>[<span class="ruby-constant">DATA_COLOR_INDEX</span>]
+        <span class="ruby-ivar">@d</span> = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">fill</span> <span class="ruby-value str">'transparent'</span>
+        <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">stroke_width</span>(<span class="ruby-identifier">radius</span>) <span class="ruby-comment cmt"># stroke width should be equal to radius. we'll draw centered on (radius / 2)</span>
+
+        <span class="ruby-identifier">current_degrees</span> = (<span class="ruby-identifier">data_row</span>[<span class="ruby-constant">DATA_VALUES_INDEX</span>].<span class="ruby-identifier">first</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">total_sum</span>) <span class="ruby-operator">*</span> <span class="ruby-value">360.0</span> 
+
+        <span class="ruby-comment cmt"># ellipse will draw the the stroke centered on the first two parameters offset by the second two.</span>
+        <span class="ruby-comment cmt"># therefore, in order to draw a circle of the proper diameter we must center the stroke at</span>
+        <span class="ruby-comment cmt"># half the radius for both x and y</span>
+        <span class="ruby-ivar">@d</span> = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">ellipse</span>(<span class="ruby-identifier">center_x</span>, <span class="ruby-identifier">center_y</span>, 
+                  <span class="ruby-identifier">radius</span> <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>, <span class="ruby-identifier">radius</span> <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>,
+                  <span class="ruby-identifier">prev_degrees</span>, <span class="ruby-identifier">prev_degrees</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">current_degrees</span> <span class="ruby-operator">+</span> <span class="ruby-value">0</span><span class="ruby-value">.5</span>) <span class="ruby-comment cmt"># &lt;= +0.5 'fudge factor' gets rid of the ugly gaps</span>
+                  
+        <span class="ruby-identifier">half_angle</span> = <span class="ruby-identifier">prev_degrees</span> <span class="ruby-operator">+</span> ((<span class="ruby-identifier">prev_degrees</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">current_degrees</span>) <span class="ruby-operator">-</span> <span class="ruby-identifier">prev_degrees</span>) <span class="ruby-operator">/</span> <span class="ruby-value">2</span>
+        
+        <span class="ruby-comment cmt"># Following line is commented to allow display of the percentiles</span>
+        <span class="ruby-comment cmt"># bug appeared between r90 and r92</span>
+        <span class="ruby-comment cmt"># unless @hide_line_markers then</span>
+          <span class="ruby-comment cmt"># End the string with %% to escape the single %.</span>
+          <span class="ruby-comment cmt"># RMagick must use sprintf with the string and % has special significance.</span>
+          <span class="ruby-identifier">label_string</span> = ((<span class="ruby-identifier">data_row</span>[<span class="ruby-constant">DATA_VALUES_INDEX</span>].<span class="ruby-identifier">first</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">total_sum</span>) <span class="ruby-operator">*</span>
+                          <span class="ruby-value">100.0</span>).<span class="ruby-identifier">round</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">'%%'</span>
+          <span class="ruby-ivar">@d</span> = <span class="ruby-identifier">draw_label</span>(<span class="ruby-identifier">center_x</span>,<span class="ruby-identifier">center_y</span>, <span class="ruby-identifier">half_angle</span>,
+                          <span class="ruby-identifier">radius</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">radius</span> <span class="ruby-operator">*</span> <span class="ruby-constant">TEXT_OFFSET_PERCENTAGE</span>),
+                          <span class="ruby-identifier">label_string</span>)
+        <span class="ruby-comment cmt"># end</span>
+
+        <span class="ruby-identifier">prev_degrees</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">current_degrees</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-comment cmt"># TODO debug a circle where the text is drawn...</span>
+    
+    <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">draw</span>(<span class="ruby-ivar">@base_image</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

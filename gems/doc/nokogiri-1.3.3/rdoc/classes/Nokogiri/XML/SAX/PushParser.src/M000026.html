@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (Nokogiri::XML::SAX::PushParser)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/nokogiri/xml/sax/push_parser.rb, line 34</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">doc</span> = <span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">SAX</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>, <span class="ruby-identifier">file_name</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">encoding</span> = <span class="ruby-value str">'ASCII'</span>)
+          <span class="ruby-ivar">@document</span> = <span class="ruby-identifier">doc</span>
+          <span class="ruby-ivar">@encoding</span> = <span class="ruby-identifier">encoding</span>
+          <span class="ruby-ivar">@sax_parser</span> = <span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">SAX</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">doc</span>)
+
+          <span class="ruby-comment cmt">## Create our push parser context</span>
+          <span class="ruby-identifier">initialize_native</span>(<span class="ruby-ivar">@sax_parser</span>, <span class="ruby-identifier">file_name</span>)
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Sets the proxy address, port, user, and password <tt>addr</tt> should be a host, with no &quot;http://&quot;
+full_name: WWW::Mechanize#set_proxy
+is_singleton: false
+name: set_proxy
+params: (addr, port, user = nil, pass = nil)
+visibility: public

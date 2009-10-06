@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Register namespaces in <tt>namespaces</tt>
+full_name: Nokogiri::XML::XPathContext#register_namespaces
+is_singleton: false
+name: register_namespaces
+params: (namespaces)
+visibility: public

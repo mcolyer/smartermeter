@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: root
+block_params: 
+comment: 
+full_name: WWW::Mechanize::Page#parser
+is_singleton: false
+name: parser
+params: ()
+visibility: public

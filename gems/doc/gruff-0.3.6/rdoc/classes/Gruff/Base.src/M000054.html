@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>theme_keynote (Gruff::Base)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/gruff/base.rb, line 322</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">theme_keynote</span>
+      <span class="ruby-comment cmt"># Colors</span>
+      <span class="ruby-ivar">@blue</span> = <span class="ruby-value str">'#6886B4'</span>
+      <span class="ruby-ivar">@yellow</span> = <span class="ruby-value str">'#FDD84E'</span>
+      <span class="ruby-ivar">@green</span> = <span class="ruby-value str">'#72AE6E'</span>
+      <span class="ruby-ivar">@red</span> = <span class="ruby-value str">'#D1695E'</span>
+      <span class="ruby-ivar">@purple</span> = <span class="ruby-value str">'#8A6EAF'</span>
+      <span class="ruby-ivar">@orange</span> = <span class="ruby-value str">'#EFAA43'</span>
+      <span class="ruby-ivar">@white</span> = <span class="ruby-value str">'white'</span>
+      <span class="ruby-ivar">@colors</span> = [<span class="ruby-ivar">@yellow</span>, <span class="ruby-ivar">@blue</span>, <span class="ruby-ivar">@green</span>, <span class="ruby-ivar">@red</span>, <span class="ruby-ivar">@purple</span>, <span class="ruby-ivar">@orange</span>, <span class="ruby-ivar">@white</span>]
+
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">theme</span> = {
+        <span class="ruby-identifier">:colors</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@colors</span>,
+        <span class="ruby-identifier">:marker_color</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'white'</span>,
+        <span class="ruby-identifier">:font_color</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'white'</span>,
+        <span class="ruby-identifier">:background_colors</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value str">'black'</span>, <span class="ruby-value str">'#4a465a'</span>]
+      }
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Handle the start_element event with <tt>name</tt> and <tt>attrs</tt>
+full_name: XSD::XMLParser::Nokogiri#start_element
+is_singleton: false
+name: start_element
+params: (name, attrs = [])
+visibility: public

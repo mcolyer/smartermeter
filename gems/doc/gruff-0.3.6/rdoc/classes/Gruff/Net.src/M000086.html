@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>draw_line_markers (Gruff::Net)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/gruff/net.rb, line 82</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">draw_line_markers</span>
+    <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@hide_line_markers</span>
+
+
+    <span class="ruby-comment cmt"># have to do this here (AGAIN)... see draw() in this class</span>
+    <span class="ruby-comment cmt"># because this funtion is called before the @radius, @center_x and @center_y are set</span>
+    <span class="ruby-ivar">@radius</span> = <span class="ruby-ivar">@graph_height</span> <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>
+    <span class="ruby-ivar">@center_x</span> = <span class="ruby-ivar">@graph_left</span> <span class="ruby-operator">+</span> (<span class="ruby-ivar">@graph_width</span> <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>)
+    <span class="ruby-ivar">@center_y</span> = <span class="ruby-ivar">@graph_top</span> <span class="ruby-operator">+</span> (<span class="ruby-ivar">@graph_height</span> <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>) <span class="ruby-operator">-</span> <span class="ruby-value">10</span> <span class="ruby-comment cmt"># Move graph up a bit</span>
+
+
+    <span class="ruby-comment cmt"># Draw horizontal line markers and annotate with numbers</span>
+    <span class="ruby-ivar">@d</span> = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">stroke</span>(<span class="ruby-ivar">@marker_color</span>)
+    <span class="ruby-ivar">@d</span> = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">stroke_width</span> <span class="ruby-value">1</span>
+
+
+    (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-ivar">@column_count</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">rad_pos</span> = <span class="ruby-identifier">index</span> <span class="ruby-operator">*</span> <span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-constant">PI</span> <span class="ruby-operator">*</span> <span class="ruby-value">2</span> <span class="ruby-operator">/</span> <span class="ruby-ivar">@column_count</span>
+
+      <span class="ruby-ivar">@d</span> = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">line</span>(<span class="ruby-ivar">@center_x</span>, <span class="ruby-ivar">@center_y</span>, <span class="ruby-ivar">@center_x</span> <span class="ruby-operator">+</span> <span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">sin</span>(<span class="ruby-identifier">rad_pos</span>) <span class="ruby-operator">*</span> <span class="ruby-ivar">@radius</span>, <span class="ruby-ivar">@center_y</span> <span class="ruby-operator">-</span> <span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-identifier">cos</span>(<span class="ruby-identifier">rad_pos</span>) <span class="ruby-operator">*</span> <span class="ruby-ivar">@radius</span>)
+
+
+      <span class="ruby-identifier">marker_label</span> = <span class="ruby-identifier">labels</span>[<span class="ruby-identifier">index</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">labels</span>[<span class="ruby-identifier">index</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-operator">:</span> <span class="ruby-value str">'000'</span>
+
+      <span class="ruby-identifier">draw_label</span>(<span class="ruby-ivar">@center_x</span>, <span class="ruby-ivar">@center_y</span>, <span class="ruby-identifier">rad_pos</span> <span class="ruby-operator">*</span> <span class="ruby-value">360</span> <span class="ruby-operator">/</span> (<span class="ruby-value">2</span> <span class="ruby-operator">*</span> <span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-constant">PI</span>), <span class="ruby-ivar">@radius</span>, <span class="ruby-identifier">marker_label</span>)
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

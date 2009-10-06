@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Encode any special characters in <tt>string</tt>
+full_name: Nokogiri::XML::Node#encode_special_chars
+is_singleton: false
+name: encode_special_chars
+params: |
+  encode_special_chars(string)
+
+visibility: public

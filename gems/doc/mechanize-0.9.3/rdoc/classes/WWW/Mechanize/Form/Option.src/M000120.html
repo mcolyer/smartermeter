@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>new (WWW::Mechanize::Form::Option)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/www/mechanize/form/option.rb, line 15</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">select_list</span>)
+          <span class="ruby-ivar">@text</span>     = <span class="ruby-identifier">node</span>.<span class="ruby-identifier">inner_text</span>
+          <span class="ruby-ivar">@value</span>    = <span class="ruby-constant">Util</span>.<span class="ruby-identifier">html_unescape</span>(<span class="ruby-identifier">node</span>[<span class="ruby-value str">'value'</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">inner_text</span>)
+          <span class="ruby-ivar">@selected</span> = <span class="ruby-identifier">node</span>.<span class="ruby-identifier">has_attribute?</span> <span class="ruby-value str">'selected'</span>
+          <span class="ruby-ivar">@select_list</span> = <span class="ruby-identifier">select_list</span> <span class="ruby-comment cmt"># The select list this option belongs to</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Create a new XSD parser with <tt>host</tt> and <tt>opt</tt>
+full_name: XSD::XMLParser::Nokogiri::new
+is_singleton: true
+name: new
+params: (host, opt = {})
+visibility: public

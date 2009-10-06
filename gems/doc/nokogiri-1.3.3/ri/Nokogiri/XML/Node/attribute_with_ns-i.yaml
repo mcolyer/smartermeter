@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Get the attribute node with <tt>name</tt> and <tt>namespace</tt>
+full_name: Nokogiri::XML::Node#attribute_with_ns
+is_singleton: false
+name: attribute_with_ns
+params: |
+  attribute_with_ns(name, namespace)
+
+visibility: public

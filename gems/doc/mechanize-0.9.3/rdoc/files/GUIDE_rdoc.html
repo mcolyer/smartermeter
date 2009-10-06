@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: GUIDE.rdoc</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>GUIDE.rdoc</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>GUIDE.rdoc
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Tue Oct 06 13:49:34 -0700 2009</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Getting Started With <a href="../classes/WWW/Mechanize.html">WWW::Mechanize</a></h1>
+<p>
+This guide is meant to get you started using Mechanize. By the end of this
+guide, you should be able to fetch pages, click links, fill out and submit
+forms, scrape data, and many other hopefully useful things. This guide
+really just scratches the surface of what is available, but should be
+enough information to get you really going!
+</p>
+<h2>Let&#8216;s Fetch a Page!</h2>
+<p>
+First thing is first. Make sure that you&#8216;ve required mechanize and
+that you instantiate a new mechanize object:
+</p>
+<pre>
+ require 'rubygems'
+ require 'mechanize'
+
+ agent = WWW::Mechanize.new
+</pre>
+<p>
+Now we&#8216;ll use the agent we&#8216;ve created to fetch a page.
+Let&#8216;s fetch google with our mechanize agent:
+</p>
+<pre>
+ page = agent.get('http://google.com/')
+</pre>
+<p>
+What just happened? We told mechanize to go pick up google&#8216;s main
+page. Mechanize stored any cookies that were set, and followed any
+redirects that google may have sent. The agent gave us back a page that we
+can use to scrape data, find links to click, or find forms to fill out.
+</p>
+<p>
+Next, lets try finding some links to click.
+</p>
+<h2>Finding Links</h2>
+<p>
+Mechanize returns a page object whenever you get a page, post, or submit a
+form. When a page is fetched, the agent will parse the page and put a list
+of links on the page object.
+</p>
+<p>
+Now that we&#8216;ve fetched google&#8216;s homepage, lets try listing all
+of the links:
+</p>
+<pre>
+ page.links.each do |link|
+   puts link.text
+ end
+</pre>
+<p>
+We can list the links, but Mechanize gives a few shortcuts to help us find
+a link to click on. Lets say we wanted to click the link whose text is
+&#8216;News&#8217;. Normally, we would have to do this:
+</p>
+<pre>
+ page = agent.click page.links.find { |l| l.text == 'News' }
+</pre>
+<p>
+But Mechanize gives us a shortcut. Instead we can say this:
+</p>
+<pre>
+ page = agent.click page.link_with(:text =&gt; 'News')
+</pre>
+<p>
+That shortcut says &quot;find all links with the name
+&#8216;News&#8217;&quot;. You&#8216;re probably thinking &quot;there could
+be multiple links with that text!&quot;, and you would be correct! If you
+use the plural form, you can access the list. If you wanted to click on the
+second news link, you could do this:
+</p>
+<pre>
+ agent.click page.links_with(:text =&gt; 'News')[1]
+</pre>
+<p>
+We can even find a link with a certain href like so:
+</p>
+<pre>
+ page.links_with(:href =&gt; '/something')
+</pre>
+<p>
+Or chain them together to find a link with certain text and certain href:
+</p>
+<pre>
+ page.links_with(:text =&gt; 'News', :href =&gt; '/something')
+</pre>
+<p>
+These shortcuts that mechanize provides are available on any list that you
+can fetch like frames, iframes, or forms. Now that we know how to find and
+click links, lets try something more complicated like filling out a form.
+</p>
+<h2>Filling Out Forms</h2>
+<p>
+Lets continue with our google example. Here&#8216;s the code we have so
+far:
+</p>
+<pre>
+ require 'rubygems'
+ require 'mechanize'
+
+ agent = WWW::Mechanize.new
+ page = agent.get('http://google.com/')
+</pre>
+<p>
+If we pretty print the page, we can see that there is one form named
+&#8216;f&#8217;, that has a couple buttons and a few fields:
+</p>
+<pre>
+ pp page
+</pre>
+<p>
+Now that we know the name of the form, lets fetch it off the page:
+</p>
+<pre>
+ google_form = page.form('f')
+</pre>
+<p>
+Mechanize lets you access form input fields in a few different ways, but
+the most convenient is that you can access input fields as accessors on the
+object. So lets set the form field named &#8216;q&#8217; on the form to
+&#8216;ruby mechanize&#8217;:
+</p>
+<pre>
+ google_form.q = 'ruby mechanize'
+</pre>
+<p>
+To make sure that we set the value, lets pretty print the form, and you
+should see a line similar to this:
+</p>
+<pre>
+ #&lt;WWW::Mechanize::Field:0x1403488 @name=&quot;q&quot;, @value=&quot;ruby mechanize&quot;&gt;
+</pre>
+<p>
+If you saw that the value of &#8216;q&#8217; changed, you&#8216;re on the
+right track! Now we can submit the form and &#8216;press&#8217; the submit
+button and print the results:
+</p>
+<pre>
+ page = agent.submit(google_form, google_form.buttons.first)
+ pp page
+</pre>
+<p>
+What we just did was equivalent to putting text in the search field and
+clicking the &#8216;Google Search&#8217; button. If we had submitted the
+form without a button, it would be like typing in the text field and
+hitting the return button.
+</p>
+<p>
+Lets take a look at the code all together:
+</p>
+<pre>
+ require 'rubygems'
+ require 'mechanize'
+
+ agent = WWW::Mechanize.new
+ page = agent.get('http://google.com/')
+ google_form = page.form('f')
+ google_form.q = 'ruby mechanize'
+ page = agent.submit(google_form)
+ pp page
+</pre>
+<p>
+Before we go on to screen scraping, lets take a look at forms a little more
+in depth. Unless you want to skip ahead!
+</p>
+<h2>Advanced Form Techniques</h2>
+<p>
+In this section, I want to touch on using the different types in input
+fields possible with a form. Password and textarea fields can be treated
+just like text input fields. Select fields are very similar to text fields,
+but they have many options associated with them. If you select one option,
+mechanize will deselect the other options (unless it is a multi select!).
+</p>
+<p>
+For example, lets select an option on a list:
+</p>
+<pre>
+ form.field_with(:name =&gt; 'list').options[0].select
+</pre>
+<p>
+Now lets take a look at checkboxes and radio buttons. To select a checkbox,
+just check it like this:
+</p>
+<pre>
+ form.checkbox_with(:name =&gt; 'box').check
+</pre>
+<p>
+Radio buttons are very similar to checkboxes, but they know how to uncheck
+other radio buttons of the same name. Just check a radio button like you
+would a checkbox:
+</p>
+<pre>
+ form.radiobuttons_with(:name =&gt; 'box')[1].check
+</pre>
+<p>
+Mechanize also makes file uploads easy! Just find the file upload field,
+and tell it what file name you want to upload:
+</p>
+<pre>
+  form.file_uploads.first.file_name = &quot;somefile.jpg&quot;
+</pre>
+<h2>Scraping Data</h2>
+<p>
+Mechanize uses <a href="http://nokogiri.rubyforge.org/">nokogiri</a> to
+parse html. What does this mean for you? You can treat a mechanize page
+like an nokogiri object. After you have used Mechanize to navigate to the
+page that you need to scrape, then scrape it using nokogiri methods:
+</p>
+<pre>
+  agent.get('http://someurl.com/').search(&quot;.//p[@class='posted']&quot;)
+</pre>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

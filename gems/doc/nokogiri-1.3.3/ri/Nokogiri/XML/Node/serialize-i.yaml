@@ -1,0 +1,20 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Serialize Node using <tt>options</tt>. Save options can also be set using a block. See SaveOptions.
+- !ruby/struct:SM::Flow::P 
+  body: "These two statements are equivalent:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " node.serialize(:encoding =&gt; 'UTF-8', :save_with =&gt; FORMAT | AS_XML)\n"
+- !ruby/struct:SM::Flow::P 
+  body: or
+- !ruby/struct:SM::Flow::VERB 
+  body: "  node.serialize(:encoding =&gt; 'UTF-8') do |config|\n    config.format.as_xml\n  end\n"
+full_name: Nokogiri::XML::Node#serialize
+is_singleton: false
+name: serialize
+params: (*args, &block)
+visibility: public

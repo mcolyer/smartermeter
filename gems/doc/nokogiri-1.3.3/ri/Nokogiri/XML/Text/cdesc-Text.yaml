@@ -1,0 +1,22 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "call-seq:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " new(document, content)\n"
+- !ruby/struct:SM::Flow::P 
+  body: Create a new CData element on the <tt>document</tt> with <tt>content</tt>
+constants: []
+
+full_name: Nokogiri::XML::Text
+includes: []
+
+instance_methods: []
+
+name: Text
+superclass: Node

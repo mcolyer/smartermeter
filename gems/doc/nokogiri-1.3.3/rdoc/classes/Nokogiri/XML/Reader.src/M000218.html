@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>read (Nokogiri::XML::Reader)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *   read
+ *
+ * Move the Reader forward through the XML document.
+ */
+static VALUE read_more(VALUE self)
+{
+  xmlTextReaderPtr reader;
+  Data_Get_Struct(self, xmlTextReader, reader);
+
+  VALUE error_list = rb_funcall(self, rb_intern(&quot;errors&quot;), 0);
+
+  xmlSetStructuredErrorFunc((void *)error_list, Nokogiri_error_array_pusher);
+  int ret = xmlTextReaderRead(reader);
+  xmlSetStructuredErrorFunc(NULL, NULL);
+
+  if(ret == 1) return self;
+  if(ret == 0) return Qnil;
+
+  xmlErrorPtr error = xmlGetLastError();
+  if(error)
+    rb_funcall(rb_mKernel, rb_intern(&quot;raise&quot;), 1,
+        Nokogiri_wrap_xml_syntax_error((VALUE)NULL, error)
+    );
+  else
+    rb_raise(rb_eRuntimeError, &quot;Error pulling: %d&quot;, ret);
+
+  return Qnil;
+}</pre>
+</body>
+</html>

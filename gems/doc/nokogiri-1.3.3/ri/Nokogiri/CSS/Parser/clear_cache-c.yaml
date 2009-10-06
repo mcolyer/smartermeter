@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Clear the cache
+full_name: Nokogiri::CSS::Parser::clear_cache
+is_singleton: true
+name: clear_cache
+params: ()
+visibility: public

@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Validate <tt>document</tt> returning a list of errors
+full_name: Nokogiri::XML::DTD#validate
+is_singleton: false
+name: validate
+params: |
+  validate(document)
+
+visibility: public

@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: returns a list containing the Node attributes.
+full_name: Nokogiri::XML::Node#attribute_nodes
+is_singleton: false
+name: attribute_nodes
+params: |
+  attribute_nodes()
+
+visibility: public

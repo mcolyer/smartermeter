@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Search this NodeSet for XPath <tt>paths</tt>
+- !ruby/struct:SM::Flow::P 
+  body: For more information see Nokogiri::XML::Node#xpath
+full_name: Nokogiri::XML::NodeSet#xpath
+is_singleton: false
+name: xpath
+params: (*paths)
+visibility: public

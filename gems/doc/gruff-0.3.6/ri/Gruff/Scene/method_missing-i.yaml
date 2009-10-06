@@ -1,0 +1,18 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Group layers to input values
+- !ruby/struct:SM::Flow::VERB 
+  body: " g.weather_group = [&quot;sky&quot;, &quot;sea&quot;, &quot;clouds&quot;]\n"
+- !ruby/struct:SM::Flow::P 
+  body: Set input values
+- !ruby/struct:SM::Flow::VERB 
+  body: " g.weather = &quot;cloudy&quot;\n"
+full_name: Gruff::Scene#method_missing
+is_singleton: false
+name: method_missing
+params: (method_name, *args)
+visibility: public

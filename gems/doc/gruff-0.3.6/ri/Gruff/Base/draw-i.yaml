@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Overridden by subclasses to do the actual plotting of the graph.
+- !ruby/struct:SM::Flow::P 
+  body: Subclasses should start by calling super() for this method.
+full_name: Gruff::Base#draw
+is_singleton: false
+name: draw
+params: ()
+visibility: protected

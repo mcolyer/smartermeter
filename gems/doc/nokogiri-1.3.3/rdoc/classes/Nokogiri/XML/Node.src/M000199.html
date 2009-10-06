@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>set_namespace (Nokogiri::XML::Node)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *   set_namespace(namespace)
+ *
+ * Set the namespace to +namespace+
+ */
+static VALUE set_namespace(VALUE self, VALUE namespace)
+{
+  xmlNodePtr node;
+  xmlNsPtr ns;
+
+  Data_Get_Struct(self, xmlNode, node);
+  Data_Get_Struct(namespace, xmlNs, ns);
+
+  xmlSetNs(node, ns);
+
+  return self;
+}</pre>
+</body>
+</html>

@@ -1,0 +1,46 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: The XML::SyntaxError is raised on parse errors
+constants: []
+
+full_name: Nokogiri::XML::SyntaxError
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: code
+- !ruby/object:RI::MethodSummary 
+  name: column
+- !ruby/object:RI::MethodSummary 
+  name: domain
+- !ruby/object:RI::MethodSummary 
+  name: error?
+- !ruby/object:RI::MethodSummary 
+  name: fatal?
+- !ruby/object:RI::MethodSummary 
+  name: file
+- !ruby/object:RI::MethodSummary 
+  name: int1
+- !ruby/object:RI::MethodSummary 
+  name: level
+- !ruby/object:RI::MethodSummary 
+  name: line
+- !ruby/object:RI::MethodSummary 
+  name: message
+- !ruby/object:RI::MethodSummary 
+  name: none?
+- !ruby/object:RI::MethodSummary 
+  name: str1
+- !ruby/object:RI::MethodSummary 
+  name: str2
+- !ruby/object:RI::MethodSummary 
+  name: str3
+- !ruby/object:RI::MethodSummary 
+  name: warning?
+name: SyntaxError
+superclass: "::Nokogiri::SyntaxError"

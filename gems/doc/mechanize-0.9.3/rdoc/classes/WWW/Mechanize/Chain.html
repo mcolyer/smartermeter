@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: WWW::Mechanize::Chain</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">WWW::Mechanize::Chain</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/lib/www/mechanize/chain_rb.html">
+                lib/www/mechanize/chain.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/www/mechanize/chain/request_resolver_rb.html">
+                lib/www/mechanize/chain/request_resolver.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/www/mechanize/chain/response_body_parser_rb.html">
+                lib/www/mechanize/chain/response_body_parser.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/www/mechanize/chain/response_reader_rb.html">
+                lib/www/mechanize/chain/response_reader.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/www/mechanize/chain/header_resolver_rb.html">
+                lib/www/mechanize/chain/header_resolver.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/www/mechanize/chain/parameter_resolver_rb.html">
+                lib/www/mechanize/chain/parameter_resolver.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/www/mechanize/chain/connection_resolver_rb.html">
+                lib/www/mechanize/chain/connection_resolver.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/www/mechanize/chain/auth_headers_rb.html">
+                lib/www/mechanize/chain/auth_headers.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/www/mechanize/chain/custom_headers_rb.html">
+                lib/www/mechanize/chain/custom_headers.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/www/mechanize/chain/pre_connect_hook_rb.html">
+                lib/www/mechanize/chain/pre_connect_hook.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/www/mechanize/chain/ssl_resolver_rb.html">
+                lib/www/mechanize/chain/ssl_resolver.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/www/mechanize/chain/response_header_handler_rb.html">
+                lib/www/mechanize/chain/response_header_handler.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/www/mechanize/chain/body_decoding_handler_rb.html">
+                lib/www/mechanize/chain/body_decoding_handler.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/www/mechanize/chain/uri_resolver_rb.html">
+                lib/www/mechanize/chain/uri_resolver.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000049">handle</a>&nbsp;&nbsp;
+      <a href="#M000048">new</a>&nbsp;&nbsp;
+      <a href="#M000050">pass</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+    <div id="class-list">
+      <h3 class="section-bar">Classes and Modules</h3>
+
+      Class <a href="Chain/AuthHeaders.html" class="link">WWW::Mechanize::Chain::AuthHeaders</a><br />
+Class <a href="Chain/BodyDecodingHandler.html" class="link">WWW::Mechanize::Chain::BodyDecodingHandler</a><br />
+Class <a href="Chain/ConnectionResolver.html" class="link">WWW::Mechanize::Chain::ConnectionResolver</a><br />
+Class <a href="Chain/CustomHeaders.html" class="link">WWW::Mechanize::Chain::CustomHeaders</a><br />
+Class <a href="Chain/HeaderResolver.html" class="link">WWW::Mechanize::Chain::HeaderResolver</a><br />
+Class <a href="Chain/ParameterResolver.html" class="link">WWW::Mechanize::Chain::ParameterResolver</a><br />
+Class <a href="Chain/PostConnectHook.html" class="link">WWW::Mechanize::Chain::PostConnectHook</a><br />
+Class <a href="Chain/PreConnectHook.html" class="link">WWW::Mechanize::Chain::PreConnectHook</a><br />
+Class <a href="Chain/RequestResolver.html" class="link">WWW::Mechanize::Chain::RequestResolver</a><br />
+Class <a href="Chain/ResponseBodyParser.html" class="link">WWW::Mechanize::Chain::ResponseBodyParser</a><br />
+Class <a href="Chain/ResponseHeaderHandler.html" class="link">WWW::Mechanize::Chain::ResponseHeaderHandler</a><br />
+Class <a href="Chain/ResponseReader.html" class="link">WWW::Mechanize::Chain::ResponseReader</a><br />
+Class <a href="Chain/SSLResolver.html" class="link">WWW::Mechanize::Chain::SSLResolver</a><br />
+Class <a href="Chain/URIResolver.html" class="link">WWW::Mechanize::Chain::URIResolver</a><br />
+
+    </div>
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000048" class="method-detail">
+        <a name="M000048"></a>
+
+        <div class="method-heading">
+          <a href="Chain.src/M000048.html" target="Code" class="method-signature"
+            onclick="popupCode('Chain.src/M000048.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(list)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000049" class="method-detail">
+        <a name="M000049"></a>
+
+        <div class="method-heading">
+          <a href="Chain.src/M000049.html" target="Code" class="method-signature"
+            onclick="popupCode('Chain.src/M000049.html');return false;">
+          <span class="method-name">handle</span><span class="method-args">(request)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000050" class="method-detail">
+        <a name="M000050"></a>
+
+        <div class="method-heading">
+          <a href="Chain.src/M000050.html" target="Code" class="method-signature"
+            onclick="popupCode('Chain.src/M000050.html');return false;">
+          <span class="method-name">pass</span><span class="method-args">(obj, request)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

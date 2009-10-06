@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Set Intersection \xE2\x80\x94 Returns a new NodeSet containing nodes common to the two NodeSets."
+full_name: Nokogiri::XML::NodeSet#&
+is_singleton: false
+name: "&"
+params: |
+  &(node_set)
+
+visibility: public

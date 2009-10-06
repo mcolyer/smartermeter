@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>handle (WWW::Mechanize::Chain::ConnectionResolver)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/www/mechanize/chain/connection_resolver.rb, line 22</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handle</span>(<span class="ruby-identifier">ctx</span>, <span class="ruby-identifier">params</span>)
+          <span class="ruby-identifier">uri</span> = <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:uri</span>]
+          <span class="ruby-identifier">http_obj</span> = <span class="ruby-keyword kw">nil</span>
+
+          <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">scheme</span>.<span class="ruby-identifier">downcase</span>
+          <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'http'</span>, <span class="ruby-value str">'https'</span>
+            <span class="ruby-identifier">cache_obj</span> = (<span class="ruby-ivar">@connection_cache</span>[<span class="ruby-node">&quot;#{uri.host}:#{uri.port}&quot;</span>] <span class="ruby-operator">||=</span> {
+              <span class="ruby-identifier">:connection</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword kw">nil</span>,
+              <span class="ruby-identifier">:keep_alive_options</span> =<span class="ruby-operator">&gt;</span> {},
+            })
+            <span class="ruby-identifier">http_obj</span> = <span class="ruby-identifier">cache_obj</span>[<span class="ruby-identifier">:connection</span>]
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">http_obj</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">http_obj</span>.<span class="ruby-identifier">started?</span>
+              <span class="ruby-identifier">http_obj</span> = <span class="ruby-identifier">cache_obj</span>[<span class="ruby-identifier">:connection</span>] =
+                  <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">host</span>,
+                          <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">port</span>,
+                          <span class="ruby-ivar">@proxy_addr</span>,
+                          <span class="ruby-ivar">@proxy_port</span>,
+                          <span class="ruby-ivar">@proxy_user</span>,
+                          <span class="ruby-ivar">@proxy_pass</span>
+                        )
+              <span class="ruby-identifier">cache_obj</span>[<span class="ruby-identifier">:keep_alive_options</span>] = {}
+            <span class="ruby-keyword kw">end</span>
+
+            <span class="ruby-comment cmt"># If we're keeping connections alive and the last request time is too</span>
+            <span class="ruby-comment cmt"># long ago, stop the connection.  Or, if the max requests left is 1,</span>
+            <span class="ruby-comment cmt"># reset the connection.</span>
+            <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@keep_alive</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">http_obj</span>.<span class="ruby-identifier">started?</span>
+              <span class="ruby-identifier">opts</span> = <span class="ruby-identifier">cache_obj</span>[<span class="ruby-identifier">:keep_alive_options</span>]
+              <span class="ruby-keyword kw">if</span>((<span class="ruby-identifier">opts</span>[<span class="ruby-identifier">:timeout</span>] <span class="ruby-operator">&amp;&amp;</span>
+                 <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">cache_obj</span>[<span class="ruby-identifier">:last_request_time</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">opts</span>[<span class="ruby-identifier">:timeout</span>].<span class="ruby-identifier">to_i</span>) <span class="ruby-operator">||</span>
+                  <span class="ruby-identifier">opts</span>[<span class="ruby-identifier">:max</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">opts</span>[<span class="ruby-identifier">:max</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>)
+  
+                <span class="ruby-constant">Mechanize</span>.<span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span>(<span class="ruby-value str">'Finishing stale connection'</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Mechanize</span>.<span class="ruby-identifier">log</span>
+                <span class="ruby-identifier">http_obj</span>.<span class="ruby-identifier">finish</span>
+  
+              <span class="ruby-keyword kw">end</span>
+            <span class="ruby-keyword kw">end</span>
+
+            <span class="ruby-identifier">cache_obj</span>[<span class="ruby-identifier">:last_request_time</span>] = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>
+          <span class="ruby-keyword kw">when</span> <span class="ruby-value str">'file'</span>
+            <span class="ruby-identifier">http_obj</span> = <span class="ruby-constant">Object</span>.<span class="ruby-identifier">new</span>
+            <span class="ruby-keyword kw">class</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">http_obj</span>
+              <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">started?</span>; <span class="ruby-keyword kw">true</span>; <span class="ruby-keyword kw">end</span>
+              <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+                <span class="ruby-identifier">response</span> = <span class="ruby-constant">FileResponse</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">request</span>.<span class="ruby-identifier">uri</span>.<span class="ruby-identifier">path</span>)
+                <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">response</span>
+              <span class="ruby-keyword kw">end</span>
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+
+          <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:connection</span>] = <span class="ruby-identifier">http_obj</span>
+          <span class="ruby-keyword kw">super</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

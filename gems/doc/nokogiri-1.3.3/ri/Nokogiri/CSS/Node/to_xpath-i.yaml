@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Convert this CSS node to xpath with <tt>prefix</tt> using <tt>visitor</tt>
+full_name: Nokogiri::CSS::Node#to_xpath
+is_singleton: false
+name: to_xpath
+params: (prefix = '//', visitor = XPathVisitor.new)
+visibility: public

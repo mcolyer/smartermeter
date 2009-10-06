@@ -1,0 +1,52 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: mech
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::H 
+  level: 1
+  text: Synopsis
+- !ruby/struct:SM::Flow::P 
+  body: This class encapsulates an HTML page. If Mechanize finds a content type of 'text/html', this class will be instantiated and returned.
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Example
+- !ruby/struct:SM::Flow::VERB 
+  body: " require 'rubygems'\n require 'mechanize'\n\n agent = WWW::Mechanize.new\n agent.get('http://google.com/').class  #=&gt; WWW::Mechanize::Page\n"
+constants: []
+
+full_name: WWW::Mechanize::Page
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: bases
+- !ruby/object:RI::MethodSummary 
+  name: content_type
+- !ruby/object:RI::MethodSummary 
+  name: encoding
+- !ruby/object:RI::MethodSummary 
+  name: encoding=
+- !ruby/object:RI::MethodSummary 
+  name: forms
+- !ruby/object:RI::MethodSummary 
+  name: frames
+- !ruby/object:RI::MethodSummary 
+  name: iframes
+- !ruby/object:RI::MethodSummary 
+  name: links
+- !ruby/object:RI::MethodSummary 
+  name: meta
+- !ruby/object:RI::MethodSummary 
+  name: parser
+- !ruby/object:RI::MethodSummary 
+  name: root
+- !ruby/object:RI::MethodSummary 
+  name: title
+name: Page
+superclass: WWW::Mechanize::File

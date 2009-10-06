@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>draw_line_markers (Gruff::Dot)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/gruff/dot.rb, line 56</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">draw_line_markers</span>
+
+    <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@hide_line_markers</span>
+
+    <span class="ruby-ivar">@d</span> = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">stroke_antialias</span> <span class="ruby-keyword kw">false</span>
+
+    <span class="ruby-comment cmt"># Draw horizontal line markers and annotate with numbers</span>
+    <span class="ruby-ivar">@d</span> = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">stroke</span>(<span class="ruby-ivar">@marker_color</span>)
+    <span class="ruby-ivar">@d</span> = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">stroke_width</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">number_of_lines</span> = <span class="ruby-value">5</span>
+
+    <span class="ruby-comment cmt"># TODO Round maximum marker value to a round number like 100, 0.1, 0.5, etc.</span>
+    <span class="ruby-identifier">increment</span> = <span class="ruby-identifier">significant</span>(<span class="ruby-ivar">@maximum_value</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">number_of_lines</span>)
+    (<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">number_of_lines</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+
+      <span class="ruby-identifier">line_diff</span>    = (<span class="ruby-ivar">@graph_right</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@graph_left</span>) <span class="ruby-operator">/</span> <span class="ruby-identifier">number_of_lines</span>
+      <span class="ruby-identifier">x</span>            = <span class="ruby-ivar">@graph_right</span> <span class="ruby-operator">-</span> (<span class="ruby-identifier">line_diff</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">index</span>) <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+      <span class="ruby-ivar">@d</span>           = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">line</span>(<span class="ruby-identifier">x</span>, <span class="ruby-ivar">@graph_bottom</span>, <span class="ruby-identifier">x</span>, <span class="ruby-ivar">@graph_bottom</span> <span class="ruby-operator">+</span> <span class="ruby-value">0</span><span class="ruby-value">.5</span> <span class="ruby-operator">*</span> <span class="ruby-constant">LABEL_MARGIN</span>)
+      <span class="ruby-identifier">diff</span>         = <span class="ruby-identifier">index</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">number_of_lines</span>
+      <span class="ruby-identifier">marker_label</span> = <span class="ruby-identifier">diff</span>.<span class="ruby-identifier">abs</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">increment</span>
+
+      <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@hide_line_numbers</span>
+        <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">fill</span>      = <span class="ruby-ivar">@font_color</span>
+        <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">font</span>      = <span class="ruby-ivar">@font</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@font</span>
+        <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">stroke</span>    = <span class="ruby-value str">'transparent'</span>
+        <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">pointsize</span> = <span class="ruby-identifier">scale_fontsize</span>(<span class="ruby-ivar">@marker_font_size</span>)
+        <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">gravity</span>   = <span class="ruby-constant">CenterGravity</span>
+        <span class="ruby-comment cmt"># TODO Center text over line</span>
+        <span class="ruby-ivar">@d</span>           = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">annotate_scaled</span>( <span class="ruby-ivar">@base_image</span>,
+                          <span class="ruby-value">0</span>, <span class="ruby-value">0</span>, <span class="ruby-comment cmt"># Width of box to draw text in</span>
+                          <span class="ruby-identifier">x</span>, <span class="ruby-ivar">@graph_bottom</span> <span class="ruby-operator">+</span> (<span class="ruby-constant">LABEL_MARGIN</span> <span class="ruby-operator">*</span> <span class="ruby-value">2.0</span>), <span class="ruby-comment cmt"># Coordinates of text</span>
+                          <span class="ruby-identifier">marker_label</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-ivar">@scale</span>)
+      <span class="ruby-keyword kw">end</span> <span class="ruby-comment cmt"># unless</span>
+      <span class="ruby-ivar">@d</span> = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">stroke_antialias</span> <span class="ruby-keyword kw">true</span>
+    <span class="ruby-keyword kw">end</span>
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

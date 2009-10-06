@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>validate_document (Nokogiri::XML::Schema)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *  validate_document(document)
+ *
+ * Validate a Nokogiri::XML::Document against this Schema.
+ */
+static VALUE validate_document(VALUE self, VALUE document)
+{
+  xmlDocPtr doc;
+  xmlSchemaPtr schema;
+
+  Data_Get_Struct(self, xmlSchema, schema);
+  Data_Get_Struct(document, xmlDoc, doc);
+
+  VALUE errors = rb_ary_new();
+
+  xmlSchemaValidCtxtPtr valid_ctxt = xmlSchemaNewValidCtxt(schema);
+
+  if(NULL == valid_ctxt) {
+    // we have a problem
+    rb_raise(rb_eRuntimeError, &quot;Could not create a validation context&quot;);
+  }
+
+#ifdef HAVE_XMLSCHEMASETVALIDSTRUCTUREDERRORS
+  xmlSchemaSetValidStructuredErrors(
+    valid_ctxt,
+    Nokogiri_error_array_pusher,
+    (void *)errors
+  );
+#endif
+
+  xmlSchemaValidateDoc(valid_ctxt, doc);
+
+  xmlSchemaFreeValidCtxt(valid_ctxt);
+
+  return errors;
+}</pre>
+</body>
+</html>

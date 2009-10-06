@@ -1,0 +1,21 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "call-seq:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " initialize_native(xml_sax, filename)\n"
+- !ruby/struct:SM::Flow::P 
+  body: Initialize the push parser with <tt>xml_sax</tt> using <tt>filename</tt>
+constants: []
+
+full_name: Nokogiri::XML::SAX
+includes: []
+
+instance_methods: []
+
+name: SAX
+superclass: 

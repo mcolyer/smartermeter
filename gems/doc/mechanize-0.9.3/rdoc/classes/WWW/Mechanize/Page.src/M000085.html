@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>parser (WWW::Mechanize::Page)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/www/mechanize/page.rb, line 70</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">parser</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@parser</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@parser</span>
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">body</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">response</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">mech</span>.<span class="ruby-identifier">html_parser</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">HTML</span>
+            <span class="ruby-ivar">@parser</span> = <span class="ruby-identifier">mech</span>.<span class="ruby-identifier">html_parser</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">html_body</span>, <span class="ruby-keyword kw">nil</span>, <span class="ruby-ivar">@encoding</span>)
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-ivar">@parser</span> = <span class="ruby-identifier">mech</span>.<span class="ruby-identifier">html_parser</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">html_body</span>)
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-ivar">@parser</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

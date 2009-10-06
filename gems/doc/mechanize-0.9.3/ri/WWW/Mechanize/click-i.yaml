@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Clicks the WWW::Mechanize::Link object passed in and returns the page fetched.
+full_name: WWW::Mechanize#click
+is_singleton: false
+name: click
+params: (link)
+visibility: public

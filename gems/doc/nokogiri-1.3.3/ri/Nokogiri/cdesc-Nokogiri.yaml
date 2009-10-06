@@ -1,0 +1,53 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: HTML
+- !ruby/object:RI::MethodSummary 
+  name: Hpricot
+- !ruby/object:RI::MethodSummary 
+  name: Slop
+- !ruby/object:RI::MethodSummary 
+  name: XML
+- !ruby/object:RI::MethodSummary 
+  name: XSLT
+- !ruby/object:RI::MethodSummary 
+  name: make
+- !ruby/object:RI::MethodSummary 
+  name: parse
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "call-seq:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " node_set\n"
+- !ruby/struct:SM::Flow::P 
+  body: Fetch the node set associated with this xpath context.
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: LIBXML_PARSER_VERSION
+  value: LibXML.__xmlParserVersion().read_pointer.read_string
+- !ruby/object:RI::Constant 
+  comment: 
+  name: LIBXML_VERSION
+  value: LIBXML_PARSER_VERSION.scan(/^(.*)(..)(..)$/).first.collect{|j|j.to_i}.join(".")
+- !ruby/object:RI::Constant 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: The version of Nokogiri you are using
+  name: VERSION
+  value: "'1.3.3'"
+- !ruby/object:RI::Constant 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: More complete version information about libxml
+  name: VERSION_INFO
+  value: "{}"
+full_name: Nokogiri
+includes: []
+
+instance_methods: []
+
+name: Nokogiri
+superclass: 

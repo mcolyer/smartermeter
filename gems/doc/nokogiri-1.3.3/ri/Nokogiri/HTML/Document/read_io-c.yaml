@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Read the HTML document from <tt>io</tt> with given <tt>url</tt>, <tt>encoding</tt>, and <tt>options</tt>. See Nokogiri::HTML.parse
+full_name: Nokogiri::HTML::Document::read_io
+is_singleton: true
+name: read_io
+params: |
+  read_io(io, url, encoding, options)
+
+visibility: public

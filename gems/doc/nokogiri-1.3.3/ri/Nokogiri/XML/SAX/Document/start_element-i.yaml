@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Called at the beginning of an element <tt>name</tt> is the name of the tag with <tt>attrs</tt> as attributes
+full_name: Nokogiri::XML::SAX::Document#start_element
+is_singleton: false
+name: start_element
+params: (name, attrs = [])
+visibility: public

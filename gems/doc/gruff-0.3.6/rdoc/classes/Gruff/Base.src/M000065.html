@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>normalize (Gruff::Base)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/gruff/base.rb, line 542</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">normalize</span>(<span class="ruby-identifier">force</span>=<span class="ruby-keyword kw">false</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@norm_data</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">force</span>
+        <span class="ruby-ivar">@norm_data</span> = []
+        <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@has_data</span>
+
+        <span class="ruby-identifier">calculate_spread</span>
+
+        <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">data_row</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">norm_data_points</span> = []
+          <span class="ruby-identifier">data_row</span>[<span class="ruby-constant">DATA_VALUES_INDEX</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">data_point</span><span class="ruby-operator">|</span>
+            <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">data_point</span>.<span class="ruby-identifier">nil?</span>
+              <span class="ruby-identifier">norm_data_points</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword kw">nil</span>
+            <span class="ruby-keyword kw">else</span>
+              <span class="ruby-identifier">norm_data_points</span> <span class="ruby-operator">&lt;&lt;</span> ((<span class="ruby-identifier">data_point</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@minimum_value</span>.<span class="ruby-identifier">to_f</span> ) <span class="ruby-operator">/</span> <span class="ruby-ivar">@spread</span>)
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+          <span class="ruby-ivar">@norm_data</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">data_row</span>[<span class="ruby-constant">DATA_LABEL_INDEX</span>], <span class="ruby-identifier">norm_data_points</span>, <span class="ruby-identifier">data_row</span>[<span class="ruby-constant">DATA_COLOR_INDEX</span>]]
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

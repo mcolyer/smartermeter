@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Fetch the node set associated with this xpath context.
+full_name: Nokogiri::XML::XPath#node_set
+is_singleton: false
+name: node_set
+params: |
+  node_set
+
+visibility: public

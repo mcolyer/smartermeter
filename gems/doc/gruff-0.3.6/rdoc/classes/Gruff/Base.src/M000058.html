@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>theme_pastel (Gruff::Base)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/gruff/base.rb, line 403</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">theme_pastel</span>
+      <span class="ruby-comment cmt"># Colors</span>
+      <span class="ruby-ivar">@colors</span> = [
+                 <span class="ruby-value str">'#a9dada'</span>, <span class="ruby-comment cmt"># blue</span>
+                 <span class="ruby-value str">'#aedaa9'</span>, <span class="ruby-comment cmt"># green</span>
+                 <span class="ruby-value str">'#daaea9'</span>, <span class="ruby-comment cmt"># peach</span>
+                 <span class="ruby-value str">'#dadaa9'</span>, <span class="ruby-comment cmt"># yellow</span>
+                 <span class="ruby-value str">'#a9a9da'</span>, <span class="ruby-comment cmt"># dk purple</span>
+                 <span class="ruby-value str">'#daaeda'</span>, <span class="ruby-comment cmt"># purple</span>
+                 <span class="ruby-value str">'#dadada'</span> <span class="ruby-comment cmt"># grey</span>
+                ]
+
+      <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">theme</span> = {
+        <span class="ruby-identifier">:colors</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@colors</span>,
+        <span class="ruby-identifier">:marker_color</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'#aea9a9'</span>, <span class="ruby-comment cmt"># Grey</span>
+        <span class="ruby-identifier">:font_color</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'black'</span>,
+        <span class="ruby-identifier">:background_colors</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'white'</span>
+      }
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

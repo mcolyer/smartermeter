@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Called at the end of an element <tt>name</tt> is the element's name <tt>prefix</tt> is the namespace prefix associated with the element <tt>uri</tt> is the associated namespace URI
+full_name: Nokogiri::XML::SAX::Document#end_element_namespace
+is_singleton: false
+name: end_element_namespace
+params: (name, prefix = nil, uri = nil)
+visibility: public

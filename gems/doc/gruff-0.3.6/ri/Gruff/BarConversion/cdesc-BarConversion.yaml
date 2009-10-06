@@ -1,0 +1,43 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: graph_height
+  rw: W
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: graph_top
+  rw: W
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: minimum_value
+  rw: W
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: mode
+  rw: W
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: spread
+  rw: W
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: zero
+  rw: W
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Original Author: David Stokar"
+- !ruby/struct:SM::Flow::VERB 
+  body: "      This class perfoms the y coordinats conversion for the bar class.\n\n      There are three cases:\n\n  1. Bars all go from zero in positive direction\n              2. Bars all go from zero to negative direction\n              3. Bars either go from zero to positive or from zero to negative\n"
+constants: []
+
+full_name: Gruff::BarConversion
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: getLeftYRightYscaled
+name: BarConversion
+superclass: Object

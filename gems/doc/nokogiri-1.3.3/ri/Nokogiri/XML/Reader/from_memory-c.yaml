@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Create a new reader that parses <tt>string</tt>
+full_name: Nokogiri::XML::Reader::from_memory
+is_singleton: true
+name: from_memory
+params: |
+  from_memory(string, url = nil, encoding = nil, options = 0)
+
+visibility: public

@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Parse the document accessable via <tt>io</tt>
+full_name: Nokogiri::XML::SAX::Parser#native_parse_io
+is_singleton: false
+name: native_parse_io
+params: |
+  native_parse_io(data, encoding)
+
+visibility: public

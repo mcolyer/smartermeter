@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Validate <tt>thing</tt> against this schema. <tt>thing</tt> can be a Nokogiri::XML::Document object, or a filename. An Array of Nokogiri::XML::SyntaxError objects found while validating the <tt>thing</tt> is returned.
+full_name: Nokogiri::XML::Schema#validate
+is_singleton: false
+name: validate
+params: (thing)
+visibility: public

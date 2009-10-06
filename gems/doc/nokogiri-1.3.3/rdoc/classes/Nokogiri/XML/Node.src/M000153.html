@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>replace (Nokogiri::XML::Node)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/nokogiri/xml/node.rb, line 465</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">replace</span> <span class="ruby-identifier">new_node</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">new_node</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Document</span>) <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">new_node</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Node</span>)
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">&quot;Node.replace requires a Node argument, and cannot accept a Document.\n(You probably want to select a node from the Document with at() or search(), or create a new Node via Node.new().)\n&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">replace_with_node</span> <span class="ruby-identifier">new_node</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

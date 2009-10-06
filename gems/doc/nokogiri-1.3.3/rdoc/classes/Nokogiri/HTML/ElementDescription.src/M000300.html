@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>implied_start_tag? (Nokogiri::HTML::ElementDescription)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *  implied_start_tag?
+ *
+ * Can the start tag be implied for this tag?
+ */
+static VALUE implied_start_tag_eh(VALUE self)
+{
+  htmlElemDesc * description;
+  Data_Get_Struct(self, htmlElemDesc, description);
+
+  if(description-&gt;startTag) return Qtrue;
+  return Qfalse;
+}</pre>
+</body>
+</html>

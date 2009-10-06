@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: tick
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Select this option
+full_name: WWW::Mechanize::Form::Option#select
+is_singleton: false
+name: select
+params: ()
+visibility: public

@@ -1,0 +1,19 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: scheme
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: WWW::Mechanize::UnsupportedSchemeError
+includes: []
+
+instance_methods: []
+
+name: UnsupportedSchemeError
+superclass: RuntimeError

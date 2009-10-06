@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Insert <tt>datum</tt> after the last Node in this NodeSet
+full_name: Nokogiri::XML::NodeSet#after
+is_singleton: false
+name: after
+params: (datum)
+visibility: public

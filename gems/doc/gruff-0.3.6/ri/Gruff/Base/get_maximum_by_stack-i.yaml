@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Used by StackedBar and child classes.
+- !ruby/struct:SM::Flow::P 
+  body: May need to be moved to the StackedBar class.
+full_name: Gruff::Base#get_maximum_by_stack
+is_singleton: false
+name: get_maximum_by_stack
+params: ()
+visibility: protected

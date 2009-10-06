@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Register the namespace with <tt>prefix</tt> and <tt>uri</tt>.
+full_name: Nokogiri::XML::XPathContext#register_ns
+is_singleton: false
+name: register_ns
+params: |
+  register_ns(prefix, uri)
+
+visibility: public

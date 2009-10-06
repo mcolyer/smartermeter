@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>handle (WWW::Mechanize::Chain::ResponseReader)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/www/mechanize/chain/response_reader.rb, line 11</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">handle</span>(<span class="ruby-identifier">ctx</span>, <span class="ruby-identifier">params</span>)
+          <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:response</span>] = <span class="ruby-ivar">@response</span>
+          <span class="ruby-identifier">body</span> = <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>
+          <span class="ruby-identifier">total</span> = <span class="ruby-value">0</span>
+          <span class="ruby-ivar">@response</span>.<span class="ruby-identifier">read_body</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">part</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">total</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">part</span>.<span class="ruby-identifier">length</span>
+            <span class="ruby-identifier">body</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">part</span>)
+            <span class="ruby-constant">Mechanize</span>.<span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span>(<span class="ruby-node">&quot;Read #{total} bytes&quot;</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Mechanize</span>.<span class="ruby-identifier">log</span>
+          }
+          <span class="ruby-identifier">body</span>.<span class="ruby-identifier">rewind</span>
+
+          <span class="ruby-identifier">res_klass</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPResponse</span><span class="ruby-operator">::</span><span class="ruby-constant">CODE_TO_OBJ</span>[<span class="ruby-ivar">@response</span>.<span class="ruby-identifier">code</span>.<span class="ruby-identifier">to_s</span>]
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">ResponseCodeError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@response</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">res_klass</span>
+
+          <span class="ruby-comment cmt"># Net::HTTP ignores EOFError if Content-length is given, so we emulate it here.</span>
+          <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">res_klass</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPRedirection</span>
+            <span class="ruby-identifier">raise</span> <span class="ruby-constant">EOFError</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">params</span>[<span class="ruby-identifier">:request</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Head</span>)) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@response</span>.<span class="ruby-identifier">content_length</span>() <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@response</span>.<span class="ruby-identifier">content_length</span>() <span class="ruby-operator">!=</span> <span class="ruby-identifier">total</span>
+          <span class="ruby-keyword kw">end</span>
+  
+          <span class="ruby-ivar">@response</span>.<span class="ruby-identifier">each_header</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+            <span class="ruby-constant">Mechanize</span>.<span class="ruby-identifier">log</span>.<span class="ruby-identifier">debug</span>(<span class="ruby-node">&quot;response-header: #{ k } =&gt; #{ v }&quot;</span>)
+          } <span class="ruby-keyword kw">if</span> <span class="ruby-constant">Mechanize</span>.<span class="ruby-identifier">log</span>
+
+          <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:response_body</span>] = <span class="ruby-identifier">body</span>
+          <span class="ruby-identifier">params</span>[<span class="ruby-identifier">:res_klass</span>] = <span class="ruby-identifier">res_klass</span>
+          <span class="ruby-keyword kw">super</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

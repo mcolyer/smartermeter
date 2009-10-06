@@ -1,0 +1,32 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Can be used to make the pie start cutting slices at the top (-90.0) or at another angle. Default is 0.0, which starts at 3 o'clock.
+  name: zero_degree
+  rw: RW
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Here's how to make a Pie graph:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  g = Gruff::Pie.new\n  g.title = &quot;Visual Pie Graph Test&quot;\n  g.data 'Fries', 20\n  g.data 'Hamburgers', 50\n  g.write(&quot;test/output/pie_keynote.png&quot;)\n"
+- !ruby/struct:SM::Flow::P 
+  body: "To control where the pie chart starts creating slices, use #zero_degree."
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: TEXT_OFFSET_PERCENTAGE
+  value: "0.15"
+full_name: Gruff::Pie
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: draw
+- !ruby/object:RI::MethodSummary 
+  name: initialize_ivars
+name: Pie
+superclass: Gruff::Base

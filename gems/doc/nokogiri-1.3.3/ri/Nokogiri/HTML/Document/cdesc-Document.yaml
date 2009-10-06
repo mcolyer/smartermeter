@@ -1,0 +1,39 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+- !ruby/object:RI::MethodSummary 
+  name: new
+- !ruby/object:RI::MethodSummary 
+  name: parse
+- !ruby/object:RI::MethodSummary 
+  name: read_io
+- !ruby/object:RI::MethodSummary 
+  name: read_memory
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "call-seq:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " meta_encoding\n"
+- !ruby/struct:SM::Flow::P 
+  body: Get the meta tag encoding for this document.
+constants: []
+
+full_name: Nokogiri::HTML::Document
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: fragment
+- !ruby/object:RI::MethodSummary 
+  name: meta_encoding
+- !ruby/object:RI::MethodSummary 
+  name: meta_encoding=
+- !ruby/object:RI::MethodSummary 
+  name: serialize
+- !ruby/object:RI::MethodSummary 
+  name: type
+name: Document
+superclass: Nokogiri::XML::Document

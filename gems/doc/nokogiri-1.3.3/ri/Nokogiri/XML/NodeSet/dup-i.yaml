@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Duplicate this node set
+full_name: Nokogiri::XML::NodeSet#dup
+is_singleton: false
+name: dup
+params: |
+  dup
+
+visibility: public

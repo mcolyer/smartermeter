@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns true if this is an HTML::Document node
+full_name: Nokogiri::XML::Node#html?
+is_singleton: false
+name: html?
+params: ()
+visibility: public

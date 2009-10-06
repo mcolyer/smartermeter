@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Initialize the push parser with <tt>xml_sax</tt> using <tt>filename</tt>
+full_name: Nokogiri::XML::SAX::PushParser#initialize_native
+is_singleton: false
+name: initialize_native
+params: |
+  initialize_native(xml_sax, filename)
+
+visibility: public

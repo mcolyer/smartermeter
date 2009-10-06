@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Validate a Nokogiri::XML::Document against this RelaxNG schema.
+full_name: Nokogiri::XML::RelaxNG#validate_document
+is_singleton: false
+name: validate_document
+params: |
+  validate_document(document)
+
+visibility: public

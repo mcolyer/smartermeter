@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Visit attribute condition nodes with <tt>node</tt>
+full_name: Nokogiri::Decorators::Hpricot::XPathVisitor#visit_attribute_condition
+is_singleton: false
+name: visit_attribute_condition
+params: (node)
+visibility: public

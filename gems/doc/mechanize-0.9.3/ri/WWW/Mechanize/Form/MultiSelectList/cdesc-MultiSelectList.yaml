@@ -1,0 +1,38 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: options
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "This class represents a select list where multiple values can be selected. MultiSelectList#value= accepts an array, and those values are used as values for the select list. For example, to select multiple values, simply do this:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " list.value = ['one', 'two']\n"
+- !ruby/struct:SM::Flow::P 
+  body: "Single values are still supported, so these two are the same:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " list.value = ['one']\n list.value = 'one'\n"
+constants: []
+
+full_name: WWW::Mechanize::Form::MultiSelectList
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: query_value
+- !ruby/object:RI::MethodSummary 
+  name: select_all
+- !ruby/object:RI::MethodSummary 
+  name: select_none
+- !ruby/object:RI::MethodSummary 
+  name: selected_options
+- !ruby/object:RI::MethodSummary 
+  name: value
+- !ruby/object:RI::MethodSummary 
+  name: value=
+name: MultiSelectList
+superclass: Field

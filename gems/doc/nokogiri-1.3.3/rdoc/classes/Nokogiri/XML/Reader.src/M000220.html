@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>name (Nokogiri::XML::Reader)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *   name
+ *
+ * Get the name of the node
+ */
+static VALUE name(VALUE self)
+{
+  xmlTextReaderPtr reader;
+  Data_Get_Struct(self, xmlTextReader, reader);
+  const char * name = (const char *)xmlTextReaderConstName(reader);
+  if(name == NULL) return Qnil;
+
+  VALUE MAYBE_UNUSED(enc) = rb_iv_get(self, &quot;@encoding&quot;);
+  return NOKOGIRI_STR_NEW2(name,
+      RTEST(enc) ? StringValuePtr(enc) : NULL);
+}</pre>
+</body>
+</html>

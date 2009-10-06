@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Parse a fragment from <tt>string</tt> in to a NodeSet.
+full_name: Nokogiri::XML::fragment
+is_singleton: true
+name: fragment
+params: (string)
+visibility: public

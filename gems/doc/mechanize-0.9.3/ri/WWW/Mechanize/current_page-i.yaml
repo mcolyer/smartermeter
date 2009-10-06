@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: page
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the current page loaded by Mechanize
+full_name: WWW::Mechanize#current_page
+is_singleton: false
+name: current_page
+params: ()
+visibility: public

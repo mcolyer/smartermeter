@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Use with a theme to make a transparent background
+full_name: Gruff::Base#render_transparent_background
+is_singleton: false
+name: render_transparent_background
+params: ()
+visibility: protected

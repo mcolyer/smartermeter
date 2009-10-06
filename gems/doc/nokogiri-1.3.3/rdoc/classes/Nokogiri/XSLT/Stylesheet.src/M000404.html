@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>serialize (Nokogiri::XSLT::Stylesheet)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *   serialize(document)
+ *
+ * Serialize +document+ to an xml string.
+ */
+static VALUE serialize(VALUE self, VALUE xmlobj)
+{
+    xmlDocPtr xml ;
+    xsltStylesheetPtr ss ;
+    xmlChar* doc_ptr ;
+    int doc_len ;
+    VALUE rval ;
+
+    Data_Get_Struct(xmlobj, xmlDoc, xml);
+    Data_Get_Struct(self, xsltStylesheet, ss);
+    xsltSaveResultToString(&amp;doc_ptr, &amp;doc_len, xml, ss);
+    rval = NOKOGIRI_STR_NEW(doc_ptr, doc_len, xml-&gt;encoding);
+    xmlFree(doc_ptr);
+    return rval ;
+}</pre>
+</body>
+</html>

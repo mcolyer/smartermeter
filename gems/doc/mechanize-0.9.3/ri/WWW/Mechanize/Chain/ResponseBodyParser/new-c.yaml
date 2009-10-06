@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: WWW::Mechanize::Chain::ResponseBodyParser::new
+is_singleton: true
+name: new
+params: (pluggable_parser, watch_for_set)
+visibility: public

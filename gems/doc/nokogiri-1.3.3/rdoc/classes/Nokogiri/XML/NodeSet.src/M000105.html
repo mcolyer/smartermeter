@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>unlink (Nokogiri::XML::NodeSet)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ *  call-seq:
+ *    unlink
+ *
+ * Unlink this NodeSet and all Node objects it contains from their current context.
+ */
+static VALUE unlink_nodeset(VALUE self)
+{
+  xmlNodeSetPtr node_set;
+  int j, nodeNr ;
+
+  Data_Get_Struct(self, xmlNodeSet, node_set);
+  nodeNr = node_set-&gt;nodeNr ;
+  for (j = 0 ; j &lt; nodeNr ; j++) {
+    VALUE node ;
+    xmlNodePtr node_ptr;
+    node = Nokogiri_wrap_xml_node(Qnil, node_set-&gt;nodeTab[j]);
+    rb_funcall(node, rb_intern(&quot;unlink&quot;), 0); /* modifies the C struct out from under the object */
+    Data_Get_Struct(node, xmlNode, node_ptr);
+    node_set-&gt;nodeTab[j] = node_ptr ;
+  }
+  return self ;
+}</pre>
+</body>
+</html>

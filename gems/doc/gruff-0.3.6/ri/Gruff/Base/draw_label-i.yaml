@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Draws column labels below graph, centered over x_offset
+full_name: Gruff::Base#draw_label
+is_singleton: false
+name: draw_label
+params: (x_offset, index)
+visibility: protected

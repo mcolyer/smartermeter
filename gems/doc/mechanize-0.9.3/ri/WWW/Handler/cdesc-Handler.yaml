@@ -1,0 +1,19 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: chain
+  rw: RW
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: WWW::Handler
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: handle
+name: Handler
+superclass: 

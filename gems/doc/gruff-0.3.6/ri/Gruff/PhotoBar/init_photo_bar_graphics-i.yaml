@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Sets up colors with a list of images that will be used. Images should be 340px tall
+full_name: Gruff::PhotoBar#init_photo_bar_graphics
+is_singleton: false
+name: init_photo_bar_graphics
+params: ()
+visibility: protected

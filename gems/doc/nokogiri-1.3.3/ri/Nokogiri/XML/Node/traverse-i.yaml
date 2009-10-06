@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Yields self and all children to <tt>block</tt> recursively.
+full_name: Nokogiri::XML::Node#traverse
+is_singleton: false
+name: traverse
+params: (&block)
+visibility: public

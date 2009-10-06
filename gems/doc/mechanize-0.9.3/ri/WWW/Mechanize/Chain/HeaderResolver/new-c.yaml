@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: WWW::Mechanize::Chain::HeaderResolver::new
+is_singleton: true
+name: new
+params: (keep_alive, keep_alive_time, cookie_jar, user_agent, headers)
+visibility: public

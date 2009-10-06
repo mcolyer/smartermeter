@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>root= (Nokogiri::XML::Document)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *  root=
+ *
+ * Set the root element on this document
+ */
+static VALUE set_root(VALUE self, VALUE root)
+{
+  xmlDocPtr doc;
+  xmlNodePtr new_root;
+
+  Data_Get_Struct(self, xmlDoc, doc);
+  Data_Get_Struct(root, xmlNode, new_root);
+
+  xmlNodePtr old_root = NULL;
+
+  /* If the new root's document is not the same as the current document,
+   * then we need to dup the node in to this document. */
+  if(new_root-&gt;doc != doc) {
+    old_root = xmlDocGetRootElement(doc);
+    if (!(new_root = xmlDocCopyNode(new_root, doc, 1))) {
+      rb_raise(rb_eRuntimeError, &quot;Could not reparent node (xmlDocCopyNode)&quot;);
+    }
+  }
+
+  xmlDocSetRootElement(doc, new_root);
+  if(old_root) NOKOGIRI_ROOT_NODE(old_root);
+  return root;
+}</pre>
+</body>
+</html>

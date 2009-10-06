@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>xpath (Nokogiri::XML::Node)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/nokogiri/xml/node.rb, line 126</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">xpath</span> <span class="ruby-operator">*</span><span class="ruby-identifier">paths</span>
+        <span class="ruby-comment cmt"># Pop off our custom function handler if it exists</span>
+        <span class="ruby-identifier">handler</span> = <span class="ruby-operator">!</span>[
+          <span class="ruby-constant">Hash</span>, <span class="ruby-constant">String</span>, <span class="ruby-constant">Symbol</span>
+        ].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">paths</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">class</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>
+
+        <span class="ruby-identifier">ns</span> = <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">:</span>
+          (<span class="ruby-identifier">document</span>.<span class="ruby-identifier">root</span> <span class="ruby-value">? </span><span class="ruby-identifier">document</span>.<span class="ruby-identifier">root</span>.<span class="ruby-identifier">namespaces</span> <span class="ruby-operator">:</span> {})
+
+        <span class="ruby-keyword kw">return</span> <span class="ruby-constant">NodeSet</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">document</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">document</span>
+
+        <span class="ruby-identifier">sets</span> = <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">ctx</span> = <span class="ruby-constant">XPathContext</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">self</span>)
+          <span class="ruby-identifier">ctx</span>.<span class="ruby-identifier">register_namespaces</span>(<span class="ruby-identifier">ns</span>)
+          <span class="ruby-identifier">set</span> = <span class="ruby-identifier">ctx</span>.<span class="ruby-identifier">evaluate</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">handler</span>).<span class="ruby-identifier">node_set</span>
+          <span class="ruby-identifier">set</span>.<span class="ruby-identifier">document</span> = <span class="ruby-identifier">document</span>
+          <span class="ruby-identifier">document</span>.<span class="ruby-identifier">decorate</span>(<span class="ruby-identifier">set</span>)
+          <span class="ruby-identifier">set</span>
+        }
+        <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">sets</span>.<span class="ruby-identifier">first</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">sets</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+
+        <span class="ruby-constant">NodeSet</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">document</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">combined</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">document</span>.<span class="ruby-identifier">decorate</span>(<span class="ruby-identifier">combined</span>)
+          <span class="ruby-identifier">sets</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">set</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">set</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">node</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">combined</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">node</span>
+            <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

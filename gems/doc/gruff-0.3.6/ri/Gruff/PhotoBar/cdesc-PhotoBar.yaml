@@ -1,0 +1,29 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: The name of a pre-packaged photo-based theme.
+  name: theme
+  rw: R
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: EXPERIMENTAL!
+- !ruby/struct:SM::Flow::P 
+  body: Doesn't work yet.
+constants: []
+
+full_name: Gruff::PhotoBar
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: draw
+- !ruby/object:RI::MethodSummary 
+  name: init_photo_bar_graphics
+- !ruby/object:RI::MethodSummary 
+  name: theme
+name: PhotoBar
+superclass: Gruff::Base

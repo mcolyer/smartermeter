@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Create a Nokogiri::XSLT::Stylesheet with <tt>stylesheet</tt>.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  xslt = Nokogiri::XSLT(File.read(ARGV[0]))\n"
+full_name: Nokogiri::XSLT
+is_singleton: true
+name: XSLT
+params: (stylesheet)
+visibility: public

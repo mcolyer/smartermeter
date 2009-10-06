@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Get the length of the node set
+full_name: Nokogiri::XML::NodeSet#length
+is_singleton: false
+name: length
+params: |
+  length
+
+visibility: public

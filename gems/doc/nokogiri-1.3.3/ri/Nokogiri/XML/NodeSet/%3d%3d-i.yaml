@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Equality -- Two NodeSets are equal if the contain the same number of elements and if each element is equal to the corresponding element in the other NodeSet
+full_name: Nokogiri::XML::NodeSet#==
+is_singleton: false
+name: ==
+params: (other)
+visibility: public

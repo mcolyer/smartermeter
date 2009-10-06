@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Set the <tt>property</tt> to <tt>value</tt>
+full_name: Nokogiri::XML::Node#[]=
+is_singleton: false
+name: "[]="
+params: |
+  []=(property, value)
+
+visibility: public

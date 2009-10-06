@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: warning
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Handle errors with message <tt>msg</tt>
+full_name: XSD::XMLParser::Nokogiri#error
+is_singleton: false
+name: error
+params: (msg)
+visibility: public

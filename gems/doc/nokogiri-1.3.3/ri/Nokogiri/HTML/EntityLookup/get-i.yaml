@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Get the HTML::EntityDescription for <tt>key</tt>
+full_name: Nokogiri::HTML::EntityLookup#get
+is_singleton: false
+name: get
+params: |
+  get(key)
+
+visibility: public

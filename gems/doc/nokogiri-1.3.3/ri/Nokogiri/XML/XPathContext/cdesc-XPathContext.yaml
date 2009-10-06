@@ -1,0 +1,23 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: XPathContext is the entry point for searching a Document by using XPath.
+constants: []
+
+full_name: Nokogiri::XML::XPathContext
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: evaluate
+- !ruby/object:RI::MethodSummary 
+  name: register_namespaces
+- !ruby/object:RI::MethodSummary 
+  name: register_ns
+name: XPathContext
+superclass: Object

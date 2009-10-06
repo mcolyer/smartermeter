@@ -1,0 +1,62 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: An array listing the foldernames that will be rendered, from back to front.
+  - !ruby/struct:SM::Flow::VERB 
+    body: " g.layers = %w(sky clouds buildings street people)\n"
+  name: layers
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: A scene is a non-linear graph that assembles layers together to tell a story. Layers are folders with appropriately named files (see below). You can group layers and control them together or just set their values individually.
+- !ruby/struct:SM::Flow::P 
+  body: "Examples:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: A city scene that changes with the time of day and the weather conditions.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: A traffic map that shows red lines on streets that are crowded and green on free-flowing ones.
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: "Usage:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " g = Gruff::Scene.new(&quot;500x100&quot;, &quot;path/to/city_scene_directory&quot;)\n\n # Define order of layers, back to front\n g.layers = %w(background haze sky clouds)\n\n # Define groups that will be controlled by the same input\n g.weather_group = %w(clouds)\n g.time_group = %w(background sky)\n\n # Set values for the layers or groups\n g.weather = &quot;cloudy&quot;\n g.time = Time.now\n g.haze = true\n\n # Write the final graph to disk\n g.write &quot;hazy_daytime_city_scene.png&quot;\n"
+- !ruby/struct:SM::Flow::P 
+  body: There are several rules that will magically select a layer when possible.
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: Numbered files will be selected according to the closest value that is less than the input value.
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: "'true.png' and 'false.png' will be used as booleans."
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: Other named files will be used if the input matches the filename (without the filetype extension).
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: If there is a file named 'default.png', it will be used unless other input values are set for the corresponding layer.
+  type: :BULLET
+constants: []
+
+full_name: Gruff::Scene
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: draw
+- !ruby/object:RI::MethodSummary 
+  name: layers=
+- !ruby/object:RI::MethodSummary 
+  name: method_missing
+name: Scene
+superclass: Gruff::Base

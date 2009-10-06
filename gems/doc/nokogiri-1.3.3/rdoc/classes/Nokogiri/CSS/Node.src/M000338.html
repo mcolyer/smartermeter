@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>preprocess! (Nokogiri::CSS::Node)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/nokogiri/css/node.rb, line 28</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">preprocess!</span>
+        <span class="ruby-comment cmt">### Deal with nth-child</span>
+        <span class="ruby-identifier">matches</span> = <span class="ruby-identifier">find_by_type</span>(
+          [<span class="ruby-identifier">:CONDITIONAL_SELECTOR</span>,
+            [<span class="ruby-identifier">:ELEMENT_NAME</span>],
+            [<span class="ruby-identifier">:PSEUDO_CLASS</span>,
+              [<span class="ruby-identifier">:FUNCTION</span>]
+            ]
+          ]
+        )
+        <span class="ruby-identifier">matches</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">match</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^nth-child/</span>
+            <span class="ruby-identifier">tag_name</span> = <span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">value</span>.<span class="ruby-identifier">first</span>
+            <span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">value</span> = [<span class="ruby-value str">'*'</span>]
+            <span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">1</span>] = <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:COMBINATOR</span>, [
+              <span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>],
+              <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:FUNCTION</span>, [<span class="ruby-value str">'self('</span>, <span class="ruby-identifier">tag_name</span>])
+            ])
+          <span class="ruby-keyword kw">end</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^nth-last-child/</span>
+            <span class="ruby-identifier">tag_name</span> = <span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">value</span>.<span class="ruby-identifier">first</span>
+            <span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">value</span> = [<span class="ruby-value str">'*'</span>]
+            <span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">1</span>] = <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:COMBINATOR</span>, [
+              <span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>],
+              <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:FUNCTION</span>, [<span class="ruby-value str">'self('</span>, <span class="ruby-identifier">tag_name</span>])
+            ])
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-comment cmt">### Deal with first-child, last-child</span>
+        <span class="ruby-identifier">matches</span> = <span class="ruby-identifier">find_by_type</span>(
+          [<span class="ruby-identifier">:CONDITIONAL_SELECTOR</span>,
+            [<span class="ruby-identifier">:ELEMENT_NAME</span>], [<span class="ruby-identifier">:PSEUDO_CLASS</span>]
+        ])
+        <span class="ruby-identifier">matches</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">match</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword kw">if</span> [<span class="ruby-value str">'first-child'</span>, <span class="ruby-value str">'last-child'</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">value</span>.<span class="ruby-identifier">first</span>)
+            <span class="ruby-identifier">which</span> = <span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">value</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/-\w*$/</span>, <span class="ruby-value str">''</span>)
+            <span class="ruby-identifier">tag_name</span> = <span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">value</span>.<span class="ruby-identifier">first</span>
+            <span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">value</span> = [<span class="ruby-value str">'*'</span>]
+            <span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">1</span>] = <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:COMBINATOR</span>, [
+              <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:FUNCTION</span>, [<span class="ruby-node">&quot;#{which}(&quot;</span>]),
+              <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:FUNCTION</span>, [<span class="ruby-value str">'self('</span>, <span class="ruby-identifier">tag_name</span>])
+            ])
+          <span class="ruby-keyword kw">elsif</span> <span class="ruby-value str">'only-child'</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">value</span>.<span class="ruby-identifier">first</span>
+            <span class="ruby-identifier">tag_name</span> = <span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">value</span>.<span class="ruby-identifier">first</span>
+            <span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">value</span> = [<span class="ruby-value str">'*'</span>]
+            <span class="ruby-identifier">match</span>.<span class="ruby-identifier">value</span>[<span class="ruby-value">1</span>] = <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:COMBINATOR</span>, [
+              <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:FUNCTION</span>, [<span class="ruby-node">&quot;#{match.value[1].value.first}(&quot;</span>]),
+              <span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:FUNCTION</span>, [<span class="ruby-value str">'self('</span>, <span class="ruby-identifier">tag_name</span>])
+            ])
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-keyword kw">self</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

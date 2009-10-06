@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "This method sets multiple fields on the form. It takes a list of field name, value pairs. If there is more than one field found with the same name, this method will set the first one found. If you want to set the value of a duplicate field, use a value which is a Hash with the key as the index in to the form. The index is zero based. For example, to set the second field named 'foo', you could do the following:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " form.set_fields( :foo =&gt; { 1 =&gt; 'bar' } )\n"
+full_name: WWW::Mechanize::Form#set_fields
+is_singleton: false
+name: set_fields
+params: (fields = {})
+visibility: public

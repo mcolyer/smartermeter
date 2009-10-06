@@ -1,0 +1,15 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: []
+
+comment: 
+constants: []
+
+full_name: Nokogiri::XML::SAX::Parser::Attribute
+includes: []
+
+instance_methods: []
+
+name: Attribute
+superclass: Struct.new(:localname, :prefix, :uri, :value)

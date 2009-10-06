@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Handle cdata_blocks containing <tt>string</tt>
+full_name: XSD::XMLParser::Nokogiri#cdata_block
+is_singleton: false
+name: cdata_block
+params: (string)
+visibility: public

@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gruff::Deprecated#graph_width
+is_singleton: false
+name: graph_width
+params: ()
+visibility: public

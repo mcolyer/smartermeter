@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Create a new reader that parses <tt>io</tt>
+full_name: Nokogiri::XML::Reader::from_io
+is_singleton: true
+name: from_io
+params: |
+  from_io(io, url = nil, encoding = nil, options = 0)
+
+visibility: public

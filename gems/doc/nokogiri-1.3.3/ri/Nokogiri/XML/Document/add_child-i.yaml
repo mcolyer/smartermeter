@@ -1,0 +1,11 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: "<<"
+block_params: 
+comment: 
+full_name: Nokogiri::XML::Document#add_child
+is_singleton: false
+name: add_child
+params: (child)
+visibility: public

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Get the attribute values for this Node.
+full_name: Nokogiri::XML::Node#values
+is_singleton: false
+name: values
+params: ()
+visibility: public

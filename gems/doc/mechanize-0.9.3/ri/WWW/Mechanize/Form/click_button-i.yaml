@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Submit form using <tt>button</tt>. Defaults to the first button.
+full_name: WWW::Mechanize::Form#click_button
+is_singleton: false
+name: click_button
+params: (button = buttons.first)
+visibility: public

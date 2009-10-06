@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: CHANGELOG.rdoc</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>CHANGELOG.rdoc</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>CHANGELOG.rdoc
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Tue Sep 29 21:11:51 -0700 2009</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h3>1.3.3 / 2009/07/26</h3>
+<ul>
+<li>New Features
+
+<ul>
+<li>NodeSet#children returns all children of all nodes
+
+</li>
+</ul>
+</li>
+<li>Bugfixes
+
+<ul>
+<li>Override libxml-ruby&#8216;s global error handler
+
+</li>
+<li>ParseOption#strict fixed
+
+</li>
+<li>Fixed a segfault when sending an empty string to Node#inner_html= GH 88
+
+</li>
+<li>String encoding is now set to UTF-8 in Ruby 1.9
+
+</li>
+<li>Fixed a segfault when moving root nodes between documents. GH 91
+
+</li>
+<li>Fixed an O(n) penalty on node creation. GH 101
+
+</li>
+<li>Allowing XML documents to be output as HTML documents
+
+</li>
+</ul>
+</li>
+<li>Deprecations
+
+<ul>
+<li>Hpricot compatibility layer will be removed in 1.4.0
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.3.2 / 2009-06-22</h3>
+<ul>
+<li>New Features
+
+<ul>
+<li>Nokogiri::XML::DTD#validate will validate your document
+
+</li>
+</ul>
+</li>
+<li>Bugfixes
+
+<ul>
+<li>Nokogiri::XML::NodeSet#search will search top level nodes. GH 73
+
+</li>
+<li>Removed namespace related methods from <a
+href="../classes/Nokogiri/XML/Document.html">Nokogiri::XML::Document</a>
+
+</li>
+<li>Fixed a segfault when a namespace was added twice
+
+</li>
+<li>Made nokogiri work with Snow Leopard GH 79
+
+</li>
+<li>Mailing list has moved to: <a
+href="http://groups.google.com/group/nokogiri-talk">groups.google.com/group/nokogiri-talk</a>
+
+</li>
+<li>HTML fragments now correctly handle comments and CDATA blocks. GH 78
+
+</li>
+<li>Nokogiri::XML::Document#clone is now an alias of dup
+
+</li>
+</ul>
+</li>
+<li>Deprecations
+
+<ul>
+<li>Nokogiri::XML::SAX::Document#start_element_ns is deprecated, please switch
+to Nokogiri::XML::SAX::Document#start_element_namespace
+
+</li>
+<li>Nokogiri::XML::SAX::Document#end_element_ns is deprecated, please switch to
+Nokogiri::XML::SAX::Document#end_element_namespace
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.3.1 / 2009-06-07</h3>
+<ul>
+<li>Bugfixes
+
+<ul>
+<li>extconf.rb checks for optional RelaxNG and Schema functions
+
+</li>
+<li>Namespace nodes are added to the Document node cache
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.3.0 / 2009-05-30</h3>
+<ul>
+<li>New Features
+
+<ul>
+<li>Builder changes scope based on block arity
+
+</li>
+<li>Builder supports methods ending in underscore similar to tagz
+
+</li>
+<li><a
+href="../classes/Nokogiri/XML/Node.html">Nokogiri::XML::Node</a>#&lt;=&gt;
+compares nodes based on Document position
+
+</li>
+<li>Nokogiri::XML::Node#matches? returns true if Node can be found with given
+selector.
+
+</li>
+<li>Nokogiri::XML::Node#ancestors now returns an <a
+href="../classes/Nokogiri/XML/NodeSet.html">Nokogiri::XML::NodeSet</a>
+
+</li>
+<li>Nokogiri::XML::Node#ancestors will match parents against optional selector
+
+</li>
+<li>Nokogiri::HTML::Document#meta_encoding for getting the meta encoding
+
+</li>
+<li>Nokogiri::HTML::Document#meta_encoding= for setting the meta encoding
+
+</li>
+<li>Nokogiri::XML::Document#encoding= to set the document encoding
+
+</li>
+<li><a href="../classes/Nokogiri/XML/Schema.html">Nokogiri::XML::Schema</a> for
+validating documents against XSD schema
+
+</li>
+<li><a href="../classes/Nokogiri/XML/RelaxNG.html">Nokogiri::XML::RelaxNG</a>
+for validating documents against RelaxNG schema
+
+</li>
+<li><a
+href="../classes/Nokogiri/HTML/ElementDescription.html">Nokogiri::HTML::ElementDescription</a>
+for fetching HTML element descriptions
+
+</li>
+<li>Nokogiri::XML::Node#description to fetch the node description
+
+</li>
+<li>Nokogiri::XML::Node#accept implements Visitor pattern
+
+</li>
+<li>bin/nokogiri for easily examining documents (Thanks Yutaka HARA!)
+
+</li>
+<li><a href="../classes/Nokogiri/XML/NodeSet.html">Nokogiri::XML::NodeSet</a>
+now supports more Array and Enumerable operators: index, delete, slice, -
+(difference), + (concatenation), &amp; (intersection), push, pop, shift, ==
+
+</li>
+<li><a href="../classes/Nokogiri.html#M000004">Nokogiri.XML</a>, <a
+href="../classes/Nokogiri.html#M000002">Nokogiri.HTML</a> take blocks that
+receive <a
+href="../classes/Nokogiri/XML/ParseOptions.html">Nokogiri::XML::ParseOptions</a>
+objects
+
+</li>
+<li>Nokogiri::XML::Node#namespace returns a <a
+href="../classes/Nokogiri/XML/Namespace.html">Nokogiri::XML::Namespace</a>
+
+</li>
+<li>Nokogiri::XML::Node#namespace= for setting a node&#8216;s namespace
+
+</li>
+<li><a
+href="../classes/Nokogiri/XML/DocumentFragment.html">Nokogiri::XML::DocumentFragment</a>
+and <a
+href="../classes/Nokogiri/HTML/DocumentFragment.html">Nokogiri::HTML::DocumentFragment</a>
+have a sensible API and a more robust implementation.
+
+</li>
+<li>JRuby 1.3.0 support via FFI.
+
+</li>
+</ul>
+</li>
+<li>Bugfixes
+
+<ul>
+<li>Fixed a problem with nil passed to CDATA constructor
+
+</li>
+<li>Fragment method deals with regular expression characters (Thanks Joel!) LH
+73
+
+</li>
+<li>Fixing builder scope issues LH 61, LH 74, LH 70
+
+</li>
+<li>Fixed a problem when adding a child could remove the child namespace LH#78
+
+</li>
+<li>Fixed bug with unlinking a node then reparenting it. (GH#22)
+
+</li>
+<li>Fixed failure to catch errors during XSLT parsing (GH#32)
+
+</li>
+<li>Fixed a bug with attribute conditions in CSS selectors (GH#36)
+
+</li>
+<li>Fixed intolerance of HTML attributes without values in
+Node#before/after/inner_html=. (GH#35)
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.2.3 / 2009-03-22</h3>
+<ul>
+<li>Bugfixes
+
+<ul>
+<li>Fixing bug where a node is passed in to Node#new
+
+</li>
+<li>Namespace should be assigned on DocumentFragment creation. LH 66
+
+</li>
+<li>Nokogiri::XML::NodeSet#dup works GH 10
+
+</li>
+<li><a href="../classes/Nokogiri/HTML.html">Nokogiri::HTML</a> returns an empty
+Document when given a blank string GH#11
+
+</li>
+<li>Adding a child will remove duplicate namespace declarations LH 67
+
+</li>
+<li>Builder methods take a hash as a second argument
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.2.2 / 2009-03-14</h3>
+<ul>
+<li>New features
+
+<ul>
+<li><a href="../classes/Nokogiri.html">Nokogiri</a> may be used with soap4r.
+See <a
+href="../classes/XSD/XMLParser/Nokogiri.html">XSD::XMLParser::Nokogiri</a>
+
+</li>
+<li>Nokogiri::XML::Node#inner_html= to set the inner html for a node
+
+</li>
+<li><a href="../classes/Nokogiri.html">Nokogiri</a> builder interface
+improvements
+
+</li>
+<li>Nokogiri::XML::Node#swap swaps html for current node (LH 50)
+
+</li>
+</ul>
+</li>
+<li>Bugfixes
+
+<ul>
+<li>Fixed a tag nesting problem in the Builder API (LH 41)
+
+</li>
+<li>Nokogiri::HTML.fragment will properly handle text only nodes (LH 43)
+
+</li>
+<li>Nokogiri::XML::Node#before will prepend text nodes (LH 44)
+
+</li>
+<li>Nokogiri::XML::Node#after will append text nodes
+
+</li>
+<li>Nokogiri::XML::Node#search automatically registers root namepsaces (LH 42)
+
+</li>
+<li>Nokogiri::XML::NodeSet#search automatically registers namespaces
+
+</li>
+<li>Nokogiri::HTML::NamedCharacters delegates to libxml2
+
+</li>
+<li><a href="../classes/Nokogiri/XML/Node.html">Nokogiri::XML::Node</a>#[] can
+take a symbol (LH 48)
+
+</li>
+<li>vasprintf for windows updated. Thanks Geoffroy Couprie!
+
+</li>
+<li><a href="../classes/Nokogiri/XML/Node.html">Nokogiri::XML::Node</a>#[]=
+should not encode entities (LH 55)
+
+</li>
+<li>Namespaces should be copied to reparented nodes (LH 56)
+
+</li>
+<li><a href="../classes/Nokogiri.html">Nokogiri</a> uses encoding set on the
+string for default in Ruby 1.9
+
+</li>
+<li>Document#dup should create a new document of the same type (LH 59)
+
+</li>
+<li>Document should not have a parent method (LH 64)
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.2.1 / 2009-02-23</h3>
+<ul>
+<li>Bugfixes
+
+<ul>
+<li>Fixed a CSS selector space bug
+
+</li>
+<li>Fixed Ruby 1.9 String Encoding (Thanks 角谷さん！)
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.2.0 / 2009-02-22</h3>
+<ul>
+<li>New features
+
+<ul>
+<li>CSS search now supports CSS3 namespace queries
+
+</li>
+<li>Namespaces on the root node are automatically registered
+
+</li>
+<li>CSS queries use the default namespace
+
+</li>
+<li>Nokogiri::XML::Document#encoding get encoding used for this document
+
+</li>
+<li>Nokogiri::XML::Document#url get the document url
+
+</li>
+<li>Nokogiri::XML::Node#add_namespace add a namespace to the node LH#38
+
+</li>
+<li>Nokogiri::XML::Node#each iterate over attribute name, value pairs
+
+</li>
+<li>Nokogiri::XML::Node#keys get all attribute names
+
+</li>
+<li>Nokogiri::XML::Node#line get the line number for a node (Thanks Dirkjan
+Bussink!)
+
+</li>
+<li>Nokogiri::XML::Node#serialize now takes an optional encoding parameter
+
+</li>
+<li>Nokogiri::XML::Node#to_html, to_xml, and to_xhtml take an optional encoding
+
+</li>
+<li>Nokogiri::XML::Node#to_str
+
+</li>
+<li>Nokogiri::XML::Node#to_xhtml to produce XHTML documents
+
+</li>
+<li>Nokogiri::XML::Node#values get all attribute values
+
+</li>
+<li>Nokogiri::XML::Node#write_to writes the node to an IO object with optional
+encoding
+
+</li>
+<li>Nokogiri::XML::ProcessingInstrunction.new
+
+</li>
+<li><a
+href="../classes/Nokogiri/XML/SAX/PushParser.html">Nokogiri::XML::SAX::PushParser</a>
+for all your push parsing needs.
+
+</li>
+</ul>
+</li>
+<li>Bugfixes
+
+<ul>
+<li>Fixed Nokogiri::XML::Document#dup
+
+</li>
+<li>Fixed header detection. Thanks rubikitch!
+
+</li>
+<li>Fixed a problem where invalid CSS would cause the parser to hang
+
+</li>
+</ul>
+</li>
+<li>Deprecations
+
+<ul>
+<li>Nokogiri::XML::Node.new_from_str will be deprecated in 1.3.0
+
+</li>
+</ul>
+</li>
+<li>API Changes
+
+<ul>
+<li>Nokogiri::HTML.fragment now returns an XML::DocumentFragment (LH 32)
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.1.1</h3>
+<ul>
+<li>New features
+
+<ul>
+<li>Added XML::Node#elem?
+
+</li>
+<li>Added XML::Node#attribute_nodes
+
+</li>
+<li>Added XML::Attr
+
+</li>
+<li>XML::Node#delete added.
+
+</li>
+<li>XML::NodeSet#inner_html added.
+
+</li>
+</ul>
+</li>
+<li>Bugfixes
+
+<ul>
+<li>Not including an HTML entity for \r for HTML nodes.
+
+</li>
+<li>Removed CSS::SelectorHandler and XML::XPathHandler
+
+</li>
+<li>XML::Node#attributes returns an Attr node for the value.
+
+</li>
+<li>XML::NodeSet implements to_xml
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.1.0</h3>
+<ul>
+<li>New Features
+
+<ul>
+<li>Custom XPath functions are now supported. See Nokogiri::XML::Node#xpath
+
+</li>
+<li>Custom CSS pseudo classes are now supported. See Nokogiri::XML::Node#css
+
+</li>
+<li><a
+href="../classes/Nokogiri/XML/Node.html">Nokogiri::XML::Node</a>#&lt;&lt;
+will add a child to the current node
+
+</li>
+</ul>
+</li>
+<li>Bugfixes
+
+<ul>
+<li>Mutex lock on CSS cache access
+
+</li>
+<li>Fixed build problems with GCC 3.3.5
+
+</li>
+<li>XML::Node#to_xml now takes an indentation argument
+
+</li>
+<li>XML::Node#dup takes an optional depth argument
+
+</li>
+<li>XML::Node#add_previous_sibling returns new sibling node.
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.0.7</h3>
+<ul>
+<li>Bugfixes
+
+<ul>
+<li>Fixed memory leak when using Dike
+
+</li>
+<li>SAX parser now parses IO streams
+
+</li>
+<li>Comment nodes have their own class
+
+</li>
+<li><a href="../classes/Nokogiri.html">Nokogiri</a>() should delegate to <a
+href="../classes/Nokogiri.html#M000006">Nokogiri.parse</a>()
+
+</li>
+<li>Prepending rather than appending to ENV[&#8216;PATH&#8217;] on windows
+
+</li>
+<li>Fixed a bug in complex CSS negation selectors
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.0.6</h3>
+<ul>
+<li>5 Bugfixes
+
+<ul>
+<li>XPath Parser raises a SyntaxError on parse failure
+
+</li>
+<li>CSS Parser raises a SyntaxError on parse failure
+
+</li>
+<li>filter() and not() hpricot compatibility added
+
+</li>
+<li>CSS searches via Node#search are now always relative
+
+</li>
+<li>CSS to XPath conversion is now cached
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.0.5</h3>
+<ul>
+<li>Bugfixes
+
+<ul>
+<li>Added mailing list and ticket tracking information to the README.txt
+
+</li>
+<li>Sets ENV[&#8216;PATH&#8217;] on windows if it doesn&#8216;t exist
+
+</li>
+<li>Caching results of NodeSet#[] on Document
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.0.4</h3>
+<ul>
+<li>Bugfixes
+
+<ul>
+<li>Changed memory mangement from weak refs to document refs
+
+</li>
+<li>Plugged some memory leaks
+
+</li>
+<li>Builder blocks can call methods from surrounding contexts
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.0.3</h3>
+<ul>
+<li>5 Bugfixes
+
+<ul>
+<li>NodeSet now implements to_ary
+
+</li>
+<li>XML::Document should not implement parent
+
+</li>
+<li>More GC Bugs fixed. (Mike is AWESOME!)
+
+</li>
+<li>Removed RARRAY_LEN for 1.8.5 compatibility. Thanks Shane Hanna.
+
+</li>
+<li>inner_html fixed. (Thanks Yehuda!)
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.0.2</h3>
+<ul>
+<li>1 Bugfix
+
+<ul>
+<li>extconf.rb should not check for frex and racc
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.0.1</h3>
+<ul>
+<li>1 Bugfix
+
+<ul>
+<li>Made sure extconf.rb searched libdir and prefix so that ports libxml/ruby
+will link properly. Thanks lucsky!
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>1.0.0 / 2008-07-13</h3>
+<ul>
+<li>1 major enhancement
+
+<ul>
+<li>Birthday!
+
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: checked
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: This class represents a radio button found in a Form. To activate the RadioButton in the Form, set the checked method to true.
+constants: []
+
+full_name: WWW::Mechanize::Form::RadioButton
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: check
+- !ruby/object:RI::MethodSummary 
+  name: click
+- !ruby/object:RI::MethodSummary 
+  name: uncheck
+name: RadioButton
+superclass: Field

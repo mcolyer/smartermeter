@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Create a new DocumentFragment element on the <tt>document</tt>
+full_name: Nokogiri::XML::DocumentFragment::new
+is_singleton: true
+name: new
+params: |
+  new(document)
+
+visibility: public

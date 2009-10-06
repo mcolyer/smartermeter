@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Quote parameters in <tt>params</tt> for stylesheet safety
+full_name: Nokogiri::XSLT::quote_params
+is_singleton: true
+name: quote_params
+params: (params)
+visibility: public

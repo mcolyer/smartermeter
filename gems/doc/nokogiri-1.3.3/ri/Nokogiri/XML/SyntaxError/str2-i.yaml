@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Extra string information
+full_name: Nokogiri::XML::SyntaxError#str2
+is_singleton: false
+name: str2
+params: |
+  str2
+
+visibility: public

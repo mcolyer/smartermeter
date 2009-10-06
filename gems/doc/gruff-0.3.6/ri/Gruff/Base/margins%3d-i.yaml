@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Sets the top, bottom, left and right margins to <tt>margin</tt>.
+full_name: Gruff::Base#margins=
+is_singleton: false
+name: margins=
+params: (margin)
+visibility: public

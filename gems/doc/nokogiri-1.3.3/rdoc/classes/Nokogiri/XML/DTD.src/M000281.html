@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>entities (Nokogiri::XML::DTD)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *   entities
+ *
+ * Get a hash of the elements for this DTD.
+ */
+static VALUE entities(VALUE self)
+{
+  xmlDtdPtr dtd;
+  Data_Get_Struct(self, xmlDtd, dtd);
+
+  if(!dtd-&gt;entities) return Qnil;
+
+  VALUE hash = rb_hash_new();
+
+  xmlHashScan((xmlHashTablePtr)dtd-&gt;entities, element_copier, (void *)hash);
+
+  return hash;
+}</pre>
+</body>
+</html>

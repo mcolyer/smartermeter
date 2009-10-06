@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Get the depth of the node
+full_name: Nokogiri::XML::Reader#depth
+is_singleton: false
+name: depth
+params: |
+  depth
+
+visibility: public

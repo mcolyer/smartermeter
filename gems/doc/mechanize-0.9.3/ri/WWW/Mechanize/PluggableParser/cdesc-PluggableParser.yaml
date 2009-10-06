@@ -1,0 +1,67 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: default
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::H 
+  level: 1
+  text: Synopsis
+- !ruby/struct:SM::Flow::P 
+  body: This class is used to register and maintain pluggable parsers for Mechanize to use.
+- !ruby/struct:SM::Flow::P 
+  body: A Pluggable Parser is a parser that Mechanize uses for any particular content type. Mechanize will ask PluggableParser for the class it should initialize given any content type. This class allows users to register their own pluggable parsers, or modify existing pluggable parsers.
+- !ruby/struct:SM::Flow::P 
+  body: PluggableParser returns a WWW::Mechanize::File object for content types that it does not know how to handle. WWW::Mechanize::File provides basic functionality for any content type, so it is a good class to extend when building your own parsers.
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Example
+- !ruby/struct:SM::Flow::P 
+  body: "To create your own parser, just create a class that takes four parameters in the constructor. Here is an example of registering a pluggable parser that handles CSV files:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " class CSVParser &lt; WWW::Mechanize::File\n   attr_reader :csv\n   def initialize(uri=nil, response=nil, body=nil, code=nil)\n     super(uri, response, body, code)\n     @csv = CSV.parse(body)\n   end\n end\n agent = WWW::Mechanize.new\n agent.pluggable_parser.csv = CSVParser\n agent.get('http://example.com/test.csv')  # =&gt; CSVParser\n"
+- !ruby/struct:SM::Flow::P 
+  body: Now any page that returns the content type of 'text/csv' will initialize a CSVParser and return that object to the caller.
+- !ruby/struct:SM::Flow::P 
+  body: "To register a pluggable parser for a content type that pluggable parser does not know about, just use the hash syntax:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " agent.pluggable_parser['text/something'] = SomeClass\n"
+- !ruby/struct:SM::Flow::P 
+  body: "To set the default parser, just use the 'defaut' method:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " agent.pluggable_parser.default = SomeClass\n"
+- !ruby/struct:SM::Flow::P 
+  body: Now all unknown content types will be instances of SomeClass.
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  name: CONTENT_TYPES
+  value: "{         :html => 'text/html',         :wap  => 'application/vnd.wap.xhtml+xml',         :xhtml => 'application/xhtml+xml',         :pdf  => 'application/pdf',         :csv  => 'text/csv',         :xml  => 'text/xml',       }"
+full_name: WWW::Mechanize::PluggableParser
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: "[]"
+- !ruby/object:RI::MethodSummary 
+  name: "[]="
+- !ruby/object:RI::MethodSummary 
+  name: csv=
+- !ruby/object:RI::MethodSummary 
+  name: html=
+- !ruby/object:RI::MethodSummary 
+  name: parser
+- !ruby/object:RI::MethodSummary 
+  name: pdf=
+- !ruby/object:RI::MethodSummary 
+  name: register_parser
+- !ruby/object:RI::MethodSummary 
+  name: xhtml=
+- !ruby/object:RI::MethodSummary 
+  name: xml=
+name: PluggableParser
+superclass: Object

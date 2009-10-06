@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: dir_body
+comment: 
+full_name: WWW::Mechanize::FileResponse#read_body
+is_singleton: false
+name: read_body
+params: () {|dir_body| ...}
+visibility: public

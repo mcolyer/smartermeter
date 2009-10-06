@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>html_unescape (WWW::Mechanize::Util)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/www/mechanize/util.rb, line 46</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">html_unescape</span>(<span class="ruby-identifier">s</span>)
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">s</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">s</span>
+          <span class="ruby-identifier">s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/&amp;(\w+|#[0-9]+);/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">match</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">number</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">match</span>
+            <span class="ruby-keyword kw">when</span> <span class="ruby-regexp re">/&amp;(\w+);/</span>
+              <span class="ruby-constant">Mechanize</span>.<span class="ruby-identifier">html_parser</span><span class="ruby-operator">::</span><span class="ruby-constant">NamedCharacters</span>[<span class="ruby-identifier">$1</span>]
+            <span class="ruby-keyword kw">when</span> <span class="ruby-regexp re">/&amp;#([0-9]+);/</span>
+              <span class="ruby-identifier">$1</span>.<span class="ruby-identifier">to_i</span>
+            <span class="ruby-keyword kw">end</span>
+  
+            <span class="ruby-identifier">number</span> <span class="ruby-value">? </span>([<span class="ruby-identifier">number</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-value str">'U'</span>) <span class="ruby-keyword kw">rescue</span> <span class="ruby-identifier">match</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">match</span>
+          }
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

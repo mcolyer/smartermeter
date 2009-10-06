@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Insert <tt>node</tt> after this node (as a sibling).
+full_name: Nokogiri::XML::Node#add_next_sibling
+is_singleton: false
+name: add_next_sibling
+params: |
+  add_next_sibling(node)
+
+visibility: public

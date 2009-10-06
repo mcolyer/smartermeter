@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Copy this Document. An optional depth may be passed in, but it defaults to a deep copy. 0 is a shallow copy, 1 is a deep copy.
+full_name: Nokogiri::XML::Document#dup
+is_singleton: false
+name: dup
+params: |
+  dup
+
+visibility: public

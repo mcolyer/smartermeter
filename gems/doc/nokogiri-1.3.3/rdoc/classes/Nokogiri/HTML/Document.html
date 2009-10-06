@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Nokogiri::HTML::Document</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Nokogiri::HTML::Document</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../../files/lib/nokogiri/html/document_rb.html">
+                lib/nokogiri/html/document.rb
+                </a>
+        <br />
+                <a href="../../../files/lib/nokogiri/ffi/html/document_rb.html">
+                lib/nokogiri/ffi/html/document.rb
+                </a>
+        <br />
+                <a href="../../../files/ext/nokogiri/nokogiri_c.html">
+                ext/nokogiri/nokogiri.c
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                <a href="../XML/Document.html">
+                Nokogiri::XML::Document
+               </a>
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+call-seq:
+</p>
+<pre>
+ meta_encoding
+</pre>
+<p>
+Get the meta tag encoding for this document.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000317">fragment</a>&nbsp;&nbsp;
+      <a href="#M000323">meta_encoding</a>&nbsp;&nbsp;
+      <a href="#M000324">meta_encoding=</a>&nbsp;&nbsp;
+      <a href="#M000321">new</a>&nbsp;&nbsp;
+      <a href="#M000315">new</a>&nbsp;&nbsp;
+      <a href="#M000318">parse</a>&nbsp;&nbsp;
+      <a href="#M000320">read_io</a>&nbsp;&nbsp;
+      <a href="#M000319">read_memory</a>&nbsp;&nbsp;
+      <a href="#M000316">serialize</a>&nbsp;&nbsp;
+      <a href="#M000322">type</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000321" class="method-detail">
+        <a name="M000321"></a>
+
+        <div class="method-heading">
+          <a href="Document.src/M000321.html" target="Code" class="method-signature"
+            onclick="popupCode('Document.src/M000321.html');return false;">
+          <span class="method-name">new<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Create a <a href="Document.html#M000315">new</a> document
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000315" class="method-detail">
+        <a name="M000315"></a>
+
+        <div class="method-heading">
+          <a href="Document.src/M000315.html" target="Code" class="method-signature"
+            onclick="popupCode('Document.src/M000315.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000318" class="method-detail">
+        <a name="M000318"></a>
+
+        <div class="method-heading">
+          <a href="Document.src/M000318.html" target="Code" class="method-signature"
+            onclick="popupCode('Document.src/M000318.html');return false;">
+          <span class="method-name">parse</span><span class="method-args">(string_or_io, url = nil, encoding = nil, options = XML::ParseOptions::DEFAULT_HTML) {|options if block_given?| ...}</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Parse <a href="../HTML.html">HTML</a>. <tt>thing</tt> may be a String, or
+any object that responds to <em>read</em> and <em>close</em> such as an IO,
+or StringIO. <tt>url</tt> is resource where this document is located.
+<tt>encoding</tt> is the encoding that should be used when processing the
+document. <tt>options</tt> is a number that sets options in the parser,
+such as Nokogiri::XML::ParseOptions::RECOVER. See the constants in <a
+href="../XML/ParseOptions.html">Nokogiri::XML::ParseOptions</a>.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000320" class="method-detail">
+        <a name="M000320"></a>
+
+        <div class="method-heading">
+          <a href="Document.src/M000320.html" target="Code" class="method-signature"
+            onclick="popupCode('Document.src/M000320.html');return false;">
+          <span class="method-name">read_io(io, url, encoding, options)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Read the <a href="../HTML.html">HTML</a> document from <tt>io</tt> with
+given <tt>url</tt>, <tt>encoding</tt>, and <tt>options</tt>. See <a
+href="../HTML.html#M000288">Nokogiri::HTML.parse</a>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000319" class="method-detail">
+        <a name="M000319"></a>
+
+        <div class="method-heading">
+          <a href="Document.src/M000319.html" target="Code" class="method-signature"
+            onclick="popupCode('Document.src/M000319.html');return false;">
+          <span class="method-name">read_memory(string, url, encoding, options)<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Read the <a href="../HTML.html">HTML</a> document contained in
+<tt>string</tt> with given <tt>url</tt>, <tt>encoding</tt>, and
+<tt>options</tt>. See <a
+href="../HTML.html#M000288">Nokogiri::HTML.parse</a>
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000317" class="method-detail">
+        <a name="M000317"></a>
+
+        <div class="method-heading">
+          <a href="Document.src/M000317.html" target="Code" class="method-signature"
+            onclick="popupCode('Document.src/M000317.html');return false;">
+          <span class="method-name">fragment</span><span class="method-args">(tags)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Create a <a
+href="../XML/DocumentFragment.html">Nokogiri::XML::DocumentFragment</a>
+from <tt>tags</tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000323" class="method-detail">
+        <a name="M000323"></a>
+
+        <div class="method-heading">
+          <a href="Document.src/M000323.html" target="Code" class="method-signature"
+            onclick="popupCode('Document.src/M000323.html');return false;">
+          <span class="method-name">meta_encoding<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Get the meta tag encoding for this document.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000324" class="method-detail">
+        <a name="M000324"></a>
+
+        <div class="method-heading">
+          <a href="Document.src/M000324.html" target="Code" class="method-signature"
+            onclick="popupCode('Document.src/M000324.html');return false;">
+          <span class="method-name">meta_encoding=<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Set the meta tag encoding for this document.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000316" class="method-detail">
+        <a name="M000316"></a>
+
+        <div class="method-heading">
+          <a href="Document.src/M000316.html" target="Code" class="method-signature"
+            onclick="popupCode('Document.src/M000316.html');return false;">
+          <span class="method-name">serialize</span><span class="method-args">(*args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Serialize this <a href="Document.html">Document</a> with <tt>encoding</tt>
+using <tt>options</tt>
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000322" class="method-detail">
+        <a name="M000322"></a>
+
+        <div class="method-heading">
+          <a href="Document.src/M000322.html" target="Code" class="method-signature"
+            onclick="popupCode('Document.src/M000322.html');return false;">
+          <span class="method-name">type<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The <a href="Document.html#M000322">type</a> for this document
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

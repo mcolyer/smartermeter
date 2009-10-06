@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Returns the index of the first node in self that is == to <tt>node</tt>. Returns nil if no match is found.
+full_name: Nokogiri::XML::NodeSet#index
+is_singleton: false
+name: index
+params: (node)
+visibility: public

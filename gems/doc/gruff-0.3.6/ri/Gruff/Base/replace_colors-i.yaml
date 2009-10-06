@@ -1,0 +1,20 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Replace the entire color list with a new array of colors. Also aliased as the colors= setter method.
+- !ruby/struct:SM::Flow::P 
+  body: If you specify fewer colors than the number of datasets you intend to draw, 'increment_color' will cycle through the array, reusing colors as needed.
+- !ruby/struct:SM::Flow::P 
+  body: Note that (as with the 'theme' method), you should set up your color list before you send your data (via the 'data' method). Calls to the 'data' method made prior to this call will use whatever color scheme was in place at the time data was called.
+- !ruby/struct:SM::Flow::P 
+  body: "Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " replace_colors ['#cc99cc', '#d9e043', '#34d8a2']\n"
+full_name: Gruff::Base#replace_colors
+is_singleton: false
+name: replace_colors
+params: (color_list=[])
+visibility: public

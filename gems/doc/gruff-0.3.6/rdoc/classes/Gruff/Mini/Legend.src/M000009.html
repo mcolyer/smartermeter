@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>draw_vertical_legend (Gruff::Mini::Legend)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/gruff/mini/legend.rb, line 21</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">draw_vertical_legend</span>
+        <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@hide_mini_legend</span>
+        
+        <span class="ruby-ivar">@legend_labels</span> = <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span> <span class="ruby-identifier">item</span>[<span class="ruby-constant">Gruff</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span><span class="ruby-operator">::</span><span class="ruby-constant">DATA_LABEL_INDEX</span>] }
+        
+        <span class="ruby-identifier">legend_square_width</span> = <span class="ruby-value">40.0</span> <span class="ruby-comment cmt"># small square with color of this item</span>
+        <span class="ruby-identifier">legend_square_margin</span> = <span class="ruby-value">10.0</span>
+        <span class="ruby-ivar">@legend_left_margin</span> = <span class="ruby-value">100.0</span>
+        <span class="ruby-identifier">legend_top_margin</span> = <span class="ruby-value">40.0</span>
+
+        <span class="ruby-comment cmt"># May fix legend drawing problem at small sizes</span>
+        <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">font</span> = <span class="ruby-ivar">@font</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@font</span>
+        <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">pointsize</span> = <span class="ruby-ivar">@legend_font_size</span>
+
+        <span class="ruby-identifier">current_x_offset</span> = <span class="ruby-ivar">@legend_left_margin</span>
+        <span class="ruby-identifier">current_y_offset</span> = <span class="ruby-ivar">@original_rows</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">legend_top_margin</span>
+
+        <span class="ruby-identifier">debug</span> { <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">line</span> <span class="ruby-value">0</span><span class="ruby-value">.0</span>, <span class="ruby-identifier">current_y_offset</span>, <span class="ruby-ivar">@raw_columns</span>, <span class="ruby-identifier">current_y_offset</span> }
+
+        <span class="ruby-ivar">@legend_labels</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">legend_label</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>        
+
+          <span class="ruby-comment cmt"># Draw label</span>
+          <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">fill</span> = <span class="ruby-ivar">@font_color</span>
+          <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">font</span> = <span class="ruby-ivar">@font</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@font</span>
+          <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">pointsize</span> = <span class="ruby-identifier">scale_fontsize</span>(<span class="ruby-ivar">@legend_font_size</span>)
+          <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">stroke</span> = <span class="ruby-value str">'transparent'</span>
+          <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">font_weight</span> = <span class="ruby-constant">Magick</span><span class="ruby-operator">::</span><span class="ruby-constant">NormalWeight</span>
+          <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">gravity</span> = <span class="ruby-constant">Magick</span><span class="ruby-operator">::</span><span class="ruby-constant">WestGravity</span>
+          <span class="ruby-ivar">@d</span> = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">annotate_scaled</span>( <span class="ruby-ivar">@base_image</span>, 
+                            <span class="ruby-ivar">@raw_columns</span>, <span class="ruby-value">1.0</span>,
+                            <span class="ruby-identifier">current_x_offset</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">legend_square_width</span> <span class="ruby-operator">*</span> <span class="ruby-value">1.7</span>), <span class="ruby-identifier">current_y_offset</span>, 
+                            <span class="ruby-identifier">truncate_legend_label</span>(<span class="ruby-identifier">legend_label</span>), <span class="ruby-ivar">@scale</span>)
+
+          <span class="ruby-comment cmt"># Now draw box with color of this dataset</span>
+          <span class="ruby-ivar">@d</span> = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">stroke</span> <span class="ruby-value str">'transparent'</span>
+          <span class="ruby-ivar">@d</span> = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">fill</span> <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">index</span>][<span class="ruby-constant">Gruff</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span><span class="ruby-operator">::</span><span class="ruby-constant">DATA_COLOR_INDEX</span>]
+          <span class="ruby-ivar">@d</span> = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">rectangle</span>(<span class="ruby-identifier">current_x_offset</span>, 
+                            <span class="ruby-identifier">current_y_offset</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">legend_square_width</span> <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>, 
+                            <span class="ruby-identifier">current_x_offset</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">legend_square_width</span>, 
+                            <span class="ruby-identifier">current_y_offset</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">legend_square_width</span> <span class="ruby-operator">/</span> <span class="ruby-value">2.0</span>)
+          
+          <span class="ruby-identifier">current_y_offset</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">calculate_caps_height</span>(<span class="ruby-ivar">@legend_font_size</span>) <span class="ruby-operator">*</span> <span class="ruby-value">1.7</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-ivar">@color_index</span> = <span class="ruby-value">0</span>
+      <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

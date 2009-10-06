@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: A color scheme similar to the popular presentation software.
+full_name: Gruff::Base#theme_keynote
+is_singleton: false
+name: theme_keynote
+params: ()
+visibility: public

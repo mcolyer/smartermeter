@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Parse a document and add the Slop decorator. The Slop decorator implements method_missing such that methods may be used instead of CSS or XPath. For example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  doc = Nokogiri::Slop(&lt;&lt;-eohtml)\n    &lt;html&gt;\n      &lt;body&gt;\n        &lt;p&gt;first&lt;/p&gt;\n        &lt;p&gt;second&lt;/p&gt;\n      &lt;/body&gt;\n    &lt;/html&gt;\n  eohtml\n  assert_equal('second', doc.html.body.p[1].text)\n"
+full_name: Nokogiri::Slop
+is_singleton: true
+name: Slop
+params: (*args, &block)
+visibility: public

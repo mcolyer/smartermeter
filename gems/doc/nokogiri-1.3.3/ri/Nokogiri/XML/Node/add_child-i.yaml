@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Add <tt>node</tt> as a child of this node. Returns the new child node.
+full_name: Nokogiri::XML::Node#add_child
+is_singleton: false
+name: add_child
+params: |
+  add_child(node)
+
+visibility: public

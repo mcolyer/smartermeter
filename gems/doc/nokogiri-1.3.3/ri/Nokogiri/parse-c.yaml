@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: doc if block_given?
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Parse an HTML or XML document. <tt>string</tt> contains the document.
+full_name: Nokogiri::parse
+is_singleton: true
+name: parse
+params: (string, url = nil, encoding = nil, options = nil) {|doc if block_given?| ...}
+visibility: public

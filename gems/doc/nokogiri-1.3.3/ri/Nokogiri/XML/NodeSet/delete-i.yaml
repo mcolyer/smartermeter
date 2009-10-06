@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Delete <tt>node</tt> from the Nodeset, if it is a member. Returns the deleted node if found, otherwise returns nil.
+full_name: Nokogiri::XML::NodeSet#delete
+is_singleton: false
+name: delete
+params: |
+  delete(node)
+
+visibility: public

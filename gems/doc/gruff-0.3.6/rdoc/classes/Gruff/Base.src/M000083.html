@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>get_maximum_by_stack (Gruff::Base)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/gruff/base.rb, line 1016</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_maximum_by_stack</span>
+      <span class="ruby-comment cmt"># Get sum of each stack</span>
+      <span class="ruby-identifier">max_hash</span> = {}
+      <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">data_set</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">data_set</span>[<span class="ruby-constant">DATA_VALUES_INDEX</span>].<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">data_point</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">max_hash</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-value">0</span><span class="ruby-value">.0</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">max_hash</span>[<span class="ruby-identifier">i</span>]
+          <span class="ruby-identifier">max_hash</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">data_point</span>.<span class="ruby-identifier">to_f</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-comment cmt"># @maximum_value = 0</span>
+      <span class="ruby-identifier">max_hash</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+        <span class="ruby-ivar">@maximum_value</span> = <span class="ruby-identifier">max_hash</span>[<span class="ruby-identifier">key</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">max_hash</span>[<span class="ruby-identifier">key</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@maximum_value</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-ivar">@minimum_value</span> = <span class="ruby-value">0</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

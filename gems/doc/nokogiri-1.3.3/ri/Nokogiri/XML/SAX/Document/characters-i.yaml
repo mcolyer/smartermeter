@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Characters read between a tag <tt>string</tt> contains the character data
+full_name: Nokogiri::XML::SAX::Document#characters
+is_singleton: false
+name: characters
+params: (string)
+visibility: public

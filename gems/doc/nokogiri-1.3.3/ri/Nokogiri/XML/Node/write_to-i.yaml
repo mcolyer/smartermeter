@@ -1,0 +1,35 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: config if block_given?
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Write Node to <tt>io</tt> with <tt>options</tt>. <tt>options</tt> modify the output of this method. Valid options are:"
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: +:encoding+ for changing the encoding
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: +:indent_text+ the indentation text, defaults to one space
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: +:indent+ the number of +:indent_text+ to use, defaults to 2
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: +:save_with+ a combination of SaveOptions constants.
+  type: :BULLET
+- !ruby/struct:SM::Flow::P 
+  body: "To save with UTF-8 indented twice:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  node.write_to(io, :encoding =&gt; 'UTF-8', :indent =&gt; 2)\n"
+- !ruby/struct:SM::Flow::P 
+  body: "To save indented with two dashes:"
+- !ruby/struct:SM::Flow::VERB 
+  body: "  node.write_to(io, :indent_text =&gt; '-', :indent =&gt; 2\n"
+full_name: Nokogiri::XML::Node#write_to
+is_singleton: false
+name: write_to
+params: (io, *options) {|config if block_given?| ...}
+visibility: public

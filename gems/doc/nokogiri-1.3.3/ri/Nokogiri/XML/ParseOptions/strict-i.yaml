@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Nokogiri::XML::ParseOptions#strict
+is_singleton: false
+name: strict
+params: ()
+visibility: public

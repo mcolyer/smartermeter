@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: the lines connecting in the center, with the first line vertical
+full_name: Gruff::Net#draw_line_markers
+is_singleton: false
+name: draw_line_markers
+params: ()
+visibility: public

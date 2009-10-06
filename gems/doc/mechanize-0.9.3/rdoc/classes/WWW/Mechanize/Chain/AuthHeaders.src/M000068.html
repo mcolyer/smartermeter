@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>gen_auth_header (WWW::Mechanize::Chain::AuthHeaders)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/www/mechanize/chain/auth_headers.rb, line 38</span>
+        <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">gen_auth_header</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-identifier">request</span>, <span class="ruby-identifier">auth_header</span>, <span class="ruby-identifier">is_IIS</span> = <span class="ruby-keyword kw">false</span>)
+          <span class="ruby-identifier">auth_header</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^(\w+) (.*)/</span>
+  
+          <span class="ruby-identifier">params</span> = {}
+          <span class="ruby-identifier">$2</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/(\w+)=(&quot;[^&quot;]*&quot;|[^,]*)/</span>) {
+            <span class="ruby-identifier">params</span>[<span class="ruby-identifier">$1</span>] = <span class="ruby-identifier">$2</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/^&quot;/</span>, <span class="ruby-value str">''</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/&quot;$/</span>, <span class="ruby-value str">''</span>)
+          }
+  
+          <span class="ruby-ivar">@@nonce_count</span>[<span class="ruby-identifier">params</span>[<span class="ruby-value str">'nonce'</span>]] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+
+          <span class="ruby-identifier">a_1</span> = <span class="ruby-node">&quot;#{@user}:#{params['realm']}:#{@password}&quot;</span>
+          <span class="ruby-identifier">a_2</span> = <span class="ruby-node">&quot;#{request.method}:#{uri.path}&quot;</span>
+          <span class="ruby-identifier">request_digest</span> = <span class="ruby-value str">''</span>
+          <span class="ruby-identifier">request_digest</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-identifier">a_1</span>)
+          <span class="ruby-identifier">request_digest</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">':'</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value str">'nonce'</span>]
+          <span class="ruby-identifier">request_digest</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">':'</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-value str">'%08x'</span> <span class="ruby-operator">%</span> <span class="ruby-ivar">@@nonce_count</span>[<span class="ruby-identifier">params</span>[<span class="ruby-value str">'nonce'</span>]])
+          <span class="ruby-identifier">request_digest</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">':'</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">CNONCE</span>
+          <span class="ruby-identifier">request_digest</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">':'</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value str">'qop'</span>]
+          <span class="ruby-identifier">request_digest</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">':'</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-identifier">a_2</span>)
+  
+          <span class="ruby-identifier">header</span> = <span class="ruby-value str">''</span>
+          <span class="ruby-identifier">header</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;Digest username=\&quot;#{@user}\&quot;, &quot;</span>
+          <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">is_IIS</span> <span class="ruby-keyword kw">then</span>
+            <span class="ruby-identifier">header</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;qop=\&quot;#{params['qop']}\&quot;, &quot;</span>
+          <span class="ruby-keyword kw">else</span>
+            <span class="ruby-identifier">header</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;qop=#{params['qop']}, &quot;</span>
+          <span class="ruby-keyword kw">end</span>
+          <span class="ruby-identifier">header</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;uri=\&quot;#{uri.path}\&quot;, &quot;</span>
+          <span class="ruby-identifier">header</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">%w{ algorithm opaque nonce realm }</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span>
+            <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">field</span>]
+            <span class="ruby-node">&quot;#{field}=\&quot;#{params[field]}\&quot;&quot;</span>
+          }.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">', '</span>)
+
+          <span class="ruby-identifier">header</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;nc=#{'%08x' % @@nonce_count[params['nonce']]}, &quot;</span>
+          <span class="ruby-identifier">header</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;cnonce=\&quot;#{CNONCE}\&quot;, &quot;</span>
+          <span class="ruby-identifier">header</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;response=\&quot;#{Digest::MD5.hexdigest(request_digest)}\&quot;&quot;</span>
+  
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">header</span>
+        <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

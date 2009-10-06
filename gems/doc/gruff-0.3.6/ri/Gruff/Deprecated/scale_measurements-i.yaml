@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gruff::Deprecated#scale_measurements
+is_singleton: false
+name: scale_measurements
+params: ()
+visibility: public

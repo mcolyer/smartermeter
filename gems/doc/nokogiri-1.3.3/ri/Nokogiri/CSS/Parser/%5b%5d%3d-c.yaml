@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Set the css selector in <tt>string</tt> in the cache to <tt>value</tt>
+full_name: Nokogiri::CSS::Parser::[]=
+is_singleton: true
+name: "[]="
+params: (string, value)
+visibility: public

@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Column number or 0 if not available
+full_name: Nokogiri::XML::SyntaxError#column
+is_singleton: false
+name: column
+params: |
+  column
+
+visibility: public

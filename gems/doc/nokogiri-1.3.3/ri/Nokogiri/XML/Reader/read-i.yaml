@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Move the Reader forward through the XML document.
+full_name: Nokogiri::XML::Reader#read
+is_singleton: false
+name: read
+params: |
+  read
+
+visibility: public

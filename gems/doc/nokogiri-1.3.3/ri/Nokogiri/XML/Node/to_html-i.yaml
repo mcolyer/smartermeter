@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Serialize this Node to HTML
+- !ruby/struct:SM::Flow::VERB 
+  body: "  doc.to_html\n"
+- !ruby/struct:SM::Flow::P 
+  body: See Node#write_to for a list of <tt>options</tt>. For formatted output, use Node#to_xhtml instead.
+full_name: Nokogiri::XML::Node#to_html
+is_singleton: false
+name: to_html
+params: (options = {})
+visibility: public

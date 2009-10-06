@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>read_memory (Nokogiri::XML::Schema)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *  read_memory(string)
+ *
+ * Create a new Schema from the contents of +string+
+ */
+static VALUE read_memory(VALUE klass, VALUE content)
+{
+
+  xmlSchemaParserCtxtPtr ctx = xmlSchemaNewMemParserCtxt(
+      (const char *)StringValuePtr(content),
+      RSTRING_LEN(content)
+  );
+
+  VALUE errors = rb_ary_new();
+  xmlSetStructuredErrorFunc((void *)errors, Nokogiri_error_array_pusher);
+
+#ifdef HAVE_XMLSCHEMASETPARSERSTRUCTUREDERRORS
+  xmlSchemaSetParserStructuredErrors(
+    ctx,
+    Nokogiri_error_array_pusher,
+    (void *)errors
+  );
+#endif
+
+  xmlSchemaPtr schema = xmlSchemaParse(ctx);
+
+  xmlSetStructuredErrorFunc(NULL, NULL);
+  xmlSchemaFreeParserCtxt(ctx);
+
+  if(NULL == schema) {
+    xmlErrorPtr error = xmlGetLastError();
+    if(error)
+      Nokogiri_error_raise(NULL, error);
+    else
+      rb_raise(rb_eRuntimeError, &quot;Could not parse document&quot;);
+
+    return Qnil;
+  }
+
+  VALUE rb_schema = Data_Wrap_Struct(klass, 0, dealloc, schema);
+  rb_iv_set(rb_schema, &quot;@errors&quot;, errors);
+
+  return rb_schema;
+}</pre>
+</body>
+</html>

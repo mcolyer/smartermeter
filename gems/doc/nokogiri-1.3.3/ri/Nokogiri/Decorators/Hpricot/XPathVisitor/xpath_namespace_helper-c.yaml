@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: take a path like '//t:sam' and convert to xpath &quot;*[name()='t:sam']&quot;
+full_name: Nokogiri::Decorators::Hpricot::XPathVisitor::xpath_namespace_helper
+is_singleton: true
+name: xpath_namespace_helper
+params: (rule)
+visibility: public

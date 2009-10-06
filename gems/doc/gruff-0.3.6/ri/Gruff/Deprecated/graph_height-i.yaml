@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gruff::Deprecated#graph_height
+is_singleton: false
+name: graph_height
+params: ()
+visibility: public

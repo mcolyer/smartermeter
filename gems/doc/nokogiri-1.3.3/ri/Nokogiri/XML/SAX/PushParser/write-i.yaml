@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: "<<"
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Write a <tt>chunk</tt> of XML to the PushParser. Any callback methods that can be called will be called immidiately.
+full_name: Nokogiri::XML::SAX::PushParser#write
+is_singleton: false
+name: write
+params: (chunk, last_chunk = false)
+visibility: public

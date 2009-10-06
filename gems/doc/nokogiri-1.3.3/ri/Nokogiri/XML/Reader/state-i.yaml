@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Get the state of the reader
+full_name: Nokogiri::XML::Reader#state
+is_singleton: false
+name: state
+params: |
+  state
+
+visibility: public

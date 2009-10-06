@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Create nodes from <tt>data</tt> and insert them after this node (as a sibling).
+full_name: Nokogiri::XML::Node#after
+is_singleton: false
+name: after
+params: (data)
+visibility: public

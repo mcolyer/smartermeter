@@ -1,0 +1,19 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Element reference - returns the node at <tt>index</tt>, or returns a NodeSet containing nodes starting at <tt>start</tt> and continuing for <tt>length</tt> elements, or returns a NodeSet containing nodes specified by <tt>range</tt>. Negative <tt>indices</tt> count backward from the end of the <tt>node_set</tt> (-1 is the last node). Returns nil if the <tt>index</tt> (or <tt>start</tt>) are out of range.
+full_name: Nokogiri::XML::NodeSet#slice
+is_singleton: false
+name: slice
+params: |
+  [index] -> Node or nil
+  [start, length] -> NodeSet or nil
+  [range] -> NodeSet or nil
+  slice(index) -> Node or nil
+  slice(start, length) -> NodeSet or nil
+  slice(range) -> NodeSet or nil
+
+visibility: public

@@ -1,0 +1,338 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Experimental
+  name: additional_line_values
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Blank space below the graph
+  name: bottom_margin
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Used internally for spacing.
+  - !ruby/struct:SM::Flow::P 
+    body: By default, labels are centered over the point they represent.
+  name: center_labels_over_point
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Get or set the list of colors that will be used to draw the bars or lines.
+  name: colors
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Font used for titles, labels, etc. Works best if you provide the full path to the TTF font file. RMagick must be built with the Freetype libraries for this to work properly.
+  - !ruby/struct:SM::Flow::P 
+    body: Tries to find Bitstream Vera (Vera.ttf) in the location specified by ENV['MAGICK_FONT_PATH']. Uses default RMagick font otherwise.
+  - !ruby/struct:SM::Flow::P 
+    body: The font= method below fulfills the role of the writer, so we only need a reader here.
+  name: font
+  rw: R
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: font_color
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Used internally for horizontal graph types.
+  name: has_left_labels
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Prevent drawing of the legend
+  name: hide_legend
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Prevent drawing of line markers
+  name: hide_line_markers
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Prevent drawing of line numbers
+  name: hide_line_numbers
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Prevent drawing of the title
+  name: hide_title
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: A hash of names for the individual columns, where the key is the array index for the column this label represents.
+  - !ruby/struct:SM::Flow::P 
+    body: Not all columns need to be named.
+  - !ruby/struct:SM::Flow::P 
+    body: "Example: 0 =&gt; 2005, 3 =&gt; 2006, 5 =&gt; 2007, 7 =&gt; 2008"
+  name: labels
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Blank space to the left of the graph
+  name: left_margin
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Optionally set the size of the colored box by each item in the legend. Default is 20.0
+  - !ruby/struct:SM::Flow::P 
+    body: Will be scaled down if graph is smaller than 800px wide.
+  name: legend_box_size
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Optionally set the size of the font. Based on an 800x600px graph. Default is 20.
+  - !ruby/struct:SM::Flow::P 
+    body: Will be scaled down if graph is smaller than 800px wide.
+  name: legend_font_size
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Blank space below the legend
+  name: legend_margin
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: The color of the auxiliary lines
+  name: marker_color
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: The number of horizontal lines shown for reference
+  name: marker_count
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: The font size of the labels around the graph
+  name: marker_font_size
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: You can manually set a maximum value, such as a percentage-based graph that always goes to 100.
+  - !ruby/struct:SM::Flow::P 
+    body: If you use this, you must set it after you have given all your data to the graph object.
+  name: maximum_value
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: You can manually set a minimum value instead of having the values guessed for you.
+  - !ruby/struct:SM::Flow::P 
+    body: Set it after you have given all your data to the graph object.
+  name: minimum_value
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Message shown when there is no data. Fits up to 20 characters. Defaults to &quot;No Data.&quot;
+  name: no_data_message
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Blank space to the right of the graph
+  name: right_margin
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Set to false if you don't want the data to be sorted with largest avg values at the back.
+  name: sort
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Experimental
+  name: stacked
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: The large title of the graph displayed at the top
+  name: title
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: The font size of the large title at the top of the graph
+  name: title_font_size
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Blank space below the title
+  name: title_margin
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Blank space above the graph
+  name: top_margin
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: A label for the bottom of the graph
+  name: x_axis_label
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Manually set increment of the horizontal marking lines
+  name: y_axis_increment
+  rw: RW
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: A label for the left side of the graph
+  name: y_axis_label
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Draw extra lines showing where the margins and text centers are
+  name: DEBUG
+  value: "false"
+- !ruby/object:RI::Constant 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Used for navigating the array of data to plot
+  name: DATA_LABEL_INDEX
+  value: "0"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: DATA_VALUES_INDEX
+  value: "1"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: DATA_COLOR_INDEX
+  value: "2"
+- !ruby/object:RI::Constant 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: Space around text elements. Mostly used for vertical spacing
+  name: LEGEND_MARGIN
+  value: TITLE_MARGIN = 20.0
+- !ruby/object:RI::Constant 
+  comment: 
+  name: LABEL_MARGIN
+  value: "10.0"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: DEFAULT_MARGIN
+  value: "20.0"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: DEFAULT_TARGET_WIDTH
+  value: "800"
+- !ruby/object:RI::Constant 
+  comment: 
+  name: THOUSAND_SEPARATOR
+  value: "','"
+full_name: Gruff::Base
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: Magick
+- !ruby/object:RI::IncludedModule 
+  name: Deprecated
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: add_color
+- !ruby/object:RI::MethodSummary 
+  name: center
+- !ruby/object:RI::MethodSummary 
+  name: data
+- !ruby/object:RI::MethodSummary 
+  name: draw
+- !ruby/object:RI::MethodSummary 
+  name: draw_axis_labels
+- !ruby/object:RI::MethodSummary 
+  name: draw_label
+- !ruby/object:RI::MethodSummary 
+  name: draw_legend
+- !ruby/object:RI::MethodSummary 
+  name: draw_line_markers
+- !ruby/object:RI::MethodSummary 
+  name: draw_no_data
+- !ruby/object:RI::MethodSummary 
+  name: draw_title
+- !ruby/object:RI::MethodSummary 
+  name: font=
+- !ruby/object:RI::MethodSummary 
+  name: get_maximum_by_stack
+- !ruby/object:RI::MethodSummary 
+  name: initialize_ivars
+- !ruby/object:RI::MethodSummary 
+  name: margins=
+- !ruby/object:RI::MethodSummary 
+  name: normalize
+- !ruby/object:RI::MethodSummary 
+  name: render_background
+- !ruby/object:RI::MethodSummary 
+  name: render_gradiated_background
+- !ruby/object:RI::MethodSummary 
+  name: render_image_background
+- !ruby/object:RI::MethodSummary 
+  name: render_solid_background
+- !ruby/object:RI::MethodSummary 
+  name: render_transparent_background
+- !ruby/object:RI::MethodSummary 
+  name: replace_colors
+- !ruby/object:RI::MethodSummary 
+  name: reset_themes
+- !ruby/object:RI::MethodSummary 
+  name: scale_fontsize
+- !ruby/object:RI::MethodSummary 
+  name: setup_drawing
+- !ruby/object:RI::MethodSummary 
+  name: setup_graph_measurements
+- !ruby/object:RI::MethodSummary 
+  name: sort_norm_data
+- !ruby/object:RI::MethodSummary 
+  name: sum
+- !ruby/object:RI::MethodSummary 
+  name: theme=
+- !ruby/object:RI::MethodSummary 
+  name: theme_37signals
+- !ruby/object:RI::MethodSummary 
+  name: theme_greyscale
+- !ruby/object:RI::MethodSummary 
+  name: theme_keynote
+- !ruby/object:RI::MethodSummary 
+  name: theme_odeo
+- !ruby/object:RI::MethodSummary 
+  name: theme_pastel
+- !ruby/object:RI::MethodSummary 
+  name: theme_rails_keynote
+- !ruby/object:RI::MethodSummary 
+  name: to_blob
+- !ruby/object:RI::MethodSummary 
+  name: write
+name: Base
+superclass: Object

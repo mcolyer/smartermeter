@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gruff::SideStackedBar#larger_than_max?
+is_singleton: false
+name: larger_than_max?
+params: (data_point, index=0)
+visibility: protected

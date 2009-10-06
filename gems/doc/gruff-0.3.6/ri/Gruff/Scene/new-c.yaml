@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gruff::Scene::new
+is_singleton: true
+name: new
+params: (target_width, base_dir)
+visibility: public

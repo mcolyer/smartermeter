@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Return attributes for DTD. Always returns <tt>nil</tt>
+full_name: Nokogiri::XML::DTD#attributes
+is_singleton: false
+name: attributes
+params: ()
+visibility: public

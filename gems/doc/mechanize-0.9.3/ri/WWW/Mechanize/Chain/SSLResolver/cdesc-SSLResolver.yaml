@@ -1,0 +1,18 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+constants: []
+
+full_name: WWW::Mechanize::Chain::SSLResolver
+includes: 
+- !ruby/object:RI::IncludedModule 
+  name: WWW::Handler
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: handle
+name: SSLResolver
+superclass: Object

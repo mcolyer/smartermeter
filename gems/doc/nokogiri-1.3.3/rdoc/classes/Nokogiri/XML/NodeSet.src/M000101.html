@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>slice (Nokogiri::XML::NodeSet)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *  [index] -&gt; Node or nil
+ *  [start, length] -&gt; NodeSet or nil
+ *  [range] -&gt; NodeSet or nil
+ *  slice(index) -&gt; Node or nil
+ *  slice(start, length) -&gt; NodeSet or nil
+ *  slice(range) -&gt; NodeSet or nil
+ *
+ * Element reference - returns the node at +index+, or returns a NodeSet
+ * containing nodes starting at +start+ and continuing for +length+ elements, or
+ * returns a NodeSet containing nodes specified by +range+. Negative +indices+
+ * count backward from the end of the +node_set+ (-1 is the last node). Returns
+ * nil if the +index+ (or +start+) are out of range.
+ */
+static VALUE slice(int argc, VALUE *argv, VALUE self)
+{
+  VALUE arg ;
+  long beg, len ;
+  xmlNodeSetPtr node_set;
+  Data_Get_Struct(self, xmlNodeSet, node_set);
+
+  if (argc == 2) {
+    beg = NUM2LONG(argv[0]);
+    len = NUM2LONG(argv[1]);
+    if (beg &lt; 0) {
+      beg += node_set-&gt;nodeNr ;
+    }
+    return subseq(self, beg, len);
+  }
+
+  if (argc != 1) {
+    rb_scan_args(argc, argv, &quot;11&quot;, NULL, NULL);
+  }
+  arg = argv[0];
+
+  if (FIXNUM_P(arg)) {
+    return index_at(self, FIX2LONG(arg));
+  }
+  
+  /* if arg is Range */
+  switch (rb_range_beg_len(arg, &amp;beg, &amp;len, node_set-&gt;nodeNr, 0)) {
+  case Qfalse:
+    break;
+  case Qnil:
+    return Qnil;
+  default:
+    return subseq(self, beg, len);
+  }
+
+  return index_at(self, NUM2LONG(arg));
+}</pre>
+</body>
+</html>

@@ -1,0 +1,62 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: A list of Nokogiri::XML::SyntaxError found when parsing a document
+  name: errors
+  rw: RW
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+- !ruby/object:RI::MethodSummary 
+  name: new
+- !ruby/object:RI::MethodSummary 
+  name: parse
+- !ruby/object:RI::MethodSummary 
+  name: read_io
+- !ruby/object:RI::MethodSummary 
+  name: read_memory
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Nokogiri::XML::Document wraps an xml document.
+constants: []
+
+full_name: Nokogiri::XML::Document
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: "<<"
+- !ruby/object:RI::MethodSummary 
+  name: add_child
+- !ruby/object:RI::MethodSummary 
+  name: decorate
+- !ruby/object:RI::MethodSummary 
+  name: decorators
+- !ruby/object:RI::MethodSummary 
+  name: document
+- !ruby/object:RI::MethodSummary 
+  name: dup
+- !ruby/object:RI::MethodSummary 
+  name: encoding
+- !ruby/object:RI::MethodSummary 
+  name: encoding=
+- !ruby/object:RI::MethodSummary 
+  name: fragment
+- !ruby/object:RI::MethodSummary 
+  name: name
+- !ruby/object:RI::MethodSummary 
+  name: namespaces
+- !ruby/object:RI::MethodSummary 
+  name: root
+- !ruby/object:RI::MethodSummary 
+  name: root=
+- !ruby/object:RI::MethodSummary 
+  name: slop!
+- !ruby/object:RI::MethodSummary 
+  name: url
+- !ruby/object:RI::MethodSummary 
+  name: validate
+name: Document
+superclass: Node

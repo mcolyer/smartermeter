@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Make copy of data with values scaled between 0-100
+full_name: Gruff::Base#normalize
+is_singleton: false
+name: normalize
+params: (force=false)
+visibility: protected

@@ -1,0 +1,23 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: The Nokogiri::XML::Document tied to this XPath instance
+  name: document
+  rw: RW
+class_methods: []
+
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: This class wraps an XPath object and should only be instantiated from XPathContext.
+constants: []
+
+full_name: Nokogiri::XML::XPath
+includes: []
+
+instance_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: node_set
+name: XPath
+superclass: Object

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Decorate this node with the decorators set up in this node's Document
+full_name: Nokogiri::XML::Node#decorate!
+is_singleton: false
+name: decorate!
+params: ()
+visibility: public

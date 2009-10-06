@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Convert this NodeSet to XHTML
+full_name: Nokogiri::XML::NodeSet#to_xhtml
+is_singleton: false
+name: to_xhtml
+params: (*args)
+visibility: public

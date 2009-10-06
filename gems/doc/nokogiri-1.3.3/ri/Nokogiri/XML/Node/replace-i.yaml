@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: replace this Node with the <tt>new_node</tt> in the Document.
+full_name: Nokogiri::XML::Node#replace
+is_singleton: false
+name: replace
+params: (new_node)
+visibility: public

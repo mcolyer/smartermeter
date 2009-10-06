@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: options if block_given?
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Parse an XML file. <tt>thing</tt> may be a String, or any object that responds to <em>read</em> and <em>close</em> such as an IO, or StringIO. <tt>url</tt> is resource where this document is located. <tt>encoding</tt> is the encoding that should be used when processing the document. <tt>options</tt> is a number that sets options in the parser, such as Nokogiri::XML::ParseOptions::RECOVER. See the constants in Nokogiri::XML::ParseOptions.
+full_name: Nokogiri::XML::Document::parse
+is_singleton: true
+name: parse
+params: (string_or_io, url = nil, encoding = nil, options = ParseOptions::DEFAULT_XML, &block) {|options if block_given?| ...}
+visibility: public

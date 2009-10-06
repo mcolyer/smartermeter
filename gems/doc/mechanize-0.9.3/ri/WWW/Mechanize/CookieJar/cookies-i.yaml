@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Fetch the cookies that should be used for the URI object passed in.
+full_name: WWW::Mechanize::CookieJar#cookies
+is_singleton: false
+name: cookies
+params: (url)
+visibility: public

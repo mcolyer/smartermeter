@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: A list of allowed sub elements for this element.
+full_name: Nokogiri::HTML::ElementDescription#sub_elements
+is_singleton: false
+name: sub_elements
+params: |
+  sub_elements
+
+visibility: public

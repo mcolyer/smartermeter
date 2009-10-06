@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gruff::Line#contains_one_point_only?
+is_singleton: false
+name: contains_one_point_only?
+params: (data_row)
+visibility: public

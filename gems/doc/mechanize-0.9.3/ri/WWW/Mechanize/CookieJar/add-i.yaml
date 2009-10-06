@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Add a cookie to the Jar.
+full_name: WWW::Mechanize::CookieJar#add
+is_singleton: false
+name: add
+params: (uri, cookie)
+visibility: public

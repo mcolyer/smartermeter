@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>draw (Gruff::Area)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/gruff/area.rb, line 6</span>
+  <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">draw</span>
+    <span class="ruby-keyword kw">super</span>
+
+    <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@has_data</span>
+
+    <span class="ruby-ivar">@x_increment</span> = <span class="ruby-ivar">@graph_width</span> <span class="ruby-operator">/</span> (<span class="ruby-ivar">@column_count</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">to_f</span>
+    <span class="ruby-ivar">@d</span> = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">stroke</span> <span class="ruby-value str">'transparent'</span>
+
+    <span class="ruby-ivar">@norm_data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">data_row</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">poly_points</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">prev_x</span> = <span class="ruby-identifier">prev_y</span> = <span class="ruby-value">0</span><span class="ruby-value">.0</span>
+      <span class="ruby-ivar">@d</span> = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">fill</span> <span class="ruby-identifier">data_row</span>[<span class="ruby-constant">DATA_COLOR_INDEX</span>]
+
+      <span class="ruby-identifier">data_row</span>[<span class="ruby-constant">DATA_VALUES_INDEX</span>].<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">data_point</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+        <span class="ruby-comment cmt"># Use incremented x and scaled y</span>
+        <span class="ruby-identifier">new_x</span> = <span class="ruby-ivar">@graph_left</span> <span class="ruby-operator">+</span> (<span class="ruby-ivar">@x_increment</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">index</span>)
+        <span class="ruby-identifier">new_y</span> = <span class="ruby-ivar">@graph_top</span> <span class="ruby-operator">+</span> (<span class="ruby-ivar">@graph_height</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">data_point</span> <span class="ruby-operator">*</span> <span class="ruby-ivar">@graph_height</span>)
+
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">prev_x</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">prev_y</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">then</span>
+          <span class="ruby-identifier">poly_points</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">new_x</span>
+          <span class="ruby-identifier">poly_points</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">new_y</span>
+          
+          <span class="ruby-comment cmt">#@d = @d.polyline(prev_x, prev_y, new_x, new_y)</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">poly_points</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@graph_left</span>
+          <span class="ruby-identifier">poly_points</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@graph_bottom</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+          <span class="ruby-identifier">poly_points</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">new_x</span>
+          <span class="ruby-identifier">poly_points</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">new_y</span>
+          
+          <span class="ruby-comment cmt">#@d = @d.polyline(@graph_left, @graph_bottom, new_x, new_y)</span>
+        <span class="ruby-keyword kw">end</span>
+
+        <span class="ruby-identifier">draw_label</span>(<span class="ruby-identifier">new_x</span>, <span class="ruby-identifier">index</span>)
+
+        <span class="ruby-identifier">prev_x</span> = <span class="ruby-identifier">new_x</span>
+        <span class="ruby-identifier">prev_y</span> = <span class="ruby-identifier">new_y</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-comment cmt"># Add closing points, draw polygon</span>
+      <span class="ruby-identifier">poly_points</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@graph_right</span>
+      <span class="ruby-identifier">poly_points</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@graph_bottom</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+      <span class="ruby-identifier">poly_points</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@graph_left</span>
+      <span class="ruby-identifier">poly_points</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@graph_bottom</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+
+      <span class="ruby-ivar">@d</span> = <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">polyline</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">poly_points</span>)
+
+    <span class="ruby-keyword kw">end</span>
+
+    <span class="ruby-ivar">@d</span>.<span class="ruby-identifier">draw</span>(<span class="ruby-ivar">@base_image</span>)
+  <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

@@ -1,0 +1,24 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Calculates size of drawable area and draws the decorations.
+- !ruby/object:SM::Flow::LIST 
+  contents: 
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: line markers
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: legend
+  - !ruby/struct:SM::Flow::LI 
+    label: "*"
+    body: title
+  type: :BULLET
+full_name: Gruff::Base#setup_drawing
+is_singleton: false
+name: setup_drawing
+params: ()
+visibility: protected

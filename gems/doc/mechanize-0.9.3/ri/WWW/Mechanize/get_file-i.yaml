@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Fetch a file and return the contents of the file.
+full_name: WWW::Mechanize#get_file
+is_singleton: false
+name: get_file
+params: (url)
+visibility: public

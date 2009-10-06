@@ -1,0 +1,13 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: 
+- !ruby/object:RI::AliasName 
+  name: text
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Get the inner text of all contained Node objects
+full_name: Nokogiri::XML::NodeSet#inner_text
+is_singleton: false
+name: inner_text
+params: ()
+visibility: public

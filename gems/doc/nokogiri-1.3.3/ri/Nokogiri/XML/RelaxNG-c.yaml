@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Create a new Nokogiri::XML::RelaxNG document from <tt>string_or_io</tt>. See Nokogiri::XML::RelaxNG for an example.
+full_name: Nokogiri::XML::RelaxNG
+is_singleton: true
+name: RelaxNG
+params: (string_or_io)
+visibility: public

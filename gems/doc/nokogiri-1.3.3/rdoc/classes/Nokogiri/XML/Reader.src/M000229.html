@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>attribute (Nokogiri::XML::Reader)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *   attribute(name)
+ *
+ * Get the value of attribute named +name+
+ */
+static VALUE reader_attribute(VALUE self, VALUE name)
+{
+  xmlTextReaderPtr reader;
+  xmlChar *value ;
+  Data_Get_Struct(self, xmlTextReader, reader);
+
+  if(name == Qnil) return Qnil;
+  name = StringValue(name) ;
+
+  value = xmlTextReaderGetAttribute(reader, (xmlChar*)StringValuePtr(name));
+  if(value == NULL) {
+    /* this section is an attempt to workaround older versions of libxml that
+       don't handle namespaces properly in all attribute-and-friends functions */
+    xmlChar *prefix = NULL ;
+    xmlChar *localname = xmlSplitQName2((xmlChar*)StringValuePtr(name), &amp;prefix);
+    if (localname != NULL) {
+      value = xmlTextReaderLookupNamespace(reader, localname);
+      xmlFree(localname) ;
+    } else {
+      value = xmlTextReaderLookupNamespace(reader, prefix);
+    }
+    xmlFree(prefix);
+  }
+  if(value == NULL) return Qnil;
+
+  VALUE MAYBE_UNUSED(enc) = rb_iv_get(self, &quot;@encoding&quot;);
+  VALUE rb_value = NOKOGIRI_STR_NEW2(value,
+      RTEST(enc) ? StringValuePtr(enc) : NULL);
+  xmlFree(value);
+  return rb_value;
+}</pre>
+</body>
+</html>

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: options if block_given?
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Parse an XML document using the Nokogiri::XML::Reader API. See Nokogiri::XML::Reader for mor information
+full_name: Nokogiri::XML::Reader
+is_singleton: true
+name: Reader
+params: (string_or_io, url = nil, encoding = nil, options = ParseOptions::STRICT) {|options if block_given?| ...}
+visibility: public

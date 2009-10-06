@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Used for degree =&gt; radian conversions
+full_name: Float#deg2rad
+is_singleton: false
+name: deg2rad
+params: ()
+visibility: public

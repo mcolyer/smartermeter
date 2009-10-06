@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Called on document warnings <tt>string</tt> contains the warning
+full_name: Nokogiri::XML::SAX::Document#warning
+is_singleton: false
+name: warning
+params: (string)
+visibility: public

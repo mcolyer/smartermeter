@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: This method adds a button to the query. If the form needs to be submitted with multiple buttons, pass each button to this method.
+full_name: WWW::Mechanize::Form#add_button_to_query
+is_singleton: false
+name: add_button_to_query
+params: (button)
+visibility: public

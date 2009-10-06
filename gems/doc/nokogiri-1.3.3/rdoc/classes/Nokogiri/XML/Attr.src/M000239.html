@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>value= (Nokogiri::XML::Attr)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre>/*
+ * call-seq:
+ *  value=(content)
+ *
+ * Set the value for this Attr to +content+
+ */
+static VALUE set_value(VALUE self, VALUE content)
+{
+  xmlAttrPtr attr;
+  Data_Get_Struct(self, xmlAttr, attr);
+
+  if(attr-&gt;children) xmlFreeNodeList(attr-&gt;children);
+
+  attr-&gt;children = attr-&gt;last = NULL;
+
+  if(content) {
+    xmlChar *buffer;
+    xmlNode *tmp;
+
+    // Encode our content
+    buffer = xmlEncodeEntitiesReentrant(attr-&gt;doc, (unsigned char *)StringValuePtr(content));
+
+    attr-&gt;children = xmlStringGetNodeList(attr-&gt;doc, buffer);
+    attr-&gt;last = NULL;
+    tmp = attr-&gt;children;
+
+    // Loop through the children
+    for(tmp = attr-&gt;children; tmp; tmp = tmp-&gt;next) {
+      tmp-&gt;parent = (xmlNode *)attr;
+      tmp-&gt;doc = attr-&gt;doc;
+      if(tmp-&gt;next == NULL) attr-&gt;last = tmp;
+    }
+
+    // Free up memory
+    xmlFree(buffer);
+  }
+
+  return content;
+}</pre>
+</body>
+</html>

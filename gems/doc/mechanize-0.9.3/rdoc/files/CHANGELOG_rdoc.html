@@ -1,0 +1,1232 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: CHANGELOG.rdoc</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>CHANGELOG.rdoc</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>CHANGELOG.rdoc
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Tue Oct 06 13:49:34 -0700 2009</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Mechanize CHANGELOG</h1>
+<h3>HEAD</h3>
+<ul>
+<li>Bug Fixes:
+
+<ul>
+<li>Do not apply encoding if encoding equals &#8216;none&#8217; Thanks Akinori
+MUSHA!
+
+</li>
+<li>Custom request headers may be supplied WWW::Mechanize#request_headers RF
+24516
+
+</li>
+<li>HTML Parser may be set on a per instance level WWW::Mechanize#html_parser
+RF 24693
+
+</li>
+<li>Fixed string encoding in ruby 1.9. RF 2433
+
+</li>
+<li>Rescuing Zlib::DataErrors (Thanks Kelley Reynolds)
+
+</li>
+<li>Fixing a problem with frozen SSL objects. RF 24950
+
+</li>
+<li>Do not send a referer on meta refresh. RF 24945
+
+</li>
+<li>Fixed a bug with double semi-colons in Content-Disposition headers
+
+</li>
+<li>Properly handling cookies that specify a path. RF 25259
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>0.9.2 / 2009/03/05</h3>
+<ul>
+<li>New Features:
+
+<ul>
+<li>Mechanize#submit and Form#submit take arbitrary headers(thanks
+penguincoder)
+
+</li>
+</ul>
+</li>
+<li>Bug Fixes:
+
+<ul>
+<li>Fixed a bug with bad cookie parsing
+
+</li>
+<li>Form::RadioButton#click unchecks other buttons (RF 24159)
+
+</li>
+<li>Fixed problems with Iconv (RF 24190, RF 24192, RF 24043)
+
+</li>
+<li>POST parameters should be CGI escaped
+
+</li>
+<li>Made Content-Type match case insensitive (Thanks Kelly Reynolds)
+
+</li>
+<li>Non-string form parameters work
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>0.9.1 2009/02/23</h3>
+<ul>
+<li>New Features:
+
+<ul>
+<li>Encoding may be specified for a page: Page#encoding=
+
+</li>
+</ul>
+</li>
+<li>Bug Fixes:
+
+<ul>
+<li>m17n fixes. ありがとう konn!
+
+</li>
+<li>Fixed a problem with base tags. ありがとう Keisuke
+
+</li>
+<li>HEAD requests do not record in the history
+
+</li>
+<li>Default encoding to ISO-8859-1 instead of ASCII
+
+</li>
+<li>Requests with URI instances should not be polluted RF 23472
+
+</li>
+<li>Nonce count fixed for digest auth requests. Thanks Adrian Slapa!
+
+</li>
+<li>Fixed a referer issue with requests using a uri. RF 23472
+
+</li>
+<li>WAP content types will now be parsed
+
+</li>
+<li>Rescued poorly formatted cookies. Thanks Kelley Reynolds!
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>0.9.0</h3>
+<ul>
+<li>Deprecations
+
+<ul>
+<li>WWW::Mechanize::List is gone!
+
+</li>
+<li>Mechanize uses Nokogiri as it&#8216;s HTML parser but you may switch to
+Hpricot by using WWW::Mechanize.html_parser = Hpricot
+
+</li>
+</ul>
+</li>
+<li>Bug Fixes:
+
+<ul>
+<li>Nil check on page when base tag is used 23021
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>0.8.5</h3>
+<ul>
+<li>Deprecations
+
+<ul>
+<li>WWW::Mechanize::List will be deprecated in 0.9.0, and warnings have been
+added to help you upgrade.
+
+</li>
+</ul>
+</li>
+<li>Bug Fixes:
+
+<ul>
+<li>Stopped raising EOF exceptions on HEAD requests. ありがとう：HIRAKU
+Kuroda
+
+</li>
+<li>Fixed exceptions when a logger is set and file:// requests are made.
+
+</li>
+<li>Made Mechanize 1.9 compatible
+
+</li>
+<li>Not setting the port in the host header for SSL sites.
+
+</li>
+<li>Following refresh headers. Thanks Tim Connor!
+
+</li>
+<li>Cookie Jar handles cookie domains containing ports, like
+&#8216;mydomain.com:443&#8217; (Thanks Michal Ochman!)
+
+</li>
+<li>Fixing strange uri escaping problems [22604]
+
+</li>
+<li>Making content-type determintation more robust. (thanks Han Holl!)
+
+</li>
+<li>Dealing with links that are query string only. [22402]
+
+</li>
+<li>Nokogiri may be dropped in as a replacement.
+
+<pre>
+  WWW::Mechanize.html_parser = Nokogiri::HTML
+</pre>
+</li>
+<li>Making sure the correct page is added to the history on meta refresh.
+[22708]
+
+</li>
+<li>Mechanize#get requests no longer send a referer unless they are relative
+requests.
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>0.8.4</h3>
+<ul>
+<li>Bug Fixes:
+
+<ul>
+<li>Setting the port number on the host header.
+
+</li>
+<li>Fixing Authorization headers for picky servers
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>0.8.3</h3>
+<ul>
+<li>Bug Fixes:
+
+<ul>
+<li>Making sure logger is set during SSL connections.
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>0.8.2</h3>
+<ul>
+<li>Bug Fixes:
+
+<ul>
+<li>Doh! I was accidentally setting headers twice.
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>0.8.1</h3>
+<ul>
+<li>Bug Fixes:
+
+<ul>
+<li>Fixed problem with nil pointer when logger is set
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>0.8.0</h3>
+<ul>
+<li>New Features:
+
+<ul>
+<li>Lifecycle hooks. Mechanize#pre_connect_hooks, Mechanize#post_connect_hooks
+
+</li>
+<li>file:/// urls are now supported
+
+</li>
+<li>Added Mechanize::Page#link_with, frame_with for searching for links using
+<tt>criteria</tt>.
+
+</li>
+<li>Implementing PUT, DELETE, and HEAD requests
+
+</li>
+</ul>
+</li>
+<li>Bug Fixes:
+
+<ul>
+<li>Fixed an infinite loop when content-length and body length don&#8216;t
+match.
+
+</li>
+<li>Only setting headers once
+
+</li>
+<li>Adding IIS authentication support
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>0.7.8</h3>
+<ul>
+<li>Bug Fixes:
+
+<ul>
+<li>Fixed bug when receiving a 304 response (HTTPNotModified) on a page not
+cached in history.
+
+</li>
+<li>21428 Default to HTML parser for &#8216;application/xhtml+xml&#8217;
+content-type.
+
+</li>
+<li>Fixed an issue where redirects were resending posted data
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>0.7.7</h3>
+<ul>
+<li>New Features:
+
+<ul>
+<li>Page#form_with takes a <tt>criteria</tt> hash.
+
+</li>
+<li>Page#form is changed to Page#form_with
+
+</li>
+<li>Mechanize#get takes custom http headers. Thanks Mike Dalessio!
+
+</li>
+<li>Form#click_button submits a form defaulting to the current button.
+
+</li>
+<li>Form#set_fields now takes a hash. Thanks Tobi!
+
+</li>
+<li>Mechanize#redirection_limit= for setting the max number of redirects.
+
+</li>
+</ul>
+</li>
+<li>Bug Fixes:
+
+<ul>
+<li>Added more examples. Thanks Robert Jackson.
+
+</li>
+<li>20480 Making sure the Host header is set.
+
+</li>
+<li>20672 Making sure cookies with weird semicolons work.
+
+</li>
+<li>Fixed bug with percent signs in urls. <a
+href="http://d.hatena.ne.jp/kitamomonga/20080410/ruby_mechanize_percent_url_bug">d.hatena.ne.jp/kitamomonga/20080410/ruby_mechanize_percent_url_bug</a>
+
+</li>
+<li>21132 Not checking for EOF errors on redirect
+
+</li>
+<li>Fixed a weird gzipping error.
+
+</li>
+<li>21233 Smarter multipart boundry. Thanks Todd Willey!
+
+</li>
+<li>20097 Supporting meta tag cookies.
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>0.7.6</h3>
+<ul>
+<li>New Features:
+
+<ul>
+<li>Added support for reading Mozilla cookie jars. Thanks Chris Riddoch!
+
+</li>
+<li>Moving text, password, hidden, int to default. Thanks Tim Harper!
+
+</li>
+<li>Mechanize#history_added callback for page loads. Thanks Tobi Reif!
+
+</li>
+<li>Mechanize#scheme_handlers callbacks for handling unsupported schemes on
+links.
+
+</li>
+</ul>
+</li>
+<li>Bug Fixes:
+
+<ul>
+<li>Ignoring scheme case <a
+href="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=470642">bugs.debian.org/cgi-bin/bugreport.cgi?bug=470642</a>
+
+</li>
+<li>Not encoding tildes in uris. Thanks Bruno. [19380]
+
+</li>
+<li>Resetting request bodys when retrying form posts. Thanks Bruno. [19379]
+
+</li>
+<li>Throwing away keep alive connections on EPIPE and ECONNRESET.
+
+</li>
+<li>Duplicating request headers when retrying a 401. Thanks Hiroshi Ichikawa.
+
+</li>
+<li>Simulating an EOF error when a response length is bad. Thanks Tobias
+Gruetzmacher. <a
+href="http://rubyforge.org/tracker/index.php?func=detail&aid=19178&group_id=1453&atid=5711">rubyforge.org/tracker/index.php?func=detail&aid=19178&group_id=1453&atid=5711</a>
+
+</li>
+<li>Defaulting option tags to the inner text. <a
+href="http://rubyforge.org/tracker/index.php?func=detail&aid=19976&group_id=1453&atid=5709">rubyforge.org/tracker/index.php?func=detail&aid=19976&group_id=1453&atid=5709</a>
+
+</li>
+<li>Supporting blank strings for option values. <a
+href="http://rubyforge.org/tracker/index.php?func=detail&aid=19975&group_id=1453&atid=5709">rubyforge.org/tracker/index.php?func=detail&aid=19975&group_id=1453&atid=5709</a>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3>0.7.5</h3>
+<ul>
+<li>Fixed a bug when fetching files and not pages. Thanks Mat Schaffer!
+
+</li>
+</ul>
+<h3>0.7.4</h3>
+<ul>
+<li>doh!
+
+</li>
+</ul>
+<h3>0.7.3</h3>
+<ul>
+<li>Pages are now yielded to a blocks given to WWW::Mechanize#get
+
+</li>
+<li>WWW::Mechanize#get now takes hash arguments for uri parameters.
+
+</li>
+<li>WWW::Mechanize#post takes an IO object as a parameter and posts correctly.
+
+</li>
+<li>Fixing a strange zlib inflate problem on windows
+
+</li>
+</ul>
+<h3>0.7.2</h3>
+<ul>
+<li>Handling gzipped responses with no Content-Length header
+
+</li>
+</ul>
+<h3>0.7.1</h3>
+<ul>
+<li>Added iPhone to the user agent aliases. [17572]
+
+</li>
+<li>Fixed a bug with EOF errors in net/http. [17570]
+
+</li>
+<li>Handling 0 length gzipped responses. [17471]
+
+</li>
+</ul>
+<h3>0.7.0</h3>
+<ul>
+<li>Removed Ruby 1.8.2 support
+
+</li>
+<li>Changed parser to lazily parse links
+
+</li>
+<li>Lazily parsing document
+
+</li>
+<li>Adding verify_callback for SSL requests. Thanks Mike Dalessio!
+
+</li>
+<li>Fixed a bug with Accept-Language header. Thanks Bill Siggelkow.
+
+</li>
+</ul>
+<h3>0.6.11</h3>
+<ul>
+<li>Detecting single quotes in meta redirects.
+
+</li>
+<li>Adding pretty inspect for ruby versions &gt; 1.8.4 (Thanks Joel Kociolek)
+<a
+href="http://rubyforge.org/tracker/index.php?func=detail&aid=13150&group_id=1453&atid=5709">rubyforge.org/tracker/index.php?func=detail&aid=13150&group_id=1453&atid=5709</a>
+
+</li>
+<li>Fixed bug with file name in multipart posts <a
+href="http://rubyforge.org/tracker/?func=detail&aid=15594&group_id=1453&atid=5709">rubyforge.org/tracker/?func=detail&aid=15594&group_id=1453&atid=5709</a>
+
+</li>
+<li>Posting forms relative to the originating page. Thanks Mortee.
+
+</li>
+<li>Added a FAQ <a
+href="http://rubyforge.org/tracker/?func=detail&aid=15772&group_id=1453&atid=5709">rubyforge.org/tracker/?func=detail&aid=15772&group_id=1453&atid=5709</a>
+
+</li>
+</ul>
+<h3>0.6.10</h3>
+<ul>
+<li>Made digest authentication work with POSTs.
+
+</li>
+<li>Made sure page was HTML before following meta refreshes. <a
+href="http://rubyforge.org/tracker/index.php?func=detail&aid=12260&group_id=1453&atid=5709">rubyforge.org/tracker/index.php?func=detail&aid=12260&group_id=1453&atid=5709</a>
+
+</li>
+<li>Made sure that URLS with a host and no path would default to
+&#8217;/&#8217; for history purposes. <a
+href="http://rubyforge.org/tracker/index.php?func=detail&aid=12368&group_id=1453&atid=5709">rubyforge.org/tracker/index.php?func=detail&aid=12368&group_id=1453&atid=5709</a>
+
+</li>
+<li>Avoiding memory leaks with transact. Thanks Tobias Gruetzmacher! <a
+href="http://rubyforge.org/tracker/index.php?func=detail&aid=12057&group_id=1453&atid=5711">rubyforge.org/tracker/index.php?func=detail&aid=12057&group_id=1453&atid=5711</a>
+
+</li>
+<li>Fixing a problem with # signs in the file name. Thanks Tobias Gruetzmacher!
+<a
+href="http://rubyforge.org/tracker/index.php?func=detail&aid=12510&group_id=1453&atid=5711">rubyforge.org/tracker/index.php?func=detail&aid=12510&group_id=1453&atid=5711</a>
+
+</li>
+<li>Made sure that blank form values are submitted. <a
+href="http://rubyforge.org/tracker/index.php?func=detail&aid=12505&group_id=1453&atid=5709">rubyforge.org/tracker/index.php?func=detail&aid=12505&group_id=1453&atid=5709</a>
+
+</li>
+<li>Mechanize now respects the base tag. Thanks Stephan Dale. <a
+href="http://rubyforge.org/tracker/index.php?func=detail&aid=12468&group_id=1453&atid=5709">rubyforge.org/tracker/index.php?func=detail&aid=12468&group_id=1453&atid=5709</a>
+
+</li>
+<li>Aliasing inspect to pretty_inspect. Thanks Eric Promislow. <a
+href="http://rubyforge.org/pipermail/mechanize-users/2007-July/000157.html">rubyforge.org/pipermail/mechanize-users/2007-July/000157.html</a>
+
+</li>
+</ul>
+<h3>0.6.9</h3>
+<ul>
+<li>Updating UTF-8 support for urls
+
+</li>
+<li>Adding AREA tags to the links list. <a
+href="http://rubyforge.org/pipermail/mechanize-users/2007-May/000140.html">rubyforge.org/pipermail/mechanize-users/2007-May/000140.html</a>
+
+</li>
+<li>WWW::Mechanize#follow_meta_refresh will allow you to automatically follow
+meta refresh tags. [10032]
+
+</li>
+<li>Adding x-gzip to accepted content-encoding. Thanks Simon Strandgaard <a
+href="http://rubyforge.org/tracker/index.php?func=detail&aid=11167&group_id=1453&atid=5711">rubyforge.org/tracker/index.php?func=detail&aid=11167&group_id=1453&atid=5711</a>
+
+</li>
+<li>Added Digest Authentication support. Thanks to Ryan Davis and Eric Hodel,
+you get a gold star!
+
+</li>
+</ul>
+<h3>0.6.8</h3>
+<ul>
+<li>Keep alive can be shut off now with WWW::Mechanize#keep_alive
+
+</li>
+<li>Conditional requests can be shut off with
+WWW::Mechanize#conditional_requests
+
+</li>
+<li>Monkey patched Net::HTTP#keep_alive?
+
+</li>
+<li>[9877] Moved last request time. Thanks Max Stepanov
+
+</li>
+<li>Added WWW::Mechanize::File#save
+
+</li>
+<li>Defaulting file name to URI or Content-Disposition
+
+</li>
+<li>Updating compatability with hpricot
+
+</li>
+<li>Added more unit tests
+
+</li>
+</ul>
+<h3>0.6.7</h3>
+<ul>
+<li>Fixed a bug with keep-alive requests
+
+</li>
+<li>[9549] fixed problem with cookie paths
+
+</li>
+</ul>
+<h3>0.6.6</h3>
+<ul>
+<li>Removing hpricot overrides
+
+</li>
+<li>Fixed a bug where alt text can be nil. Thanks Yannick!
+
+</li>
+<li>Unparseable expiration dates in cookies are now treated as session cookies
+
+</li>
+<li>Caching connections
+
+</li>
+<li>Requests now default to keep alive
+
+</li>
+<li>[9434] Fixed bug where html entities weren&#8216;t decoded
+
+</li>
+<li>[9150] Updated mechanize history to deal with redirects
+
+</li>
+</ul>
+<h3>0.6.5</h3>
+<ul>
+<li>Copying headers to a hash to prevent memory leaks
+
+</li>
+<li>Speeding up page parsing
+
+</li>
+<li>Aliased fields to elements
+
+</li>
+<li>Adding If-Modified-Since header
+
+</li>
+<li>Added delete_field! to form. Thanks to Sava Chankov
+
+</li>
+<li>Updated uri escaping to support high order characters. Thanks to Henrik
+Nyh.
+
+</li>
+<li>Better handling relative URIs. Thanks to Henrik Nyh
+
+</li>
+<li>Now handles pipes in URLs <a
+href="http://rubyforge.org/tracker/?func=detail&aid=7140&group_id=1453&atid=5709">rubyforge.org/tracker/?func=detail&aid=7140&group_id=1453&atid=5709</a>
+
+</li>
+<li>Now escaping html entities in form fields. <a
+href="http://rubyforge.org/tracker/?func=detail&aid=7563&group_id=1453&atid=5709">rubyforge.org/tracker/?func=detail&aid=7563&group_id=1453&atid=5709</a>
+
+</li>
+<li>Added MSIE 7.0 user agent string
+
+</li>
+</ul>
+<h3>0.6.4</h3>
+<ul>
+<li>Adding the &quot;redirect_ok&quot; method to Mechanize to stop mechanize
+from following redirects.
+
+<pre>
+      http://rubyforge.org/tracker/index.php?func=detail&amp;aid=6571&amp;group_id=1453&amp;atid=5712
+</pre>
+</li>
+<li>Added protected method Mechanize#set_headers so that subclasses can set
+custom headers. <a
+href="http://rubyforge.org/tracker/?func=detail&aid=7208&group_id=1453&atid=5712">rubyforge.org/tracker/?func=detail&aid=7208&group_id=1453&atid=5712</a>
+
+</li>
+<li>Aliased Page#referer to Page#page
+
+</li>
+<li>Fixed a bug when clicking relative urls <a
+href="http://rubyforge.org/pipermail/mechanize-users/2006-November/000035.html">rubyforge.org/pipermail/mechanize-users/2006-November/000035.html</a>
+
+</li>
+<li>Fixing a bug when bad version or max age is passed to Cookie::parse <a
+href="http://rubyforge.org/pipermail/mechanize-users/2006-November/000033.html">rubyforge.org/pipermail/mechanize-users/2006-November/000033.html</a>
+
+</li>
+<li>Fixing a bug with response codes. [6526]
+
+</li>
+<li>Fixed bug [6548]. Input type of &#8216;button&#8217; was not being added as
+a button.
+
+</li>
+<li>Fixed bug [7139]. REXML parser calls hpricot parser by accident
+
+</li>
+</ul>
+<h3>0.6.3</h3>
+<ul>
+<li>Added keys and values methods to Form
+
+</li>
+<li>Added has_value? to Form
+
+</li>
+<li>Added a has_field? method to Form
+
+</li>
+<li>The add_field! method on Form now creates a field for you on the form.
+Thanks to Mat Schaffer for the patch. <a
+href="http://rubyforge.org/pipermail/mechanize-users/2006-November/000025.html">rubyforge.org/pipermail/mechanize-users/2006-November/000025.html</a>
+
+</li>
+<li>Fixed a bug when form actions have html ecoded entities in them. <a
+href="http://rubyforge.org/pipermail/mechanize-users/2006-October/000019.html">rubyforge.org/pipermail/mechanize-users/2006-October/000019.html</a>
+
+</li>
+<li>Fixed a bug when links or frame sources have html encoded entities in the
+href or src.
+
+</li>
+<li>Fixed a bug where &#8217;#&#8217; symbols are encoded <a
+href="http://rubyforge.org/forum/message.php?msg_id=14747">rubyforge.org/forum/message.php?msg_id=14747</a>
+
+</li>
+</ul>
+<h3>0.6.2</h3>
+<ul>
+<li>Added a yield to Page#form so that dealing with forms can be more DSL like.
+
+</li>
+<li>Added the parsed page to the ResponseCodeError so that the parsed results
+can be accessed even in the event of an error. <a
+href="http://rubyforge.org/pipermail/mechanize-users/2006-September/000007.html">rubyforge.org/pipermail/mechanize-users/2006-September/000007.html</a>
+
+</li>
+<li>Updated documentation (Thanks to Paul Smith)
+
+</li>
+</ul>
+<h3>0.6.1</h3>
+<ul>
+<li>Added a method to Form called &quot;submit&quot;. Now forms can be
+submitted by calling a method on the form.
+
+</li>
+<li>Added a click method to links
+
+</li>
+<li>Added an REXML pluggable parser for backwards compatability. To use it,
+just do this:
+
+<pre>
+ agent.pluggable_parser.html = WWW::Mechanize::REXMLPage
+</pre>
+</li>
+<li>Fixed a bug with referrers by adding a page attribute to forms and links.
+
+</li>
+<li>Fixed a bug where domain names were case sensitive. <a
+href="http://tenderlovemaking.com/2006/09/04/road-to-ruby-mechanize-060/#comment-53">tenderlovemaking.com/2006/09/04/road-to-ruby-mechanize-060/#comment-53</a>
+
+</li>
+<li>Fixed a bug with URI escaped links. <a
+href="http://rubyforge.org/pipermail/mechanize-users/2006-September/000002.html">rubyforge.org/pipermail/mechanize-users/2006-September/000002.html</a>
+
+</li>
+<li>Fixed a bug when options in select lists don&#8216;t have a value. Thanks
+Dan Higham
+
+<dl>
+<dt>5837</dt><dd>Code in lib/mechanize/form_elements.rb is incorrect.
+
+</dd>
+</dl>
+</li>
+<li>Fixed a bug with loading text in to links. <a
+href="http://rubyforge.org/pipermail/mechanize-users/2006-September/000000.html">rubyforge.org/pipermail/mechanize-users/2006-September/000000.html</a>
+
+</li>
+</ul>
+<h3>0.6.0</h3>
+<ul>
+<li>Changed main parser to use hpricot
+
+</li>
+<li>Made <a href="../classes/WWW/Mechanize/Page.html">WWW::Mechanize::Page</a>
+class searchable like hpricot
+
+</li>
+<li>Updated WWW::Mechanize#click to support hpricot links like this:
+@agent.click (page/&quot;a&quot;).first
+
+</li>
+<li>Clicking a Frame is now possible: @agent.click
+(page/&quot;frame&quot;).first
+
+</li>
+<li>Removed deprecated attr_finder
+
+</li>
+<li>Removed REXML helper methods since the main parser is now hpricot
+
+</li>
+<li>Overhauled cookie parser to use WEBrick::Cookie
+
+</li>
+</ul>
+<h3>0.5.4</h3>
+<ul>
+<li>Added WWW::Mechanize#trasact for saving history state between in a
+transaction. See the EXAMPLES file. Thanks Johan Kiviniemi.
+
+</li>
+<li>Added support for gzip compressed pages
+
+</li>
+<li>Forms can now be accessed like a hash. For example, to set the value of an
+input field named &#8216;name&#8217; to &quot;Aaron&quot;, you can do this:
+
+<pre>
+ form['name'] = &quot;Aaron&quot;
+</pre>
+<p>
+Or to get the value of a field named &#8216;name&#8217;, do this:
+</p>
+<pre>
+ puts form['name']
+</pre>
+</li>
+<li>File uploads will now read the file specified in FileUpload#file_name
+
+</li>
+<li>FileUpload can use an IO object in FileUpload#file_data
+
+</li>
+<li>Fixed a bug with saving files on windows
+
+</li>
+<li>Fixed a bug with the filename being set in forms
+
+</li>
+</ul>
+<h3>0.5.3</h3>
+<ul>
+<li>Mechanize#click will now act on the first element of an array. So if an
+array of links is passed to WWW::Mechanize#click, the first link is
+clicked. That means the syntax for clicking links is shortened and still
+supports selecting a link. The following are equivalent:
+
+<pre>
+ agent.click page.links.first
+ agent.click page.links
+</pre>
+</li>
+<li>Fixed a bug with spaces in href&#8216;s and get&#8216;s
+
+</li>
+<li>Added a tick, untick, and click method to radio buttons so that
+radiobuttons can be &quot;clicked&quot;
+
+</li>
+<li>Added a tick, untick, and click method to check boxes so that checkboxes
+can be &quot;clicked&quot;
+
+</li>
+<li>Options on Select lists can now be &quot;tick&quot;ed, and
+&quot;untick&quot;ed.
+
+</li>
+<li>Fixed a potential bug conflicting with rails. Thanks Eric Kolve
+
+</li>
+<li>Updated log4r support for a speed increase. Thanks Yinon Bentor
+
+</li>
+<li>Added inspect methods and pretty printing
+
+</li>
+</ul>
+<h3>0.5.2</h3>
+<ul>
+<li>Fixed a bug with input names that are nil
+
+</li>
+<li>Added a warning when using attr_finder because attr_finder will be
+deprecated in 0.6.0 in favor of method calls. So this syntax:
+
+<pre>
+  @agent.links(:text =&gt; 'foo')
+</pre>
+<p>
+should be changed to this:
+</p>
+<pre>
+  @agent.links.text('foo')
+</pre>
+</li>
+<li>Added support for selecting multiple options in select tags that support
+multiple options. See WWW::Mechanize::MultiSelectList.
+
+</li>
+<li>New select list methods have been added, select_all, select_none.
+
+</li>
+<li>Options for select lists can now be &quot;clicked&quot; which toggles their
+selection, they can be &quot;selected&quot; and &quot;unselected&quot;. See
+WWW::Mechanize::Option
+
+</li>
+<li>Added a method to set multiple fields at the same time,
+WWW::Mechanize::Form#set_fields. Which can be used like so:
+
+<pre>
+ form.set_fields( :foo =&gt; 'bar', :name =&gt; 'Aaron' )
+</pre>
+</li>
+</ul>
+<h3>0.5.1</h3>
+<ul>
+<li>Fixed bug with file uploads
+
+</li>
+<li>Added performance tweaks to the cookie class
+
+</li>
+</ul>
+<h3>0.5.0</h3>
+<ul>
+<li>Added pluggable parsers. (Thanks to Eric Kolve for the idea)
+
+</li>
+<li>Changed namespace so all classes are under <a
+href="../classes/WWW/Mechanize.html">WWW::Mechanize</a>.
+
+</li>
+<li>Updating Forms so that fields can be used as accessors (Thanks Gregory
+Brown)
+
+</li>
+<li>Added <a href="../classes/WWW/Mechanize/File.html">WWW::Mechanize::File</a>
+as default object used for unknown content types.
+
+</li>
+<li>Added &#8216;save_as&#8217; method to Mechanize::File, so any page can be
+saved.
+
+</li>
+<li>Adding &#8216;save_as&#8217; and &#8216;load&#8217; to CookieJar so that
+cookies can be saved between sessions.
+
+</li>
+<li>Added <a
+href="../classes/WWW/Mechanize/FileSaver.html">WWW::Mechanize::FileSaver</a>
+pluggable parser to automatically save files.
+
+</li>
+<li>Added WWW::Mechanize::Page#title for page titles
+
+</li>
+<li>Added OpenSSL certificate support (Thanks Mike Dalessio)
+
+</li>
+<li>Removed support for body filters in favor of pluggable parsers.
+
+</li>
+<li>Fixed cookie bug adding a &#8217;/&#8217; when the url is missing one
+(Thanks Nick Dainty)
+
+</li>
+</ul>
+<h3>0.4.7</h3>
+<ul>
+<li>Fixed bug with no action in forms. Thanks to Adam Wiggins
+
+</li>
+<li>Setting a default user-agent string
+
+</li>
+<li>Added house cleaning to the cookie jar so expired cookies don&#8216;t stick
+around.
+
+</li>
+<li>Added new method WWW::Form#field to find the first field with a given name.
+(thanks to Gregory Brown)
+
+</li>
+<li>Added WWW::Mechanize#get_file for fetching non text/html files
+
+</li>
+</ul>
+<h3>0.4.6</h3>
+<ul>
+<li>Added support for proxies
+
+</li>
+<li>Added a uri field to WWW::Link
+
+</li>
+<li>Added a error class <a
+href="../classes/WWW/Mechanize/ContentTypeError.html">WWW::Mechanize::ContentTypeError</a>
+
+</li>
+<li>Added image alt text to link text
+
+</li>
+<li>Added an visited? method to <a
+href="../classes/WWW/Mechanize.html">WWW::Mechanize</a>
+
+</li>
+<li>Added Array#value= which will set the first value to the argument. That
+allows syntax as such: form.fields.name(&#8216;q&#8217;).value =
+&#8216;xyz&#8217; Before it was like this:
+form.fields.name(&#8216;q&#8217;).first.value = &#8216;xyz&#8216;
+
+</li>
+</ul>
+<h3>0.4.5</h3>
+<ul>
+<li>Added support for multiple values of the same name
+
+</li>
+<li>Updated build_query_string to take an array of arrays (Thanks Michal
+Janeczek)
+
+</li>
+<li>Added WWW::Mechanize#body_filter= so that response bodies can be
+preprocessed
+
+</li>
+<li>Added WWW::Page#body_filter= so that response bodies can be preprocessed
+
+</li>
+<li>Added support for more date formats in the cookie parser
+
+</li>
+<li>Fixed a bug with empty select lists
+
+</li>
+<li>Fixing a problem with cookies not handling no spaces after semicolons
+
+</li>
+</ul>
+<h3>0.4.4</h3>
+<ul>
+<li>Fixed error in method signature, basic_authetication is now basic_auth
+
+</li>
+<li>Fixed bug with encoding names in file uploads (Big thanks to Alex Young)
+
+</li>
+<li>Added options to the select list
+
+</li>
+</ul>
+<h3>0.4.3</h3>
+<ul>
+<li>Added syntactic sugar for finding things
+
+</li>
+<li>Fixed bug with HttpOnly option in cookies
+
+</li>
+<li>Fixed a bug with cookie date parsing
+
+</li>
+<li>Defaulted dropdown lists to the first element
+
+</li>
+<li>Added unit tests
+
+</li>
+</ul>
+<h3>0.4.2</h3>
+<ul>
+<li>Added support for iframes
+
+</li>
+<li>Made mechanize dependant on ruby-web rather than narf
+
+</li>
+<li>Added unit tests
+
+</li>
+<li>Fixed a bunch of warnings
+
+</li>
+</ul>
+<h3>0.4.1</h3>
+<ul>
+<li>Added support for file uploading
+
+</li>
+<li>Added support for frames (Thanks <a
+href="mailto:leerbag@googlemail.com">Gabriel</a>)
+
+</li>
+<li>Added more unit tests
+
+</li>
+<li>Fixed some bugs
+
+</li>
+</ul>
+<h3>0.4.0</h3>
+<ul>
+<li>Added more unit tests
+
+</li>
+<li>Added a cookie jar with better cookie support, included expiration of
+cookies and general cookie security.
+
+</li>
+<li>Updated mechanize to use built in net/http if ruby version is new enough.
+
+</li>
+<li>Added support for meta refresh tags
+
+</li>
+<li>Defaulted form actions to &#8216;GET&#8216;
+
+</li>
+<li>Fixed various bugs
+
+</li>
+<li>Added more unit tests
+
+</li>
+<li>Added a response code exception
+
+</li>
+<li>Thanks to Brian Ellin (brianellin@gmail.com) for: Added support for CA
+files, and support for 301 response codes
+
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Parse this CSS selector in <tt>selector</tt>. Returns an AST.
+full_name: Nokogiri::CSS::parse
+is_singleton: true
+name: parse
+params: (selector)
+visibility: public

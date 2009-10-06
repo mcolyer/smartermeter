@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Turn this node in to a string. If the document is HTML, this method returns html. If the document is XML, this method returns XML.
+full_name: Nokogiri::XML::Node#to_s
+is_singleton: false
+name: to_s
+params: ()
+visibility: public

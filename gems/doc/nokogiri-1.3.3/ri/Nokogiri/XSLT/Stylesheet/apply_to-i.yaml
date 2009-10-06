@@ -1,0 +1,12 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Apply an XSLT stylesheet to an XML::Document. <tt>params</tt> is an array of strings used as XSLT parameters. returns serialized document
+full_name: Nokogiri::XSLT::Stylesheet#apply_to
+is_singleton: false
+name: apply_to
+params: (document, params = [])
+visibility: public

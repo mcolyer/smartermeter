@@ -1,0 +1,16 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: Write Node as XML to <tt>io</tt> with <tt>options</tt>
+- !ruby/struct:SM::Flow::VERB 
+  body: "  doc.write_xml_to io, :encoding =&gt; 'UTF-8'\n"
+- !ruby/struct:SM::Flow::P 
+  body: See Node#write_to for a list of options
+full_name: Nokogiri::XML::Node#write_xml_to
+is_singleton: false
+name: write_xml_to
+params: (io, options = {})
+visibility: public

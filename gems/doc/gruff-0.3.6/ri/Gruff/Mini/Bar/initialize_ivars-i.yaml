@@ -1,0 +1,10 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+full_name: Gruff::Mini::Bar#initialize_ivars
+is_singleton: false
+name: initialize_ivars
+params: ()
+visibility: public

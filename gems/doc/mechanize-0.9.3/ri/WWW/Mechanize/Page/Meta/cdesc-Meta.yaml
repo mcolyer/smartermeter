@@ -1,0 +1,25 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: []
+
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: parse
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: This class encapsulates a Meta tag. Mechanize treats meta tags just like 'a' tags. Meta objects will contain links, but most likely will have no text.
+constants: 
+- !ruby/object:RI::Constant 
+  comment: 
+  - !ruby/struct:SM::Flow::P 
+    body: "Matches the content attribute of a meta tag. After the match:"
+  - !ruby/struct:SM::Flow::VERB 
+    body: "  $1:: delay\n  $3:: url\n"
+  name: CONTENT_REGEXP
+  value: /^\s*(\d+\.?\d*)(;|;\s*url=\s*['"]?(\S*?)['"]?)?\s*$/i
+full_name: WWW::Mechanize::Page::Meta
+includes: []
+
+instance_methods: []
+
+name: Meta
+superclass: Link

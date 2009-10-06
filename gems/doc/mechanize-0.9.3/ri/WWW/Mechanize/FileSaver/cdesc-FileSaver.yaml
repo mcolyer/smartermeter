@@ -1,0 +1,29 @@
+--- !ruby/object:RI::ClassDescription 
+attributes: 
+- !ruby/object:RI::Attribute 
+  comment: 
+  name: filename
+  rw: R
+class_methods: 
+- !ruby/object:RI::MethodSummary 
+  name: new
+comment: 
+- !ruby/struct:SM::Flow::H 
+  level: 1
+  text: Synopsis
+- !ruby/struct:SM::Flow::P 
+  body: This is a pluggable parser that automatically saves every file it encounters. It saves the files as a tree, reflecting the host and file path.
+- !ruby/struct:SM::Flow::H 
+  level: 2
+  text: Example to save all PDF's
+- !ruby/struct:SM::Flow::VERB 
+  body: " require 'rubygems'\n require 'mechanize'\n\n agent = WWW::Mechanize.new\n agent.pluggable_parser.pdf = WWW::Mechanize::FileSaver\n agent.get('http://example.com/foo.pdf')\n"
+constants: []
+
+full_name: WWW::Mechanize::FileSaver
+includes: []
+
+instance_methods: []
+
+name: FileSaver
+superclass: File

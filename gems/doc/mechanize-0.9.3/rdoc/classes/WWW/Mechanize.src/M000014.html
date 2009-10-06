@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+  <title>get (WWW::Mechanize)</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <link rel="stylesheet" href="../../.././rdoc-style.css" type="text/css" media="screen" />
+</head>
+<body class="standalone-code">
+  <pre><span class="ruby-comment cmt"># File lib/www/mechanize.rb, line 203</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get</span>(<span class="ruby-identifier">options</span>, <span class="ruby-identifier">parameters</span> = [], <span class="ruby-identifier">referer</span> = <span class="ruby-keyword kw">nil</span>)
+      <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Hash</span>
+        <span class="ruby-identifier">url</span> = <span class="ruby-identifier">options</span>
+        <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:each</span>) <span class="ruby-comment cmt"># FIXME: Remove this in 0.8.0</span>
+          <span class="ruby-identifier">referer</span> = <span class="ruby-identifier">parameters</span>
+          <span class="ruby-identifier">parameters</span> = []
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value str">&quot;url must be specified&quot;</span>) <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">url</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:url</span>]
+        <span class="ruby-identifier">parameters</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:params</span>] <span class="ruby-operator">||</span> []
+        <span class="ruby-identifier">referer</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:referer</span>]
+        <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:headers</span>]
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">referer</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^http/</span>
+          <span class="ruby-identifier">referer</span> = <span class="ruby-constant">Page</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">nil</span>, {<span class="ruby-value str">'content-type'</span>=<span class="ruby-operator">&gt;</span><span class="ruby-value str">'text/html'</span>})
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">referer</span> = <span class="ruby-identifier">current_page</span> <span class="ruby-operator">||</span> <span class="ruby-constant">Page</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword kw">nil</span>, {<span class="ruby-value str">'content-type'</span>=<span class="ruby-operator">&gt;</span><span class="ruby-value str">'text/html'</span>})
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-comment cmt"># FIXME: Huge hack so that using a URI as a referer works.  I need to</span>
+      <span class="ruby-comment cmt"># refactor everything to pass around URIs but still support</span>
+      <span class="ruby-comment cmt"># WWW::Mechanize::Page#base</span>
+      <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">referer</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">WWW</span><span class="ruby-operator">::</span><span class="ruby-constant">Mechanize</span><span class="ruby-operator">::</span><span class="ruby-constant">File</span>)
+        <span class="ruby-identifier">referer</span> = <span class="ruby-identifier">referer</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">?</span>
+          <span class="ruby-constant">Page</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">referer</span>), {<span class="ruby-value str">'content-type'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/html'</span>}) <span class="ruby-operator">:</span>
+          <span class="ruby-constant">Page</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">referer</span>, {<span class="ruby-value str">'content-type'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'text/html'</span>})
+      <span class="ruby-keyword kw">end</span>
+
+      <span class="ruby-comment cmt"># fetch the page</span>
+      <span class="ruby-identifier">page</span> = <span class="ruby-identifier">fetch_page</span>(  <span class="ruby-identifier">:uri</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">url</span>,
+                          <span class="ruby-identifier">:referer</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">referer</span>,
+                          <span class="ruby-identifier">:headers</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">headers</span> <span class="ruby-operator">||</span> {},
+                          <span class="ruby-identifier">:params</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">parameters</span>
+                       )
+      <span class="ruby-identifier">add_to_history</span>(<span class="ruby-identifier">page</span>)
+      <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">page</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+      <span class="ruby-identifier">page</span>
+    <span class="ruby-keyword kw">end</span></pre>
+</body>
+</html>

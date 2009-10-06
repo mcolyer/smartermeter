@@ -1,0 +1,18 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: "Posts to the given URL wht the query parameters passed in. Query parameters can be passed as a hash, or as an array of arrays. Example:"
+- !ruby/struct:SM::Flow::VERB 
+  body: " agent.post('http://example.com/', &quot;foo&quot; =&gt; &quot;bar&quot;)\n"
+- !ruby/struct:SM::Flow::P 
+  body: or
+- !ruby/struct:SM::Flow::VERB 
+  body: " agent.post('http://example.com/', [ [&quot;foo&quot;, &quot;bar&quot;] ])\n"
+full_name: WWW::Mechanize#post
+is_singleton: false
+name: post
+params: (url, query={})
+visibility: public

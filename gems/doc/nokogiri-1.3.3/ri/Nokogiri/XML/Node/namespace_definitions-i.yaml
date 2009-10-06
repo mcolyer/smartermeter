@@ -1,0 +1,14 @@
+--- !ruby/object:RI::MethodDescription 
+aliases: []
+
+block_params: 
+comment: 
+- !ruby/struct:SM::Flow::P 
+  body: returns a list of Namespace nodes defined on <em>self</em>
+full_name: Nokogiri::XML::Node#namespace_definitions
+is_singleton: false
+name: namespace_definitions
+params: |
+  namespace_definitions()
+
+visibility: public
