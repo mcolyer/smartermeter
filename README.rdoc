@@ -4,8 +4,8 @@ So I have PGE SmartMeter and I like playing with data. However I didn't really
 want to jump through 37 hoops to see the data on PG&E's website. So I made
 this.
 
-While making this library it turns out that PG&E doesn't even manage the
-software for the energy reporting it's all done by energyguide.com. Not
+While making this library I discovered that PG&E doesn't even manage the
+software for the energy reporting. It's all done by energyguide.com. Not
 terribly useful but an interesting piece of trivia.
 
 == What you need
@@ -17,7 +17,8 @@ terribly useful but an interesting piece of trivia.
 
   git clone smartermeter
   cd smartermeter
-  GEM_HOME=gems ruby run.rb <USERNAME> <PASSWORD>
+  GEM_HOME=gems ruby graph.rb <USERNAME> <PASSWORD>
+  (This should create a nice little graph of yesterday)
 
 == Questions
 

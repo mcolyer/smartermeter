@@ -1,5 +1,4 @@
 require 'mechanize'
-require 'lib/sample'
 require 'csv'
 
 class SmartMeterService
