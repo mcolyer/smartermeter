@@ -1,18 +1,40 @@
 require 'rubygems'
-Gem.path << File.join(File.dirname(__FILE__), '..', 'gems')
+Gem.clear_paths
+ENV['GEM_HOME'] = File.join(File.dirname(__FILE__), '..', 'gems')
 require 'gruff'
 
 require 'date'
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'smartermeter'
 
+if $ARGV.length == 0
+  puts "Usage: graph.rb USERNAME PASSWORD (desired date MM/DD/YYYY)"
+  exit(0)
+end
+
 USERNAME = $ARGV[0]
 PASSWORD = $ARGV[1]
 
+if $ARGV.length > 2
+  date_re = /([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/
+  if not date_re.match($ARGV[2])
+    puts "The date must be MM/DD/YYYY"
+    exit -1
+  end
+
+  month, day, year = date_re.match($ARGV[2]).captures
+  month = month.to_i
+  day = day.to_i
+  year = year.to_i
+
+  DATE = Date.new(year, month, day)
+else
+  DATE = Date.today - 1
+end
+
 api = SmartMeterService.new
 api.login(USERNAME, PASSWORD)
-yesterday = Date.today - 1
-samples = api.fetch_day(yesterday)
+samples = api.fetch_day(DATE)
 
 g = Gruff::Line.new
 g.hide_dots = true
@@ -31,4 +53,4 @@ end
 
 g.labels = Hash[labels]
 g.theme_pastel()
-g.write('power.png')
+g.write("#{DATE.strftime("%m-%d-%Y")}.png")

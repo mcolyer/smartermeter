@@ -17,7 +17,7 @@ terribly useful but an interesting piece of trivia.
 
   git clone smartermeter
   cd smartermeter
-  GEM_HOME=gems ruby graph.rb <USERNAME> <PASSWORD>
+  GEM_HOME=gems ruby graph.rb USERNAME PASSWORD (MM/DD/YYYY)
   (This should create a nice little graph of yesterday)
 
 == Questions
