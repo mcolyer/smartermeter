@@ -16,4 +16,4 @@ if ARGV.first =~ /^_(.*)_$/ and Gem::Version.correct? $1 then
 end
 
 gem 'nokogiri', version
-load 'nokogiri'
+load Gem.bin_path('nokogiri', 'nokogiri', version)
