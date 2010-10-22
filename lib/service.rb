@@ -7,7 +7,7 @@ class SmartMeterService
   ENERGYGUIDE_AUTH_URL = "https://www.energyguide.com/LoadAnalysis/LoadAnalysis.aspx?Referrerid=154"
 
   def initialize
-    @agent = Mechanize.new { |agent|
+    @agent = WWW::Mechanize.new { |agent|
       agent.user_agent_alias = 'Mac Safari'
     }
     @samples = {}
@@ -49,33 +49,34 @@ class SmartMeterService
     parse_csv(fetch_csv(date))[date]
   end
 
-    def fetch_csv(date)
-      # TODO: Check if the authentication has been called
+  def fetch_csv(date)
+    # TODO: Check if the authentication has been called
 
-      # Now we almost actually have data. However we need to setup the desired
-      # parameters first before we can get the exportable data. This really shouldn't
-      # be necessary.
-      hourly_data = @data_page.form_with(:action => "LoadAnalysis.aspx") do |form|
-        form.__EVENTTARGET = "objChartSelect$butSubmit"
-        form['objTimePeriods$objExport$hidChart'] = "Hourly Usage"
-        form['objTimePeriods$objExport$hidChartID'] = 8
-        form['objChartSelect$ddChart'] = 8 # Hourly usage
+    # Now we almost actually have data. However we need to setup the desired
+    # parameters first before we can get the exportable data. This really shouldn't
+    # be necessary.
+    hourly_data = @data_page.form_with(:action => "LoadAnalysis.aspx") do |form|
+      form.__EVENTTARGET = "objChartSelect$butSubmit"
+      form['objTimePeriods$objExport$hidChart'] = "Hourly Usage"
+      form['objTimePeriods$objExport$hidChartID'] = 8
+      form['objChartSelect$ddChart'] = 8 # Hourly usage
 
-        form['objTimePeriods$objExport$hidTimePeriod'] = "Week"
-        form['objTimePeriods$objExport$hidTimePeriodID'] = 3
-        form['objTimePeriods$rlPeriod'] = 3
+      form['objTimePeriods$objExport$hidTimePeriod'] = "Week"
+      form['objTimePeriods$objExport$hidTimePeriodID'] = 3
+      form['objTimePeriods$rlPeriod'] = 3
 
-        form['objChartSelect$ccSelectedDate1'] = date.strftime("%m/%d/%Y")
-      end.submit
+      form['objChartSelect$ccSelectedDate1'] = date.strftime("%m/%d/%Y")
+    end.submit
 
-      # Now the beautiful data...
-      hourly_csv = hourly_data.form_with(:action => "LoadAnalysis.aspx") do |form|
-        form.__EVENTTARGET = "objTimePeriods$objExport$butExport"
-      end.submit
+    # Now the beautiful data...
+    hourly_csv = hourly_data.form_with(:action => "LoadAnalysis.aspx") do |form|
+      form.__EVENTTARGET = "objTimePeriods$objExport$butExport"
+    end.submit
 
-      hourly_csv.body
-    end
+    hourly_csv.body
+  end
 
+  protected
     def parse_csv(data)
       date_re = /([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/
 
