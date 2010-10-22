@@ -49,7 +49,6 @@ class SmartMeterService
     parse_csv(fetch_csv(date))[date]
   end
 
-  protected
     def fetch_csv(date)
       # TODO: Check if the authentication has been called
 

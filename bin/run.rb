@@ -12,5 +12,5 @@ PASSWORD = $ARGV[1]
 api = SmartMeterService.new
 api.login(USERNAME, PASSWORD)
 yesterday = Date.today - 1
-samples = api.fetch_day(yesterday)
-puts samples.inspect
+samples = api.fetch_csv(yesterday)
+print samples
