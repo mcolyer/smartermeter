@@ -7,7 +7,7 @@ class SmartMeterService
   ENERGYGUIDE_AUTH_URL = "https://www.energyguide.com/LoadAnalysis/LoadAnalysis.aspx?Referrerid=154"
 
   def initialize
-    @agent = WWW::Mechanize.new { |agent|
+    @agent = Mechanize.new { |agent|
       agent.user_agent_alias = 'Mac Safari'
     }
     @samples = {}
@@ -25,8 +25,15 @@ class SmartMeterService
     # correctly by itself so let's help it along...
     @agent.get(OVERVIEW_URL) do |page|
 
+      # Load the PG&E Terms of Use page
+      tou_page = @agent.click(page.link_with(:href => '/csol/actions/billingDisclaimer.do?actionType=hourly'))
+      form = tou_page.forms().first
+      agree_button = form.button_with(:value => 'I Understand - Proceed')
+      # Agree to the terms of use
+      form['agreement'] = 'yes'
+
       # Load up the PG&E frame page for historical data
-      hourly_usage_container = @agent.click(page.links.select{|l| l.text.include? 'Hourly'}.first)
+      hourly_usage_container = form.submit(agree_button)
 
       # Now load up the frame with the content
       hourly_usage = @agent.click(hourly_usage_container.frames.select{|f| f.href == "/csol/nexus/content.jsp"}.first)
@@ -42,7 +49,6 @@ class SmartMeterService
     parse_csv(fetch_csv(date))[date]
   end
 
-  protected
     def fetch_csv(date)
       # TODO: Check if the authentication has been called
 
