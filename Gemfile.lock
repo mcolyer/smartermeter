@@ -1,0 +1,15 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    gruff (0.3.6)
+    mechanize (0.9.3)
+      nokogiri (>= 1.2.1)
+    nokogiri (1.4.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  gruff (= 0.3.6)
+  mechanize (= 0.9.3)
+  nokogiri (= 1.4.0)
