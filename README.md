@@ -1,4 +1,5 @@
-== Smartermeter - the smarter way to read your PGE SmartMeter
+Smartermeter - the smarter way to read your PGE SmartMeter
+=========================================================
 
 So I have PGE SmartMeter and I like playing with data. However I didn't really
 want to jump through 37 hoops to see the data on PG&E's website. So I made
@@ -8,19 +9,25 @@ While making this library I discovered that PG&E doesn't even manage the
 software for the energy reporting. It's all done by energyguide.com. Not
 terribly useful but an interesting piece of trivia.
 
-== What you need
+What you need
+-------------
 
 * ruby >= 1.8.6
-* librmagick-ruby 
+* librmagick-ruby
 
-== Getting Started
+Getting Started
+---------------
 
+```sh
   git clone smartermeter
   cd smartermeter
-  GEM_HOME=gems ruby graph.rb USERNAME PASSWORD (MM/DD/YYYY)
+  bundle install
+  bundle exec ruby bin/graph.rb USERNAME PASSWORD (MM/DD/YYYY)
   (This should create a nice little graph of yesterday)
+```
 
-== Questions
+Questions
+---------
 
 * How much lag is there?
   It'll show you the last full day's worth of data. The PGE website claims that
