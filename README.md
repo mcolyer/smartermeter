@@ -18,7 +18,7 @@ What you need
 Getting Started
 ---------------
 
-    git clone smartermeter
+    git clone git://github.com/mcolyer/smartermeter.git
     cd smartermeter
     bundle install
     bundle exec ruby bin/graph.rb USERNAME PASSWORD (MM/DD/YYYY)
