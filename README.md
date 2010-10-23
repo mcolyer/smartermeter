@@ -18,11 +18,11 @@ What you need
 Getting Started
 ---------------
 
-  git clone smartermeter
-  cd smartermeter
-  bundle install
-  bundle exec ruby bin/graph.rb USERNAME PASSWORD (MM/DD/YYYY)
-  (This should create a nice little graph of yesterday)
+    git clone smartermeter
+    cd smartermeter
+    bundle install
+    bundle exec ruby bin/graph.rb USERNAME PASSWORD (MM/DD/YYYY)
+    (This should create a nice little graph of yesterday)
 
 Questions
 ---------
