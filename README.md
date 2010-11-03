@@ -21,8 +21,8 @@ Getting Started
     git clone git://github.com/mcolyer/smartermeter.git
     cd smartermeter
     bundle install
-    bundle exec ruby bin/graph.rb USERNAME PASSWORD (MM/DD/YYYY)
-    (This should create a nice little graph of yesterday)
+    bundle exec ruby bin/run.rb USERNAME PASSWORD (MM/DD/YYYY)
+    (This should print out the CSV data from yesterday)
 
 Questions
 ---------
