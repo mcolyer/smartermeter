@@ -7,7 +7,7 @@ class SmartMeterService
   ENERGYGUIDE_AUTH_URL = "https://www.energyguide.com/LoadAnalysis/LoadAnalysis.aspx?Referrerid=154"
 
   def initialize
-    @agent = WWW::Mechanize.new { |agent|
+    @agent = Mechanize.new { |agent|
       agent.user_agent_alias = 'Mac Safari'
     }
     @samples = {}

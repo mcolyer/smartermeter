@@ -9,22 +9,30 @@ require 'date'
 USERNAME = $ARGV[0]
 PASSWORD = $ARGV[1]
 if $ARGV.length > 2
-  date_re = /([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/
-  if not date_re.match($ARGV[2])
-    puts "The date must be MM/DD/YYYY"
-    exit -1
+  DATE = Date.parse($ARGV[2])
+
+  if $ARGV[3]
+    ENDDATE = Date.parse($ARGV[3])
+  else
+    ENDDATE = DATE;
   end
 
-  month, day, year = date_re.match($ARGV[2]).captures
-  month = month.to_i
-  day = day.to_i
-  year = year.to_i
-
-  DATE = Date.new(year, month, day)
 else
   DATE = Date.today - 2
+  ENDDATE = DATE;
 end
 
 api = SmartMeterService.new
 api.login(USERNAME, PASSWORD)
-print api.fetch_csv(DATE)
+
+if DATE > ENDDATE
+  DATE.downto(ENDDATE) do |date|
+    printf "### %s\n", date
+    print api.fetch_csv(date)
+  end
+else
+  DATE.upto(ENDDATE) do |date|
+    printf "### %s\n", date
+    print api.fetch_csv(date)
+  end
+end
