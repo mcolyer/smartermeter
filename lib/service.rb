@@ -55,8 +55,8 @@ class SmartMeterService
     # Now we almost actually have data. However we need to setup the desired
     # parameters first before we can get the exportable data. This really shouldn't
     # be necessary.
-    hourly_data = @data_page.form_with(:action => "LoadAnalysis.aspx") do |form|
-      form.__EVENTTARGET = "objChartSelect$butSubmit"
+    hourly_data = @data_page.form_with(:action => "/LoadAnalysis/LoadAnalysis.aspx") do |form|
+      form['__EVENTTARGET'] = "objChartSelect$butSubmit"
       form['objTimePeriods$objExport$hidChart'] = "Hourly Usage"
       form['objTimePeriods$objExport$hidChartID'] = 8
       form['objChartSelect$ddChart'] = 8 # Hourly usage
@@ -69,8 +69,8 @@ class SmartMeterService
     end.submit
 
     # Now the beautiful data...
-    hourly_csv = hourly_data.form_with(:action => "LoadAnalysis.aspx") do |form|
-      form.__EVENTTARGET = "objTimePeriods$objExport$butExport"
+    hourly_csv = hourly_data.form_with(:action => "/LoadAnalysis/LoadAnalysis.aspx") do |form|
+      form['__EVENTTARGET'] = "objTimePeriods$objExport$butExport"
     end.submit
 
     hourly_csv.body
@@ -86,7 +86,7 @@ class SmartMeterService
       hour_increment = 1/24.0 
       CSV.parse(data) do |row|
         next unless row.length > 0 and date_re.match row[0]
-        
+
         month, day, year = date_re.match(row[0]).captures
         month = month.to_i
         day = day.to_i
