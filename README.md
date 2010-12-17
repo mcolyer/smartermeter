@@ -24,6 +24,12 @@ Getting Started
     bundle exec ruby bin/run.rb USERNAME PASSWORD (MM/DD/YYYY)
     (This should print out the CSV data from yesterday)
 
+Related Projects
+----------------
+
+* [PG&E to Google Power Meter](http://gitorious.org/pge-to-google-powermeter) -
+  Takes the output from bin/run.rb and uploads it to Google Power meter.
+
 Questions
 ---------
 
