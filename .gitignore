@@ -4,3 +4,4 @@ docs/*
 data/*
 .bundle/*
 .rvmrc
+package/*
