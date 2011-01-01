@@ -9,20 +9,12 @@ While making this library I discovered that PG&E doesn't even manage the
 software for the energy reporting. It's all done by energyguide.com. Not
 terribly useful but an interesting piece of trivia.
 
-What you need
--------------
-
-* ruby >= 1.8.6
-* librmagick-ruby
-
 Getting Started
 ---------------
 
     git clone git://github.com/mcolyer/smartermeter.git
     cd smartermeter
-    bundle install
-    bundle exec ruby bin/run.rb USERNAME PASSWORD (MM/DD/YYYY)
-    (This should print out the CSV data from yesterday)
+    bundle install --path lib/ruby
 
 Related Projects
 ----------------

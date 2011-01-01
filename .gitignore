@@ -5,3 +5,4 @@ data/*
 .bundle/*
 .rvmrc
 package/*
+lib/ruby/*
