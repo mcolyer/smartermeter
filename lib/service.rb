@@ -26,9 +26,11 @@ class SmartMeterService
     @agent.get(OVERVIEW_URL) do |page|
 
       # Load the PG&E Terms of Use page
+      # FIXME: the link doesn't exist here
       tou_page = @agent.click(page.link_with(:href => '/csol/actions/billingDisclaimer.do?actionType=hourly'))
       form = tou_page.forms().first
       agree_button = form.button_with(:value => 'I Understand - Proceed')
+
       # Agree to the terms of use
       form['agreement'] = 'yes'
 

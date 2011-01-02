@@ -16,6 +16,16 @@ Getting Started
     cd smartermeter
     bundle install --path lib/ruby
 
+To Build
+--------
+
+In order to build the self contained binaries, you'll need the rawr gem locally
+installed.
+
+    rake rawr:prepare
+    rake rawr:bundle:exe
+    rake rawr:bundle:app
+
 Related Projects
 ----------------
 

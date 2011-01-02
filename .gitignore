@@ -1,8 +1,8 @@
 *.swp
 *.png
-docs/*
-data/*
 .bundle/*
 .rvmrc
+docs/*
+data/*
 package/*
-lib/ruby/*
+vendor/gems/*
