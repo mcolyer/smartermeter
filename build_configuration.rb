@@ -22,7 +22,7 @@ configuration do |c|
 	# A list of directories where source files reside
 	# default value: ["src"]
 	#
-	#c.source_dirs = ["src"]
+	c.source_dirs = ["src", "lib/ruby"]
 
 	# A list of regexps of files to exclude
 	# default value: []
@@ -57,7 +57,7 @@ configuration do |c|
 	# Undocumented option 'jvm_arguments'
 	# default value: ""
 	#
-	c.jvm_arguments = "-X+O"
+	#c.jvm_arguments = ""
 
 	# Undocumented option 'java_library_path'
 	# default value: ""

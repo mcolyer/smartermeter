@@ -1,2 +1,0 @@
-require 'sample'
-require 'service'
