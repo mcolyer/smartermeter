@@ -7,7 +7,7 @@ configuration do |c|
   # Undocumented option 'output_dir'
   # default value: "package"
   #
-  #c.output_dir = "package"
+  c.output_dir = "pkg"
 
   # The main ruby file to invoke, minus the .rb extension
   # default value: "main"
@@ -22,7 +22,7 @@ configuration do |c|
   # A list of directories where source files reside
   # default value: ["src"]
   #
-  c.source_dirs = ["lib", "vendor/gems"]
+  c.source_dirs = ["lib", "vendor/gems", "rawr"]
 
   # A list of regexps of files to exclude
   # default value: []

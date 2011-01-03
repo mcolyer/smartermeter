@@ -4,5 +4,5 @@
 .rvmrc
 docs/*
 data/*
-package/*
+pkg/*
 vendor/gems/*

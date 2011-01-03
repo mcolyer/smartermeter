@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+begin
+  require 'jruby'
+  # This is needed for nokogiri to function properly under jruby
+  JRuby.objectspace=true
+rescue Exception
+end
+require 'smartermeter'
+
+SmarterMeter::Daemon.new.start

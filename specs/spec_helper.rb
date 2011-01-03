@@ -1,6 +1,6 @@
 require 'rubygems'
-Gem.clear_paths
-ENV['GEM_HOME'] = File.join(File.dirname(__FILE__), '..', 'gems')
+require 'bundler/setup'
+Bundler.require(:default, :development)
 
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'smartermeter'
