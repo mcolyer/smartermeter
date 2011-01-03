@@ -144,6 +144,8 @@ task :gemspec => :validate do
     sort.
     reject { |file| file =~ /^\./ }.
     reject { |file| file =~ /^(rdoc|pkg)/ }.
+    reject { |file| file =~ /^rawr/ }.
+    reject { |file| file =~ /\.jar$/ }.
     map { |file| "    #{file}" }.
     join("\n")
 
