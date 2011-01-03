@@ -5,4 +5,5 @@ gem "nokogiri", "1.4.0"
 
 group :development do
   gem "rspec"
+  gem "rawr"
 end

@@ -12,19 +12,21 @@ terribly useful but an interesting piece of trivia.
 Getting Started
 ---------------
 
-    git clone git://github.com/mcolyer/smartermeter.git
-    cd smartermeter
-    bundle install --path lib/ruby
+    gem install smartermeter
+    smartermeter
 
 To Build
 --------
 
-In order to build the self contained binaries, you'll need the rawr gem locally
-installed.
+In order to build the self contained binaries, you'll need a working jruby interpreter.
 
+    git clone git://github.com/mcolyer/smartermeter.git
+    cd smartermeter
+    bundle install
     rake rawr:prepare
-    rake rawr:bundle:exe
-    rake rawr:bundle:app
+    rake rawr:bundle:exe # builds a windows executable
+    rake rawr:bundle:app # builds an OSX executable
+    rake build # builds a ruby gem
 
 Related Projects
 ----------------
