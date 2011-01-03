@@ -1,3 +1,4 @@
+require 'crypt/blowfish'
 require 'yaml'
 require 'logger'
 require 'date'
@@ -5,18 +6,17 @@ require 'date'
 module SmarterMeter
   class Daemon
 
-    # Loads the configuration, and starts the daemon.
+    # Loads the configuration, and starts
     #
     # Never returns.
     def start
       configure
-      daemonize
       run
     end
 
   protected
     def log_file
-      File.join(File.dirname(__FILE__), "..", "smartermeter.log")
+      File.expand_path("smartermeter.log")
     end
 
     def config_file
@@ -64,15 +64,23 @@ module SmarterMeter
       @config
     end
 
+    def cipher
+      Crypt::Blowfish.new("Our easily discoverable key.")
+    end
+
     # Takes the unencrypted password and encrypts it.
     def password=(unencrypted)
-      #TODO: actually encrypt this password
-      @config[:password] = unencrypted
+      @config[:password] = cipher.encrypt_block(unencrypted)
     end
 
     # Returns the clear-text password or nil if it isn't set.
     def password
-      @config.fetch(:password, nil)
+      password = @config.fetch(:password, nil)
+      if password
+        cipher.decrypt_block(password)
+      else
+        password
+      end
     end
 
     # Prompts the user for required settings that are blank.
@@ -112,11 +120,6 @@ module SmarterMeter
       end
     end
 
-    # Performs the necessary steps to daemonize this process.
-    def daemonize
-      #TODO: Actually daemonize this process
-    end
-
     # Continually checks for new data for any missing days, since the first day
     # smartermeter started watching.
     #
@@ -146,7 +149,7 @@ module SmarterMeter
     def service
       service = Service.new
       log.info("Logging in as #{@config[:username]}")
-      unless service.login(@config[:username], @config[:password])
+      unless service.login(@config[:username], password)
         log.error("Incorrect username or password given.")
         log.error("Please remove ~/.smartermeter and configure smartermeter again.")
         exit(-1)
