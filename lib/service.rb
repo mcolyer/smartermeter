@@ -10,9 +10,9 @@ class SmartMeterService
     @agent = WWW::Mechanize.new { |agent|
       agent.user_agent_alias = 'Mac Safari'
     }
-    @samples = {}
   end
 
+  # Returns true upon succesful login and false otherwise
   def login(username, password)
     @agent.get(LOGIN_URL) do |page|
       logged_in_page = page.form_with(:action => 'https://www.pge.com/eum/login') do |login|
@@ -25,8 +25,9 @@ class SmartMeterService
     # correctly by itself so let's help it along...
     @agent.get(OVERVIEW_URL) do |page|
 
+      return false if page.title =~ /PG&E Login/
+
       # Load the PG&E Terms of Use page
-      # FIXME: the link doesn't exist here
       tou_page = @agent.click(page.link_with(:href => '/csol/actions/billingDisclaimer.do?actionType=hourly'))
       form = tou_page.forms().first
       agree_button = form.button_with(:value => 'I Understand - Proceed')
@@ -43,12 +44,7 @@ class SmartMeterService
       # Now post the authentication information from PG&E to energyguide.com
       @data_page = hourly_usage.form_with(:action => ENERGYGUIDE_AUTH_URL).submit
     end
-  end
-
-  def fetch_day(date)
-    return @samples[date] if @samples.has_key? date
-
-    parse_csv(fetch_csv(date))[date]
+    true
   end
 
   def fetch_csv(date)
@@ -78,30 +74,40 @@ class SmartMeterService
     hourly_csv.body
   end
 
-  protected
-    def parse_csv(data)
-      date_re = /([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/
+  # Parses the CSV returned by PG&E
+  #
+  # data - The string containing the csv returned by PG&E
+  #
+  # Returns a Hash of with keys as Date objects and values of Arrays of samples.
+  def parse_csv(data)
+    samples = {}
+    date_re = /([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/
 
-      # Apparently they felt the need to put a = outside of the correct place
-      data = data.gsub('=','')
+    # Apparently they felt the need to put a = outside of the correct place
+    data = data.gsub('=','')
 
-      hour_increment = 1/24.0 
-      CSV.parse(data) do |row|
-        next unless row.length > 0 and date_re.match row[0]
+    hour_increment = 1/24.0 
+    CSV.parse(data) do |row|
+      next unless row.length > 0 and date_re.match row[0]
 
-        month, day, year = date_re.match(row[0]).captures
-        month = month.to_i
-        day = day.to_i
-        year = year.to_i
+      month, day, year = date_re.match(row[0]).captures
+      month = month.to_i
+      day = day.to_i
+      year = year.to_i
 
-        timestamp = DateTime.new(year, month, day, 0, 0, 0) - hour_increment + 1/(24.0*60)
-        hourly_samples = row[1..24].map do |v|
+      timestamp = DateTime.new(year, month, day, 0, 0, 0) - hour_increment + 1/(24.0*60)
+      hourly_samples = row[1..24].map do |v|
+        if v == "-"
+          kwh = nil
+        else
           kwh = v.to_f
-          timestamp = timestamp + hour_increment
-          Sample.new(timestamp, kwh)
         end
-        @samples[Date.new(year, month, day)] = hourly_samples
+
+        timestamp = timestamp + hour_increment
+        Sample.new(timestamp, kwh)
       end
-      @samples
+      samples[Date.new(year, month, day)] = hourly_samples
     end
+    samples
+  end
 end

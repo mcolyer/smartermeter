@@ -38,12 +38,14 @@ protected
 
   # Returns a filename for the data belonging to the given date.
   def data_file(date)
-    File.join(@config[:data_dir], date.strftime("%Y-%m-%d.csv"))
+    File.expand_path(File.join(@config[:data_dir], date.strftime("%Y-%m-%d.csv")))
   end
 
   def log
+    return @logger if @logger
     @logger = Logger.new STDOUT
     @logger.level = Logger::INFO
+    @logger
   end
 
   # Loads the configuration and prompts for required settings if they are
@@ -97,7 +99,7 @@ protected
     puts "--------------------------------------------------------------------------------"
 
     unless @config[:username]
-      print "PG&E account username (typically your email address): "
+      print "PG&E account username: "
       @config[:username] = gets.strip
     end
 
@@ -133,16 +135,23 @@ protected
 
     while true
       dates = dates_requiring_data
-      log.info("Attempting to fetch data for: #{dates.inspect}")
+      log.info("Attempting to fetch data for: #{dates.join(",")}")
       results = fetch_dates(dates)
-      log.info("Successfully fetched: #{results.inspect}")
+      log.info("Successfully fetched: #{results.join(",")}")
       sleep(one_hour)
     end
   end
 
   def api
     @api ||= SmartMeterService.new
-    @api.login(@config[:username], @config[:password])
+    log.info("Logging in as #{@config[:username]}")
+    unless @api.login(@config[:username], @config[:password])
+      log.error("Incorrect username or password given.")
+      log.error("Please remove ~/.smartermeter and configure smartermeter again.")
+      exit(-1)
+    end
+    log.info("Logged in as #{@config[:username]}")
+    @api
   end
 
   # Connect and authenticate to the PG&E Website.
@@ -156,8 +165,6 @@ protected
       yield api
     rescue SocketError => e
       log.error("Could not access the PG&E site, are you connected to the Internet?")
-    rescue Exception => e
-      log.error(e)
     end
   end
 
@@ -171,19 +178,41 @@ protected
 
     connect do |api|
       dates.each do |date|
+        log.info("Fetching #{date}")
         data = api.fetch_csv(date)
-        File.open(data_file(date), "w") do |f|
-          f.write(data)
+
+        log.info("Verifying #{date}")
+        samples = api.parse_csv(data)
+        first_sample = samples.values.first.first
+
+        if first_sample.kwh
+          log.info("Saving #{date}")
+          File.open(data_file(date), "w") do |f|
+            f.write(data)
+          end
+          log.info("Completed #{date}")
+          completed << date
+        else
+          log.info("Incomplete #{date}")
         end
-        completed << date
       end
     end
+
+    completed
   end
 
   # Returns an Array of Date objects containing all dates since start_date
   # missing power data.
   def dates_requiring_data
-    [Date.today]
+    collected = Dir.glob(File.join(@config[:data_dir], "*-*-*.csv")).map { |f| File.basename(f, ".csv") }
+    all_days = []
+
+    count_of_days = (Date.today - @config[:start_date]).to_i
+    count_of_days.times do |i|
+      all_days << (@config[:start_date] + i).strftime("%Y-%m-%d")
+    end
+
+    (all_days - collected).map { |d| Date.parse(d) }
   end
 end
 
