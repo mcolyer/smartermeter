@@ -24,7 +24,7 @@ module SmarterMeter
     end
 
     def default_data_dir
-      File.join(File.dirname(__FILE__), "..", "data")
+      File.expand_path(File.join(File.dirname(__FILE__), "..", "data"))
     end
 
     # Returns a filename for the data belonging to the given date.
