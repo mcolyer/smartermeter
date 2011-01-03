@@ -70,6 +70,7 @@ Gem::Specification.new do |s|
     lib/smartermeter/daemon.rb
     lib/smartermeter/sample.rb
     lib/smartermeter/service.rb
+    lib/smartermeter/transports/google_powermeter.rb
     rawr/org/rubyforge/rawr/Main.java
     smartermeter.gemspec
     specs/fixtures/data.csv

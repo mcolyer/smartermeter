@@ -15,6 +15,24 @@ Getting Started
     gem install smartermeter
     smartermeter
 
+Google PowerMeter
+-----------------
+
+Once you've configured smartermeter once, you might want to use it with Google
+PowerMeter. First you'll have to register for an account and download
+pge-to-google-powermeter following the directions:
+[here](http://gitorious.org/pge-to-google-powermeter/pge-to-google-powermeter/blobs/master/pge2google.py)
+
+Then you can append the following to your ~/.smartermeter file to automatically
+upload data as it's downloaded.
+
+    :transport: :google_powermeter
+    :google_powermeter:
+      :path: "path-to-pge2google.py"
+      :token: "token"
+      :variable: "variable"
+
+
 To Build
 --------
 

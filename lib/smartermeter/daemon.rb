@@ -15,10 +15,6 @@ module SmarterMeter
     end
 
   protected
-    def log_file
-      File.expand_path("smartermeter.log")
-    end
-
     def config_file
       File.expand_path("~/.smartermeter")
     end
@@ -195,6 +191,9 @@ module SmarterMeter
             File.open(data_file(date), "w") do |f|
               f.write(data)
             end
+
+            upload(date)
+
             log.info("Completed #{date}")
             completed << date
           else
@@ -204,6 +203,16 @@ module SmarterMeter
       end
 
       completed
+    end
+
+    def upload(date)
+      case @config[:transport]
+      when :google_powermeter
+        log.info("Uploading #{date} to Google PowerMeter")
+        transport = SmarterMeter::Transports::GooglePowerMeter.new(@config[:google_powermeter])
+        transport.upload(data_file(date))
+        log.info("Upload for #{date} complete")
+      end
     end
 
     # Returns an Array of Date objects containing all dates since start_date
