@@ -126,23 +126,33 @@ module SmarterMeter
 
       while true
         dates = dates_requiring_data
-        log.info("Attempting to fetch data for: #{dates.join(",")}")
-        results = fetch_dates(dates)
-        log.info("Successfully fetched: #{results.join(",")}")
+        unless dates.empty?
+          log.info("Attempting to fetch data for: #{dates.join(",")}")
+          results = fetch_dates(dates)
+          log.info("Successfully fetched: #{results.join(",")}")
+        else
+          log.info("Sleeping")
+        end
         sleep(one_hour)
       end
     end
 
-    def api
-      @api ||= Service.new
+    # Create an authorized Service instance.
+    #
+    # Note: An authorization failure will cause an exits, as it is a dire
+    # condition.
+    #
+    # Returns a new Service instance which has been properly authorized.
+    def service
+      service = Service.new
       log.info("Logging in as #{@config[:username]}")
-      unless @api.login(@config[:username], @config[:password])
+      unless service.login(@config[:username], @config[:password])
         log.error("Incorrect username or password given.")
         log.error("Please remove ~/.smartermeter and configure smartermeter again.")
         exit(-1)
       end
       log.info("Logged in as #{@config[:username]}")
-      @api
+      service
     end
 
     # Connect and authenticate to the PG&E Website.
@@ -152,8 +162,9 @@ module SmarterMeter
     #
     # Returns nothing.
     def connect
+      s = service
       begin
-        yield api
+        yield s
       rescue SocketError => e
         log.error("Could not access the PG&E site, are you connected to the Internet?")
       end
@@ -167,13 +178,13 @@ module SmarterMeter
     def fetch_dates(dates)
       completed = []
 
-      connect do |api|
+      connect do |service|
         dates.each do |date|
           log.info("Fetching #{date}")
-          data = api.fetch_csv(date)
+          data = service.fetch_csv(date)
 
           log.info("Verifying #{date}")
-          samples = api.parse_csv(data)
+          samples = service.parse_csv(data)
           first_sample = samples.values.first.first
 
           if first_sample.kwh
