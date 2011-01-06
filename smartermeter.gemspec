@@ -62,13 +62,13 @@ Gem::Specification.new do |s|
   # = MANIFEST =
   s.files = %w[
     Gemfile
-    Gemfile.lock
     README.md
     Rakefile
     bin/smartermeter
     build_configuration.rb
     lib/smartermeter.rb
     lib/smartermeter/daemon.rb
+    lib/smartermeter/main.rb
     lib/smartermeter/sample.rb
     lib/smartermeter/service.rb
     lib/smartermeter/transports/google_powermeter.rb
