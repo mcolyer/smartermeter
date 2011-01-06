@@ -6,3 +6,4 @@ docs/*
 data/*
 pkg/*
 vendor/gems/*
+Gemfile.lock
