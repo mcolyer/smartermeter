@@ -86,15 +86,27 @@ namespace :rawr do
     dir = File.join(File.dirname(__FILE__), "vendor", "gems")
     FileUtils.rm_rf(dir)
     FileUtils.mkdir_p(dir)
-    ["nokogiri", "mechanize"].each do |gem|
+    ["nokogiri", "mechanize", "crypt"].each do |gem|
       `gem unpack -t "#{dir}" #{gem}`
     end
 
     # Rawr can't handle folders with dashes in the name, so we'll remove the
     # version numbers from the gems.
     Dir.glob(File.join(dir, "*-*")).each do |gem|
-      no_version = File.basename(gem).split("-")[0]
+      no_version = File.basename(gem).split("-")[0] + ".old"
       FileUtils.mv(gem, File.join(dir, no_version))
+    end
+
+    Dir.glob(File.join(dir, "nokogiri.old", "lib", "*")).each do |file|
+      FileUtils.mv(file, File.join(dir))
+    end
+    FileUtils.mv(File.join(dir, "crypt.old", "crypt"), File.join(dir, "crypt"))
+    Dir.glob(File.join(dir, "mechanize.old", "lib", "*")).each do |file|
+      FileUtils.mv(file, File.join(dir))
+    end
+
+    Dir.glob(File.join(dir, "*.old")).each do |gem|
+      FileUtils.rm_rf(gem)
     end
   end
 end

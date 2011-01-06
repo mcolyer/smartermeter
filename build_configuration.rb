@@ -12,7 +12,7 @@ configuration do |c|
   # The main ruby file to invoke, minus the .rb extension
   # default value: "main"
   #
-  #c.main_ruby_file = "main"
+  c.main_ruby_file = "smartermeter/main"
 
   # The fully-qualified name of the main Java file used to initiate the application.
   # default value: "org.rubyforge.rawr.Main"
