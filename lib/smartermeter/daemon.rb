@@ -221,7 +221,7 @@ module SmarterMeter
       collected = Dir.glob(File.join(@config[:data_dir], "*-*-*.csv")).map { |f| File.basename(f, ".csv") }
       all_days = []
 
-      count_of_days = (Date.today - @config[:start_date]).to_i + 1
+      count_of_days = (Date.today - @config[:start_date]).to_i
 
       count_of_days.times do |i|
         all_days << (@config[:start_date] + i).strftime("%Y-%m-%d")
