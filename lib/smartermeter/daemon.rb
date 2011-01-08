@@ -183,8 +183,8 @@ module SmarterMeter
           data = service.fetch_csv(date)
 
           log.info("Verifying #{date}")
-          samples = service.parse_csv(data)
-          first_sample = samples.values.first.first
+          samples = Sample.parse_csv(data).values.first
+          first_sample = samples.first
 
           if first_sample.kwh
             log.info("Saving #{date}")
@@ -192,7 +192,7 @@ module SmarterMeter
               f.write(data)
             end
 
-            upload(date)
+            upload(date, samples)
 
             log.info("Completed #{date}")
             completed << date
@@ -205,13 +205,16 @@ module SmarterMeter
       completed
     end
 
-    def upload(date)
+    def upload(date, samples)
       case @config[:transport]
       when :google_powermeter
         log.info("Uploading #{date} to Google PowerMeter")
         transport = SmarterMeter::Transports::GooglePowerMeter.new(@config[:google_powermeter])
-        transport.upload(data_file(date))
-        log.info("Upload for #{date} complete")
+        if transport.upload(samples)
+          log.info("Upload for #{date} complete")
+        else
+          log.info("Upload for #{date} failed")
+        end
       end
     end
 

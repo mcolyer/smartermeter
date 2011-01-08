@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
-Bundler.require(:default, :development)
+Bundler.require(:default)
+require 'rspec'
 
 $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'smartermeter'

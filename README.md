@@ -19,19 +19,21 @@ Google PowerMeter
 -----------------
 
 Once you've configured smartermeter once, you might want to use it with Google
-PowerMeter. First you'll have to register for an account and download
-pge-to-google-powermeter following the directions:
-[here](http://gitorious.org/pge-to-google-powermeter/pge-to-google-powermeter/blobs/master/pge2google.py)
+PowerMeter.
 
-Then you can append the following to your ~/.smartermeter file to automatically
-upload data as it's downloaded.
+1. Visit: https://www.google.com/powermeter/device/activate?mfg=Ruby&model=SmarterMeter&did=PGE&dvars=1
+1. Then sign in with your desired Google Account.
+1. Follow the directions on screen.
+1. On the final screen copy the entire "authInfo" into your favorite editor.
+   Pull out the "token" and the "path" from the string.
+1. Take the "path" you collected previously and append ".d1" to the end of it.
+1. Then append the following to your ~/.smartermeter file to
+   automatically upload data as it's retrieved from PG&E.
 
-    :transport: :google_powermeter
-    :google_powermeter:
-      :path: "path-to-pge2google.py"
-      :token: "token"
-      :variable: "variable"
-
+       :transport: :google_powermeter
+       :google_powermeter:
+         :token: "your-token"
+         :variable: "your-path-with.d1-appended"
 
 To Build
 --------
@@ -40,17 +42,10 @@ In order to build the self contained binaries, you'll need a working jruby inter
 
     git clone git://github.com/mcolyer/smartermeter.git
     cd smartermeter
-    bundle install
     rake rawr:prepare
     rake rawr:bundle:exe # builds a windows executable
     rake rawr:bundle:app # builds an OSX executable
     rake build # builds a ruby gem
-
-Related Projects
-----------------
-
-* [PG&E to Google Power Meter](http://gitorious.org/pge-to-google-powermeter) -
-  Takes the output from bin/run.rb and uploads it to Google Power meter.
 
 Questions
 ---------
@@ -58,11 +53,12 @@ Questions
 * How much lag is there?
 
   It'll show you the last full day's worth of data. The PGE website claims that
-  data becomes available around 3-10pm on the following day.
+  data becomes available around 3-10pm on the following day. However my
+  experience says that it's sometimes available earlier.
 
 * How long is data saved for?
 
-  I don't know, if you know tell me.
+  I don't know. If you know tell me.
 
 * How can I help?
 

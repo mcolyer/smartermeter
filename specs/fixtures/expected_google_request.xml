@@ -1,0 +1,292 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    0.149
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    0.205
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    0.257
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    0.131
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    0.142
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    0.136
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    0.127
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    0.137
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    0.136
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    0.134
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    0.416
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    1.732
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    1.844
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    0.19
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    0.189
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    0.182
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    0.173
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    1.136
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    3.55
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    3.011
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    1.426
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    0.508
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    0.58
+  </meter:quantity>
+</entry>
+
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:meter="http://schemas.google.com/meter/2008">
+  <id>https://www.google.com/powermeter/feeds/path/durMeasurement/2009-09-27T07_00_00.000Z</id>
+  <category scheme="http://schemas.google.com/g/2005#kind"
+            term="http://schemas.google.com/meter/2008#durMeasurement"/>
+  <meter:subject>https://www.google.com/powermeter/feeds/path</meter:subject>
+  <meter:startTime meter:uncertainty="1.000000">2009-09-27T07:00:00.000Z</meter:startTime>
+  <meter:endTime meter:uncertainty="1.000000">2009-09-27T08:00:00.000Z</meter:endTime>
+  <meter:quantity meter:uncertainty="0.001000" meter:unit="kW h">
+    0.316
+  </meter:quantity>
+</entry>
+
+</feed>
