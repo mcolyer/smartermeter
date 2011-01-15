@@ -86,7 +86,7 @@ namespace :rawr do
     dir = File.join(File.dirname(__FILE__), "vendor", "gems")
     FileUtils.rm_rf(dir)
     FileUtils.mkdir_p(dir)
-    ["nokogiri", "mechanize", "crypt"].each do |gem|
+    ["nokogiri", "mechanize", "crypt", "profligacy"].each do |gem|
       `gem unpack -t "#{dir}" #{gem}`
     end
 
@@ -98,6 +98,9 @@ namespace :rawr do
     end
 
     Dir.glob(File.join(dir, "nokogiri.old", "lib", "*")).each do |file|
+      FileUtils.mv(file, File.join(dir))
+    end
+    Dir.glob(File.join(dir, "profligacy.old", "lib", "*")).each do |file|
       FileUtils.mv(file, File.join(dir))
     end
     FileUtils.mv(File.join(dir, "crypt.old", "crypt"), File.join(dir, "crypt"))

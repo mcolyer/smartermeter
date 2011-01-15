@@ -1,10 +1,14 @@
+require 'fileutils'
 require 'crypt/blowfish'
 require 'yaml'
-require 'logger'
 require 'date'
 
 module SmarterMeter
   class Daemon
+
+    def initialize(interface)
+      @ui = interface
+    end
 
     # Loads the configuration, and starts
     #
@@ -28,13 +32,6 @@ module SmarterMeter
       File.expand_path(File.join(@config[:data_dir], date.strftime("%Y-%m-%d.csv")))
     end
 
-    def log
-      return @logger if @logger
-      @logger = Logger.new STDOUT
-      @logger.level = Logger::INFO
-      @logger
-    end
-
     # Loads the configuration and prompts for required settings if they are
     # missing.
     #
@@ -49,7 +46,7 @@ module SmarterMeter
     # Returns the configuration hash.
     def load_configuration
       @config = {
-        :start_date => Date.today,
+        :start_date => Date.today - 1,
         :data_dir => default_data_dir
       }
 
@@ -79,32 +76,22 @@ module SmarterMeter
       end
     end
 
+    # Returns true if the all of the required configuration has been set.
+    def has_configuration?
+      @config[:username] and @config[:password]
+    end
+
     # Prompts the user for required settings that are blank.
     #
     # Returns nothing.
     def verify_configuration
-      return if @config[:username] and @config[:password]
+      return if has_configuration?
 
-      puts
-      puts "Smartermeter: Initial Configuration"
-      puts "--------------------------------------------------------------------------------"
-      puts "This program stores your PG&E account username and password on disk. The"
-      puts "password is encrypted but could be retrieved fairly easily. If this makes you"
-      puts "uncomfortable quit now (use ctrl-c)."
-      puts "--------------------------------------------------------------------------------"
-
-      unless @config[:username]
-        print "PG&E account username: "
-        @config[:username] = gets.strip
+      @ui.setup do |config|
+        @config.merge!(config)
+        self.password = config[:password] if config.has_key? :password
+        save_configuration
       end
-
-      unless @config[:password]
-        print "PG&E account password: "
-        self.password = gets.strip
-      end
-
-      save_configuration
-      puts "Setup complete"
     end
 
     # Saves the current configuration to disk.
@@ -124,13 +111,19 @@ module SmarterMeter
       one_hour = 60 * 60
 
       while true
+        unless has_configuration?
+          @ui.log.info("Waiting for configuration")
+          sleep(5)
+          next
+        end
+
         dates = dates_requiring_data
         unless dates.empty?
-          log.info("Attempting to fetch data for: #{dates.join(",")}")
+          @ui.log.info("Attempting to fetch data for: #{dates.join(",")}")
           results = fetch_dates(dates)
-          log.info("Successfully fetched: #{results.join(",")}")
+          @ui.log.info("Successfully fetched: #{results.join(",")}")
         else
-          log.info("Sleeping")
+          @ui.log.info("Sleeping")
         end
         sleep(one_hour)
       end
@@ -144,13 +137,13 @@ module SmarterMeter
     # Returns a new Service instance which has been properly authorized.
     def service
       service = Service.new
-      log.info("Logging in as #{@config[:username]}")
+      @ui.log.info("Logging in as #{@config[:username]}")
       unless service.login(@config[:username], password)
-        log.error("Incorrect username or password given.")
-        log.error("Please remove ~/.smartermeter and configure smartermeter again.")
+        @ui.log.error("Incorrect username or password given.")
+        @ui.log.error("Please remove ~/.smartermeter and configure smartermeter again.")
         exit(-1)
       end
-      log.info("Logged in as #{@config[:username]}")
+      @ui.log.info("Logged in as #{@config[:username]}")
       service
     end
 
@@ -165,7 +158,7 @@ module SmarterMeter
       begin
         yield s
       rescue SocketError => e
-        log.error("Could not access the PG&E site, are you connected to the Internet?")
+        @ui.log.error("Could not access the PG&E site, are you connected to the Internet?")
       end
     end
 
@@ -179,25 +172,26 @@ module SmarterMeter
 
       connect do |service|
         dates.each do |date|
-          log.info("Fetching #{date}")
+          @ui.log.info("Fetching #{date}")
           data = service.fetch_csv(date)
 
-          log.info("Verifying #{date}")
+          @ui.log.info("Verifying #{date}")
           samples = Sample.parse_csv(data).values.first
           first_sample = samples.first
 
           if first_sample.kwh
-            log.info("Saving #{date}")
+            @ui.log.info("Saving #{date}")
+            FileUtils.mkdir_p(File.dirname(data_file(date)))
             File.open(data_file(date), "w") do |f|
               f.write(data)
             end
 
             upload(date, samples)
 
-            log.info("Completed #{date}")
+            @ui.log.info("Completed #{date}")
             completed << date
           else
-            log.info("Incomplete #{date}")
+            @ui.log.info("Incomplete #{date}")
           end
         end
       end
@@ -208,12 +202,12 @@ module SmarterMeter
     def upload(date, samples)
       case @config[:transport]
       when :google_powermeter
-        log.info("Uploading #{date} to Google PowerMeter")
+        @ui.log.info("Uploading #{date} to Google PowerMeter")
         transport = SmarterMeter::Transports::GooglePowerMeter.new(@config[:google_powermeter])
         if transport.upload(samples)
-          log.info("Upload for #{date} complete")
+          @ui.log.info("Upload for #{date} complete")
         else
-          log.info("Upload for #{date} failed")
+          @ui.log.info("Upload for #{date} failed")
         end
       end
     end

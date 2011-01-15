@@ -7,4 +7,5 @@ rescue Exception
 end
 require 'smartermeter'
 
-SmarterMeter::Daemon.new.start
+interface = SmarterMeter::Interfaces::CLI.new
+SmarterMeter::Daemon.new(interface).start
