@@ -59,11 +59,12 @@ module SmarterMeter
         return false
       end
 
+      @authenticated = true
       true
     end
 
     def fetch_csv(date)
-      # TODO: Check if the authentication has been called
+      raise RuntimeException, "login must be called before fetch_csv" unless @authenticated
 
       # Now we almost actually have data. However we need to setup the desired
       # parameters first before we can get the exportable data. This really shouldn't
