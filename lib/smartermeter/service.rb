@@ -54,13 +54,11 @@ module SmarterMeter
           # Now post the authentication information from PG&E to energyguide.com
           @data_page = hourly_usage.form_with(:action => ENERGYGUIDE_AUTH_URL).submit
         end
+        @authenticated = true
       rescue SocketError => e
         @last_exception = e
         return false
       end
-
-      @authenticated = true
-      true
     end
 
     def fetch_csv(date)
@@ -69,25 +67,30 @@ module SmarterMeter
       # Now we almost actually have data. However we need to setup the desired
       # parameters first before we can get the exportable data. This really shouldn't
       # be necessary.
-      hourly_data = @data_page.form_with(:action => "/LoadAnalysis/LoadAnalysis.aspx") do |form|
-        form['__EVENTTARGET'] = "objChartSelect$butSubmit"
-        form['objTimePeriods$objExport$hidChart'] = "Hourly Usage"
-        form['objTimePeriods$objExport$hidChartID'] = 8
-        form['objChartSelect$ddChart'] = 8 # Hourly usage
+      begin
+        hourly_data = @data_page.form_with(:action => "/LoadAnalysis/LoadAnalysis.aspx") do |form|
+          form['__EVENTTARGET'] = "objChartSelect$butSubmit"
+          form['objTimePeriods$objExport$hidChart'] = "Hourly Usage"
+          form['objTimePeriods$objExport$hidChartID'] = 8
+          form['objChartSelect$ddChart'] = 8 # Hourly usage
 
-        form['objTimePeriods$objExport$hidTimePeriod'] = "Week"
-        form['objTimePeriods$objExport$hidTimePeriodID'] = 3
-        form['objTimePeriods$rlPeriod'] = 3
+          form['objTimePeriods$objExport$hidTimePeriod'] = "Week"
+          form['objTimePeriods$objExport$hidTimePeriodID'] = 3
+          form['objTimePeriods$rlPeriod'] = 3
 
-        form['objChartSelect$ccSelectedDate1'] = date.strftime("%m/%d/%Y")
-      end.submit
+          form['objChartSelect$ccSelectedDate1'] = date.strftime("%m/%d/%Y")
+        end.submit
 
-      # Now the beautiful data...
-      hourly_csv = hourly_data.form_with(:action => "/LoadAnalysis/LoadAnalysis.aspx") do |form|
-        form['__EVENTTARGET'] = "objTimePeriods$objExport$butExport"
-      end.submit
+        # Now the beautiful data...
+        hourly_csv = hourly_data.form_with(:action => "/LoadAnalysis/LoadAnalysis.aspx") do |form|
+          form['__EVENTTARGET'] = "objTimePeriods$objExport$butExport"
+        end.submit
 
-      hourly_csv.body
+        hourly_csv.body
+      rescue Timeout::Error => e
+        @last_exception = e
+        return ""
+      end
     end
   end
 end

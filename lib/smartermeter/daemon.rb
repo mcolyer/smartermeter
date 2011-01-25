@@ -175,6 +175,7 @@ module SmarterMeter
         dates.each do |date|
           @ui.log.info("Fetching #{date}")
           data = service.fetch_csv(date)
+          next if data.empty?
 
           @ui.log.info("Verifying #{date}")
           samples = Sample.parse_csv(data).values.first
