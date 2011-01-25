@@ -139,9 +139,9 @@ module SmarterMeter
       service = Service.new
       @ui.log.info("Logging in as #{@config[:username]}")
       unless service.login(@config[:username], password)
-        @ui.log.error("Incorrect username or password given.")
-        @ui.log.error("Please remove ~/.smartermeter and configure smartermeter again.")
-        exit(-1)
+        @ui.log.error("Login failed.")
+        @ui.log.error(service.last_page)
+        @ui.log.error("If this happens repeatedly, remove ~/.smartermeter and configure smartermeter again.")
       end
       @ui.log.info("Logged in as #{@config[:username]}")
       service

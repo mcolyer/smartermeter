@@ -7,6 +7,8 @@ module SmarterMeter
     OVERVIEW_URL = "https://www.pge.com/csol/actions/login.do?aw"
     ENERGYGUIDE_AUTH_URL = "https://www.energyguide.com/LoadAnalysis/LoadAnalysis.aspx?Referrerid=154"
 
+    attr_reader :last_page
+
     def initialize
       @agent = WWW::Mechanize.new { |agent|
         agent.user_agent_alias = 'Mac Safari'
@@ -29,7 +31,12 @@ module SmarterMeter
         return false if page.title =~ /PG&E Login/
 
         # Load the PG&E Terms of Use page
-        tou_page = @agent.click(page.link_with(:href => '/csol/actions/billingDisclaimer.do?actionType=hourly'))
+        tou_link = page.link_with(:href => '/csol/actions/billingDisclaimer.do?actionType=hourly')
+        unless tou_link
+          @last_page = page
+          return false
+        end
+        tou_page = @agent.click(tou_link)
         form = tou_page.forms().first
         agree_button = form.button_with(:value => 'I Understand - Proceed')
 
