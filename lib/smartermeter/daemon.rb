@@ -140,7 +140,8 @@ module SmarterMeter
       @ui.log.info("Logging in as #{@config[:username]}")
       unless service.login(@config[:username], password)
         @ui.log.error("Login failed.")
-        @ui.log.error(service.last_page)
+        @ui.log.error(service.last_page) if service.last_page
+        @ui.log.error(service.last_exception) if service.last_exception
         @ui.log.error("If this happens repeatedly, remove ~/.smartermeter and configure smartermeter again.")
       end
       @ui.log.info("Logged in as #{@config[:username]}")

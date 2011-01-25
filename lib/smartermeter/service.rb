@@ -8,6 +8,7 @@ module SmarterMeter
     ENERGYGUIDE_AUTH_URL = "https://www.energyguide.com/LoadAnalysis/LoadAnalysis.aspx?Referrerid=154"
 
     attr_reader :last_page
+    attr_reader :last_exception
 
     def initialize
       @agent = WWW::Mechanize.new { |agent|
@@ -17,41 +18,47 @@ module SmarterMeter
 
     # Returns true upon succesful login and false otherwise
     def login(username, password)
-      @agent.get(LOGIN_URL) do |page|
-        logged_in_page = page.form_with(:action => 'https://www.pge.com/eum/login') do |login|
-          login.USER = username
-          login.PASSWORD = password
-        end.submit
-      end
-
-      # There is a crazy meta-reload thing here that mechanize doesn't handle
-      # correctly by itself so let's help it along...
-      @agent.get(OVERVIEW_URL) do |page|
-
-        return false if page.title =~ /PG&E Login/
-
-        # Load the PG&E Terms of Use page
-        tou_link = page.link_with(:href => '/csol/actions/billingDisclaimer.do?actionType=hourly')
-        unless tou_link
-          @last_page = page
-          return false
+      begin
+        @agent.get(LOGIN_URL) do |page|
+          logged_in_page = page.form_with(:action => 'https://www.pge.com/eum/login') do |login|
+            login.USER = username
+            login.PASSWORD = password
+          end.submit
         end
-        tou_page = @agent.click(tou_link)
-        form = tou_page.forms().first
-        agree_button = form.button_with(:value => 'I Understand - Proceed')
 
-        # Agree to the terms of use
-        form['agreement'] = 'yes'
+        # There is a crazy meta-reload thing here that mechanize doesn't handle
+        # correctly by itself so let's help it along...
+        @agent.get(OVERVIEW_URL) do |page|
 
-        # Load up the PG&E frame page for historical data
-        hourly_usage_container = form.submit(agree_button)
+          return false if page.title =~ /PG&E Login/
 
-        # Now load up the frame with the content
-        hourly_usage = @agent.click(hourly_usage_container.frames.select{|f| f.href == "/csol/nexus/content.jsp"}.first)
+          # Load the PG&E Terms of Use page
+          tou_link = page.link_with(:href => '/csol/actions/billingDisclaimer.do?actionType=hourly')
+          unless tou_link
+            @last_page = page
+            return false
+          end
+          tou_page = @agent.click(tou_link)
+          form = tou_page.forms().first
+          agree_button = form.button_with(:value => 'I Understand - Proceed')
 
-        # Now post the authentication information from PG&E to energyguide.com
-        @data_page = hourly_usage.form_with(:action => ENERGYGUIDE_AUTH_URL).submit
+          # Agree to the terms of use
+          form['agreement'] = 'yes'
+
+          # Load up the PG&E frame page for historical data
+          hourly_usage_container = form.submit(agree_button)
+
+          # Now load up the frame with the content
+          hourly_usage = @agent.click(hourly_usage_container.frames.select{|f| f.href == "/csol/nexus/content.jsp"}.first)
+
+          # Now post the authentication information from PG&E to energyguide.com
+          @data_page = hourly_usage.form_with(:action => ENERGYGUIDE_AUTH_URL).submit
+        end
+      rescue SocketError => e
+        @last_exception = e
+        return false
       end
+
       true
     end
 
