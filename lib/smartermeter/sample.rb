@@ -17,7 +17,7 @@ module SmarterMeter
       # Apparently they felt the need to put a = outside of the correct place
       data = data.gsub('=','')
 
-      hour_increment = 1/24.0
+      hour_increment = 60*60
       CSV.parse(data) do |row|
         next unless row.length > 0 and date_re.match row[0]
 
@@ -26,7 +26,7 @@ module SmarterMeter
         day = day.to_i
         year = year.to_i
 
-        timestamp = Time.local(year, month, day, 0) - hour_increment + 1/(24.0*60)
+        timestamp = Time.local(year, month, day, 0) - hour_increment
         next if row[1].include? "$"
         hourly_samples = row[1..24].map do |v|
           if v == "-"
