@@ -55,7 +55,7 @@ module SmarterMeter
           @data_page = hourly_usage.form_with(:action => ENERGYGUIDE_AUTH_URL).submit
         end
         @authenticated = true
-      rescue SocketError => e
+      rescue Exception => e
         @last_exception = e
         return false
       end

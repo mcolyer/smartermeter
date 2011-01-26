@@ -134,33 +134,34 @@ module SmarterMeter
     # Note: An authorization failure will cause an exits, as it is a dire
     # condition.
     #
-    # Returns a new Service instance which has been properly authorized.
+    # Returns a new Service instance which has been properly authorized and nil
+    #   otherwise.
     def service
       service = Service.new
       @ui.log.info("Logging in as #{@config[:username]}")
-      unless service.login(@config[:username], password)
+      if service.login(@config[:username], password)
+        @ui.log.info("Logged in as #{@config[:username]}")
+        service
+      else
         @ui.log.error("Login failed.")
         @ui.log.error(service.last_page) if service.last_page
         @ui.log.error(service.last_exception) if service.last_exception
-        @ui.log.error("If this happens repeatedly, remove ~/.smartermeter and configure smartermeter again.")
+        @ui.log.error("If this happens repeatedly your login information may be incorrect")
+        @ui.log.error("Remove ~/.smartermeter and restart to re-configure smartermeter.")
+        nil
       end
-      @ui.log.info("Logged in as #{@config[:username]}")
-      service
     end
 
     # Connect and authenticate to the PG&E Website.
     #
     # It provides an instance of Service to the provided block
-    # for direct manipulation.
+    # for direct manipulation. If there was a failure logging into the service
+    # the block will not be executed.
     #
     # Returns nothing.
     def connect
       s = service
-      begin
-        yield s
-      rescue SocketError => e
-        @ui.log.error("Could not access the PG&E site, are you connected to the Internet?")
-      end
+      yield s if s
     end
 
     # Attempts to retrieve power data for each of the dates in the list.
@@ -174,6 +175,7 @@ module SmarterMeter
       connect do |service|
         dates.each do |date|
           @ui.log.info("Fetching #{date}")
+
           data = service.fetch_csv(date)
           next if data.empty?
 
