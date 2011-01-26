@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   ## the sub! line in the Rakefile
   s.name              = 'smartermeter'
   s.version           = '0.2.0'
-  s.date              = '2011-01-15'
+  s.date              = '2011-01-25'
   s.rubyforge_project = 'smartermeter'
 
   ## Make sure your summary is short. The description may be as long
@@ -61,6 +61,7 @@ Gem::Specification.new do |s|
   ## THE MANIFEST COMMENTS, they are used as delimiters by the task.
   # = MANIFEST =
   s.files = %w[
+    CHANGELOG.md
     Gemfile
     README.md
     Rakefile
