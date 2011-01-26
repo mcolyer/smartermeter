@@ -1,3 +1,4 @@
+require 'date'
 require 'time'
 
 module SmarterMeter
@@ -26,6 +27,7 @@ module SmarterMeter
         year = year.to_i
 
         timestamp = Time.local(year, month, day, 0) - hour_increment + 1/(24.0*60)
+        next if row[1].include? "$"
         hourly_samples = row[1..24].map do |v|
           if v == "-"
             kwh = nil
