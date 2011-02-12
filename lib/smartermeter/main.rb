@@ -5,6 +5,7 @@ require 'jruby'
 JRuby.objectspace=true
 
 require 'smartermeter'
+require 'smartermeter/daemon'
 require 'smartermeter/interfaces/swing'
 
 interface = SmarterMeter::Interfaces::Swing.new
