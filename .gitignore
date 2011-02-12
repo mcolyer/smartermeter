@@ -6,4 +6,5 @@ docs/*
 data/*
 pkg/*
 vendor/gems/*
+vendor/java/*
 Gemfile.lock
