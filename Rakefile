@@ -82,7 +82,12 @@ end
 require 'rawr'
 
 namespace :rawr do
-  task :prepare do
+  task :fetch_jruby do
+    unless File.exists?("vendor/java/jruby-complete.jar")
+      `wget http://jruby.org.s3.amazonaws.com/downloads/1.6.0.RC2/jruby-complete-1.6.0.RC2.jar vendor/java/jruby-complete.jar`
+    end
+  end
+  task :prepare => :fetch_jruby do
     dir = File.join(File.dirname(__FILE__), "vendor", "gems")
     FileUtils.rm_rf(dir)
     FileUtils.mkdir_p(dir)
