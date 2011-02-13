@@ -80,27 +80,44 @@ end
 #############################################################################
 
 task :fetch_jruby do
+  require 'net/http'
+  require 'uri'
+
   dir = File.join(File.dirname(__FILE__), "pkg", "base")
   jar_file = File.join(dir, "jruby-complete.jar")
   FileUtils.mkdir_p(dir)
   unless File.exists?(jar_file)
-    `wget http://jruby.org.s3.amazonaws.com/downloads/1.6.0.RC2/jruby-complete-1.6.0.RC2.jar #{jar_file}`
+    jruby_url = "http://jruby.org.s3.amazonaws.com/downloads/1.6.0.RC2/jruby-complete-1.6.0.RC2.jar"
+    puts "Fetching JRuby"
+    File.open(jar_file, "wb") { |f| f.write(Net::HTTP.get(URI.parse(jruby_url))) }
+    puts "Fetched JRuby"
   end
 end
 
-task :fetch_gems do
-  dir = File.join(File.dirname(__FILE__), "pkg", "base", "gems", "gems")
-  FileUtils.mkdir_p(dir)
-  ["nokogiri", "mechanize", "crypt", "profligacy"].each do |gem|
-    `gem unpack -t "#{dir}" #{gem}`
-  end
+task :package_gems do
+  specifications = Dir.glob(File.join(File.dirname(__FILE__), "vendor", "gems", "jruby", "1.8", "specifications", "*"))
+  specifications.reject! { |s| s.include? "rspec" }
+  dest_dir = File.join(File.dirname(__FILE__), "pkg", "base", "gems", "specifications")
+  FileUtils.rm_rf(dest_dir)
+  FileUtils.mkdir_p(dest_dir)
+  FileUtils.cp_r(specifications, dest_dir)
+
+  gems = Dir.glob(File.join(File.dirname(__FILE__), "vendor", "gems", "jruby", "1.8", "gems", "*"))
+  gems.reject! { |s| s.include? "rspec" }
+  dest_dir = File.join(File.dirname(__FILE__), "pkg", "base", "gems", "gems")
+  FileUtils.rm_rf(dest_dir)
+  FileUtils.mkdir_p(dest_dir)
+  FileUtils.cp_r(gems, dest_dir)
 end
 
-task :build => [:fetch_jruby, :fetch_gems] do
-  src_dir = File.join(File.dirname(__FILE__), "lib")
-  dest_dir = File.join(File.dirname(__FILE__), "pkg", "base", "lib")
+desc "Package all required files into pkg/base"
+task :package => [:fetch_jruby, :package_gems] do
+  src_dir = Dir.glob(File.join(File.dirname(__FILE__), "lib", "*"))
+  dest_dir = File.join(File.dirname(__FILE__), "pkg", "base")
   FileUtils.mkdir_p(dest_dir)
   FileUtils.cp_r(src_dir, dest_dir)
+
+  FileUtils.cp(Dir.glob(File.join(File.dirname(__FILE__), "icon*")), dest_dir)
 end
 
 #############################################################################
@@ -148,7 +165,6 @@ task :gemspec => :validate do
     sort.
     reject { |file| file =~ /^\./ }.
     reject { |file| file =~ /^(rdoc|pkg)/ }.
-    reject { |file| file =~ /^rawr/ }.
     reject { |file| file =~ /\.jar$/ }.
     map { |file| "    #{file}" }.
     join("\n")

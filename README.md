@@ -42,10 +42,10 @@ In order to build the self contained binaries, you'll need a working jruby inter
 
     git clone git://github.com/mcolyer/smartermeter.git
     cd smartermeter
-    rake rawr:prepare
-    rake rawr:bundle:exe # builds a windows executable
-    rake rawr:bundle:app # builds an OSX executable
-    rake build # builds a ruby gem
+    bundle install --path vendor/gems --without test
+    rake package
+
+All of the required files are now placed in pkg/base/
 
 Questions
 ---------
