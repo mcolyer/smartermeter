@@ -79,44 +79,28 @@ end
 #
 #############################################################################
 
-require 'rawr'
-
-namespace :rawr do
-  task :fetch_jruby do
-    unless File.exists?("vendor/java/jruby-complete.jar")
-      `wget http://jruby.org.s3.amazonaws.com/downloads/1.6.0.RC2/jruby-complete-1.6.0.RC2.jar vendor/java/jruby-complete.jar`
-    end
+task :fetch_jruby do
+  dir = File.join(File.dirname(__FILE__), "pkg", "base")
+  jar_file = File.join(dir, "jruby-complete.jar")
+  FileUtils.mkdir_p(dir)
+  unless File.exists?(jar_file)
+    `wget http://jruby.org.s3.amazonaws.com/downloads/1.6.0.RC2/jruby-complete-1.6.0.RC2.jar #{jar_file}`
   end
-  task :prepare => :fetch_jruby do
-    dir = File.join(File.dirname(__FILE__), "vendor", "gems")
-    FileUtils.rm_rf(dir)
-    FileUtils.mkdir_p(dir)
-    ["nokogiri", "mechanize", "crypt", "profligacy"].each do |gem|
-      `gem unpack -t "#{dir}" #{gem}`
-    end
+end
 
-    # Rawr can't handle folders with dashes in the name, so we'll remove the
-    # version numbers from the gems.
-    Dir.glob(File.join(dir, "*-*")).each do |gem|
-      no_version = File.basename(gem).split("-")[0] + ".old"
-      FileUtils.mv(gem, File.join(dir, no_version))
-    end
-
-    Dir.glob(File.join(dir, "nokogiri.old", "lib", "*")).each do |file|
-      FileUtils.mv(file, File.join(dir))
-    end
-    Dir.glob(File.join(dir, "profligacy.old", "lib", "*")).each do |file|
-      FileUtils.mv(file, File.join(dir))
-    end
-    FileUtils.mv(File.join(dir, "crypt.old", "crypt"), File.join(dir, "crypt"))
-    Dir.glob(File.join(dir, "mechanize.old", "lib", "*")).each do |file|
-      FileUtils.mv(file, File.join(dir))
-    end
-
-    Dir.glob(File.join(dir, "*.old")).each do |gem|
-      FileUtils.rm_rf(gem)
-    end
+task :fetch_gems do
+  dir = File.join(File.dirname(__FILE__), "pkg", "base", "gems", "gems")
+  FileUtils.mkdir_p(dir)
+  ["nokogiri", "mechanize", "crypt", "profligacy"].each do |gem|
+    `gem unpack -t "#{dir}" #{gem}`
   end
+end
+
+task :build => [:fetch_jruby, :fetch_gems] do
+  src_dir = File.join(File.dirname(__FILE__), "lib")
+  dest_dir = File.join(File.dirname(__FILE__), "pkg", "base", "lib")
+  FileUtils.mkdir_p(dest_dir)
+  FileUtils.cp_r(src_dir, dest_dir)
 end
 
 #############################################################################

@@ -53,7 +53,6 @@ Gem::Specification.new do |s|
 
   ## List your development dependencies here. Development dependencies are
   ## those that are only needed during development
-  s.add_development_dependency('rawr', ["~> 1.4.5"])
   s.add_development_dependency('rspec', ["~> 2.4.0"])
 
   ## Leave this section as-is. It will be automatically generated from the
