@@ -94,6 +94,29 @@ task :fetch_jruby do
   end
 end
 
+task :fetch_launch4j do
+  require 'net/http'
+  require 'uri'
+  require 'zlib'
+  require 'bundler'
+  Bundler.setup
+  require 'archive/tar/minitar'
+
+  dir = File.join(File.dirname(__FILE__), "installer")
+  tgz_file = File.join(dir, "launch4j-3.0.2-linux.tgz")
+  FileUtils.mkdir_p(dir)
+  unless File.exists?(tgz_file)
+    launch4j_url = "http://softlayer.dl.sourceforge.net/project/launch4j/launch4j-3/3.0.2/launch4j-3.0.2-linux.tgz"
+    puts "Fetching Launch4J"
+    File.open(tgz_file, "wb") { |f| f.write(Net::HTTP.get(URI.parse(launch4j_url))) }
+    puts "Fetched Launch4J"
+    puts "Extracting Launch4J"
+    tgz = Zlib::GzipReader.new(File.open(tgz_file, 'rb'))
+    Archive::Tar::Minitar.unpack(tgz, dir)
+    puts "Extracted Launch4J"
+  end
+end
+
 task :package_gems do
   specifications = Dir.glob(File.join(File.dirname(__FILE__), "vendor", "gems", "jruby", "1.8", "specifications", "*"))
   specifications.reject! { |s| s.include? "rspec" }
@@ -110,8 +133,13 @@ task :package_gems do
   FileUtils.cp_r(gems, dest_dir)
 end
 
+task :create_launcher do
+  configuration = File.join(File.dirname(__FILE__), "installer", "launch4j.xml")
+  `installer/launch4j/launch4j #{configuration}`
+end
+
 desc "Package all required files into pkg/base"
-task :package => [:fetch_jruby, :package_gems] do
+task :package => [:fetch_jruby, :fetch_launch4j, :package_gems, :create_launcher] do
   src_dir = Dir.glob(File.join(File.dirname(__FILE__), "lib", "*"))
   dest_dir = File.join(File.dirname(__FILE__), "pkg", "base")
   FileUtils.mkdir_p(dest_dir)

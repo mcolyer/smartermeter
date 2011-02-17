@@ -7,3 +7,4 @@ data/*
 pkg/*
 vendor/gems/*
 Gemfile.lock
+installer/

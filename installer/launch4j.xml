@@ -1,0 +1,27 @@
+<launch4jConfig>
+  <dontWrapJar>true</dontWrapJar>
+  <headerType>console</headerType>
+  <jar>jruby-complete.jar</jar>
+  <outfile>../pkg/base/smartermeter.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine>smartermeter/main.rb</cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <customProcName>true</customProcName>
+  <stayAlive>false</stayAlive>
+  <manifest></manifest>
+  <icon></icon>
+  <var>GEM_HOME=jruby/1.8</var>
+  <singleInstance>
+    <mutexName>smartermeter</mutexName>
+    <windowTitle>Smartermeter</windowTitle>
+  </singleInstance>
+  <jre>
+    <path></path>
+    <minVersion>1.6.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+  </jre>
+</launch4jConfig>
