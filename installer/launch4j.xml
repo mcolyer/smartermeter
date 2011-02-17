@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <manifest></manifest>
   <icon></icon>
-  <var>GEM_HOME=jruby/1.8</var>
+  <var>GEM_HOME=gems</var>
   <singleInstance>
     <mutexName>smartermeter</mutexName>
     <windowTitle>Smartermeter</windowTitle>

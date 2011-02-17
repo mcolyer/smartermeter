@@ -138,8 +138,7 @@ task :create_launcher do
   `installer/launch4j/launch4j #{configuration}`
 end
 
-desc "Package all required files into pkg/base"
-task :package => [:fetch_jruby, :fetch_launch4j, :package_gems, :create_launcher] do
+task :copy_smartermeter do
   src_dir = Dir.glob(File.join(File.dirname(__FILE__), "lib", "*"))
   dest_dir = File.join(File.dirname(__FILE__), "pkg", "base")
   FileUtils.mkdir_p(dest_dir)
@@ -147,6 +146,23 @@ task :package => [:fetch_jruby, :fetch_launch4j, :package_gems, :create_launcher
 
   FileUtils.cp(Dir.glob(File.join(File.dirname(__FILE__), "icon*")), dest_dir)
 end
+
+task :copy_smartermeter do
+  src_dir = Dir.glob(File.join(File.dirname(__FILE__), "lib", "*"))
+  dest_dir = File.join(File.dirname(__FILE__), "pkg", "base")
+  FileUtils.mkdir_p(dest_dir)
+  FileUtils.cp_r(src_dir, dest_dir)
+
+  FileUtils.cp(Dir.glob(File.join(File.dirname(__FILE__), "icon*")), dest_dir)
+end
+
+task :nsis_installer do
+  nsis_file = File.join(File.dirname(__FILE__), "installer", "nsis.nsi")
+  `makensis -DVERSION=#{version} #{nsis_file}`
+end
+
+desc "Package all required files into pkg/base"
+task :package => [:fetch_jruby, :fetch_launch4j, :package_gems, :create_launcher, :copy_smartermeter, :nsis_installer]
 
 #############################################################################
 #

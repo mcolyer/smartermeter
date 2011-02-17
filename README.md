@@ -35,17 +35,18 @@ PowerMeter.
          :token: "your-token"
          :variable: "your-path-with.d1-appended"
 
-To Build
+To Build the Windows Installer
 --------
 
-In order to build the self contained binaries, you'll need a working jruby interpreter.
+In order to build the self contained binaries, you'll need Java 1.6 and
+(NSIS)[1], both are available as packages in Ubuntu.
 
     git clone git://github.com/mcolyer/smartermeter.git
     cd smartermeter
     bundle install --path vendor/gems --without test
     rake package
 
-All of the required files are now placed in pkg/base/
+The installer will be generated in pkg/
 
 Questions
 ---------
@@ -63,3 +64,5 @@ Questions
 * How can I help?
 
   Make sure it works, make cool things with it or send me git pull requests.
+
+[1]: http://nsis.sourceforge.net/
