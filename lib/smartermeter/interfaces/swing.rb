@@ -15,11 +15,19 @@ module SmarterMeter
         #  end
         #}
 
+        update_item = MenuItem.new("Check for Updates")
+        update_item.add_action_listener do
+          desktop = Desktop.getDesktop();
+          uri = Java::JavaNet::URI.new("http://matt.colyer.name/projects/smartermeter/?v=#{SmarterMeter::VERSION}")
+          desktop.browse(uri)
+        end
+
         exit_item = MenuItem.new("Exit")
         exit_item.add_action_listener {java.lang.System::exit(0)}
 
+
         popup = PopupMenu.new
-        #popup.add(settings_item)
+        popup.add(update_item)
         popup.add(exit_item)
 
         image = Toolkit::default_toolkit.get_image("icon.png")
