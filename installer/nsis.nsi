@@ -11,7 +11,7 @@
 ;General
 
   ;Name and file
-  Name "Smartermeter"
+  Name "Smartermeter (${VERSION})"
   OutFile "../pkg/smartermeter-${VERSION}.exe"
 
   ;Default installation folder
@@ -27,6 +27,7 @@
 ;Interface Settings
 
   !define MUI_ABORTWARNING
+  !define MUI_ICON "../icons/smartermeter.ico"
 
 ;--------------------------------
 ;Pages

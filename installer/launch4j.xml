@@ -12,7 +12,7 @@
   <customProcName>true</customProcName>
   <stayAlive>false</stayAlive>
   <manifest></manifest>
-  <icon></icon>
+  <icon>../icons/smartermeter.ico</icon>
   <var>GEM_HOME=gems</var>
   <singleInstance>
     <mutexName>smartermeter</mutexName>

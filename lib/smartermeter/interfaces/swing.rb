@@ -30,7 +30,7 @@ module SmarterMeter
         popup.add(update_item)
         popup.add(exit_item)
 
-        image = Toolkit::default_toolkit.get_image("icon.png")
+        image = Toolkit::default_toolkit.get_image("icons/smartermeter-16x16.png")
         tray_icon = TrayIcon.new(image, "Smartermeter", popup)
         tray_icon.image_auto_size = true
 
