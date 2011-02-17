@@ -33,7 +33,7 @@ module SmarterMeter
       # Returns a logger like interface to log errors and warnings to.
       def log
         return @logger if @logger
-        @logger = Logger.new(File.expand_path("~/.smartermeter.log"))
+        @logger = Logger.new STDOUT
         @logger.level = Logger::INFO
         @logger
       end
