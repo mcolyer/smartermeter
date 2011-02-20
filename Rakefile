@@ -139,11 +139,19 @@ task :create_launcher do
 end
 
 task :copy_smartermeter do
-  src_dir = Dir.glob(File.join(File.dirname(__FILE__), "lib", "*"))
-  dest_dir = File.join(File.dirname(__FILE__), "pkg", "base")
+  src_dir = File.join(File.dirname(__FILE__), "lib")
+  dest_dir = File.join(File.dirname(__FILE__), "pkg", "base", "gems", "gems", "smartermeter-#{version}")
   FileUtils.mkdir_p(dest_dir)
   FileUtils.cp_r(src_dir, dest_dir)
 
+  dest = File.join(File.dirname(__FILE__), "pkg", "base", "gems", "specifications", "smartermeter-#{version}.gemspec")
+  FileUtils.cp(File.join(File.dirname(__FILE__), "smartermeter.gemspec"), dest)
+
+  dest_dir = File.join(File.dirname(__FILE__), "pkg", "base")
+  FileUtils.cp(File.join(File.dirname(__FILE__), "installer", "main.rb"), dest_dir)
+
+  dest_dir = File.join(File.dirname(__FILE__), "pkg", "base", "icons")
+  FileUtils.mkdir_p(dest_dir)
   FileUtils.cp(Dir.glob(File.join(File.dirname(__FILE__), "icons", "*.png")), dest_dir)
 end
 

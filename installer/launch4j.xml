@@ -4,7 +4,7 @@
   <jar>jruby-complete.jar</jar>
   <outfile>../pkg/base/smartermeter.exe</outfile>
   <errTitle></errTitle>
-  <cmdLine>smartermeter/main.rb</cmdLine>
+  <cmdLine>main.rb</cmdLine>
   <chdir>.</chdir>
   <priority>normal</priority>
   <downloadUrl>http://java.com/download</downloadUrl>
