@@ -89,10 +89,10 @@ Section "Uninstall"
   ;ADD YOUR OWN FILES HERE...
 
   Delete "$INSTDIR\*.rb"
-  Delete "$INSTDIR\*.png"
   Delete "$INSTDIR\*.jar"
   Delete "$INSTDIR\*.exe"
   RMDIR  /r "$INSTDIR\gems"
+  RMDIR  /r "$INSTDIR\icons"
   RMDIR  /r "$INSTDIR\smartermeter"
 
   Delete "$SMPROGRAMS\Smartermeter\Smartermeter.lnk"
