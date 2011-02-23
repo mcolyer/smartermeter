@@ -1,7 +1,3 @@
-;NSIS Modern User Interface
-;Welcome/Finish Page Example Script
-;Written by Joost Verburg
-
 ;--------------------------------
 ;Include Modern UI
 
