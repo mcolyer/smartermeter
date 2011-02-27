@@ -97,7 +97,8 @@ module SmarterMeter
         end
 
         @frame = @ui.build(:args => "Smartermeter Settings")
-        @frame.defaultCloseOperation = JFrame::DISPOSE_ON_CLOSE
+        @frame.set_location_relative_to(nil)
+        @frame.default_close_operation = JFrame::DISPOSE_ON_CLOSE
       end
     end
 
@@ -141,7 +142,8 @@ module SmarterMeter
         end
 
         @frame = @ui.build(:args => "Smartermeter Log")
-        @frame.defaultCloseOperation = JFrame::DISPOSE_ON_CLOSE
+        @frame.set_location_relative_to(nil)
+        @frame.default_close_operation = JFrame::DISPOSE_ON_CLOSE
       end
     end
   end
