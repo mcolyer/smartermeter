@@ -70,6 +70,8 @@ module SmarterMeter
       include_package "javax.swing"
 
       def initialize(&block)
+        UIManager.set_look_and_feel(UIManager.get_system_look_and_feel_class_name)
+
         layout = "
             [ username_label | (150)username_field ]
             [ password_label | (150)password_field ]
@@ -105,6 +107,8 @@ module SmarterMeter
       LogFile = File.expand_path("~/.smartermeter.log")
 
       def initialize(&block)
+        UIManager.set_look_and_feel(UIManager.get_system_look_and_feel_class_name)
+
         layout = "
             [ log_label  ]
             [ (600,200)*log_area ]
