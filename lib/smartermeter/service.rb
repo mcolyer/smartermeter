@@ -11,7 +11,7 @@ module SmarterMeter
     attr_reader :last_exception
 
     def initialize
-      @agent = WWW::Mechanize.new { |agent|
+      @agent = Mechanize.new { |agent|
         agent.user_agent_alias = 'Mac Safari'
       }
     end
@@ -68,7 +68,7 @@ module SmarterMeter
       # parameters first before we can get the exportable data. This really shouldn't
       # be necessary.
       begin
-        hourly_data = @data_page.form_with(:action => "/LoadAnalysis/LoadAnalysis.aspx") do |form|
+        hourly_data = @data_page.form_with(:action => "LoadAnalysis.aspx") do |form|
           form['__EVENTTARGET'] = "objChartSelect$butSubmit"
           form['objTimePeriods$objExport$hidChart'] = "Hourly Usage"
           form['objTimePeriods$objExport$hidChartID'] = 8
@@ -82,7 +82,7 @@ module SmarterMeter
         end.submit
 
         # Now the beautiful data...
-        hourly_csv = hourly_data.form_with(:action => "/LoadAnalysis/LoadAnalysis.aspx") do |form|
+        hourly_csv = hourly_data.form_with(:action => "LoadAnalysis.aspx") do |form|
           form['__EVENTTARGET'] = "objTimePeriods$objExport$butExport"
         end.submit
 
