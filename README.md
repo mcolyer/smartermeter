@@ -73,4 +73,4 @@ of their [Fellowship Program][3]
 
 [1]: http://nsis.sourceforge.net/
 [2]: http://brighterplanet.com/
-[2]: http://brighterplanet.github.com/fellowship.html
+[3]: http://brighterplanet.github.com/fellowship.html
