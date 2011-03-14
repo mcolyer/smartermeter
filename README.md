@@ -65,4 +65,12 @@ Questions
 
   Make sure it works, make cool things with it or send me git pull requests.
 
+Sponsorship
+-----------
+
+I would like to thank [Brighter Planet][2] for including SmarterMeter as part
+of their [Fellowship Program][3]
+
 [1]: http://nsis.sourceforge.net/
+[2]: http://brighterplanet.com/
+[2]: http://brighterplanet.github.com/fellowship.html
