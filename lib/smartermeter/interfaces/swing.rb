@@ -60,7 +60,7 @@ module SmarterMeter
       #
       # Returns nothing.
       def setup
-        SettingsWindow.new do |config|
+        Wizard.new do |config|
           yield config
         end
       end
@@ -144,6 +144,342 @@ module SmarterMeter
         @frame = @ui.build(:args => "Smartermeter Log")
         @frame.set_location_relative_to(nil)
         @frame.default_close_operation = JFrame::DISPOSE_ON_CLOSE
+      end
+    end
+
+    class Wizard
+      include_package "javax.swing"
+      include_package "java.awt"
+
+      def initialize
+        UIManager.set_look_and_feel(UIManager.get_system_look_and_feel_class_name)
+
+        layout = "
+            [ panel ]
+            [ rule ]
+            [ >buttons ]
+        "
+
+        @page_index = 0
+
+        @wizard = Profligacy::Swing::LEL.new(JFrame, layout) do |c,i|
+          c.rule = JSeparator.new
+
+          @buttons = Profligacy::Swing::LEL.new(JPanel, "[back|next|>gap|cancel]") do |cc,ii|
+            cc.back = JButton.new "Back"
+            cc.back.minimum_size = Dimension.new(50,14)
+            cc.back.visible = false
+            ii.back = { :action => method(:show_previous_page) }
+
+            cc.next = JButton.new "Next"
+            cc.next.minimum_size = Dimension.new(50,14)
+            cc.next.enabled = false
+            ii.next = { :action => method(:show_next_page) }
+
+            cc.gap = Box.create_horizontal_strut(10)
+
+            cc.cancel = JButton.new "Cancel"
+            cc.cancel.minimum_size = Dimension.new(50,14)
+            ii.cancel =  { :action => proc do |t, e|
+                if cc.cancel.text == "Complete"
+                  config = {
+                    :username => @pages[0].username,
+                    :password => @pages[0].password,
+                    :transport => :google_powermeter,
+                    :google_powermeter => {
+                      :token => @pages[1].token,
+                      :variable => @pages[1].variable,
+                      :auth => @pages[1].auth
+                    }
+                  }
+                else
+                  config = {}
+                end
+
+                @frame.dispose
+                yield config
+              end
+            }
+          end
+          c.buttons = @buttons.build
+
+          @panel = JPanel.new(CardLayout.new)
+          @pages = [PGEPage, GooglePowerMeterPage, CompletePage].map do |klass|
+            page = klass.new(@buttons)
+            @panel.add(page.build, klass.to_s)
+            page
+          end
+          c.panel = @panel
+        end
+
+        @frame = @wizard.build(:args => "SmarterMeter Setup", :auto_create_container_gaps => false) do |frame|
+          frame.default_close_operation = JFrame::DISPOSE_ON_CLOSE
+          frame.set_size(560, 400)
+          frame.set_location_relative_to(nil) # Centers on screen
+        end
+      end
+
+      # Public: Presents the next page of the wizard.
+      #
+      # type  - The symbol representing the name of the event called
+      # event - The Java::Awt::Event that was triggered.
+      #
+      # Returns nothing.
+      def show_next_page(type, event)
+        @page_index += 1
+        configure_buttons
+
+        @panel.get_layout.next(@panel)
+      end
+
+      # Public: Presents the previous page of the wizard.
+      #
+      # type  - The symbol representing the name of the event called
+      # event - The Java::Awt::Event that was triggered.
+      #
+      # Returns nothing.
+      def show_previous_page(type, event)
+        @page_index -= 1
+        configure_buttons
+
+        @panel.get_layout.previous(@panel)
+      end
+
+    protected
+
+      def configure_buttons
+        @pages[@page_index].validate
+
+        if @page_index > 0
+          @buttons.back.visible = true
+        else
+          @buttons.back.visible = false
+        end
+
+        if @page_index == @pages.size - 1
+          @buttons.next.visible = false
+          @buttons.cancel.text = "Complete"
+        else
+          @buttons.next.visible = true
+          @buttons.cancel.text = "Cancel"
+        end
+      end
+
+      module WizardPage
+        include_package "javax.swing"
+        include_package "java.awt"
+
+        # Protected: Creates a panel that includes the header at the top, in
+        # a standard wizard visual format.
+        #
+        # It expects a block, which yields a Profligacy::Swing::LEL object
+        # to attach components and events to.
+        #
+        #     header("Title", "Message") do |c|
+        #       c.controls = JButton.new("Hello World!")
+        #     end
+        #
+        # title    - The text to show in the header as the title.
+        # message  - The text to show under the title in the header.
+        # controls - True adds a controls area to the page, false ignores it.
+        #            Defaults to true.
+        #
+        # Returns nothing.
+        def header(title, message, controls=true)
+          layout = "
+            [ (560,100)*header ]
+          "
+          layout += "[ controls ]" if controls
+
+          @panel = Profligacy::Swing::LEL.new(JPanel, layout) do |c,i|
+            header_layout = "
+                [ <title ]
+                [ <message ]
+            "
+            @header = Profligacy::Swing::LEL.new(JPanel, header_layout) do |cc,ii|
+              cc.title = JLabel.new title
+              cc.message = JEditorPane.new "text/html", message
+              cc.message.background = Color::WHITE
+              cc.message.editable = false
+              cc.message.border = BorderFactory.createEmptyBorder(0, 30, 0, 0)
+              ii.message = { :hyperlink => proc do |t, e|
+                  if e.event_type.to_s == "ACTIVATED"
+                    desktop = Desktop.getDesktop()
+                    uri = Java::JavaNet::URI.new(e.url.to_s)
+                    desktop.browse(uri)
+                  end
+                end
+              }
+            end
+
+            c.header = @header.build
+            c.header.background = Color::WHITE
+
+            yield c if block_given?
+          end
+        end
+
+        def build
+          @panel.build(:auto_create_container_gaps => false)
+        end
+      end
+
+      # Contains the controls and messaging for the PGE page of the wizard.
+      class PGEPage
+        include_package "javax.swing"
+        include_package "java.awt"
+        include WizardPage
+
+        def initialize(buttons)
+          @global_buttons = buttons
+
+          title = "<html><b>Connect to PG&E</b></html>"
+          message  = "Enter your PG&E username and password. If you don't have one,"
+          message += "create one first and then enter it below."
+
+          header(title, message) do |c|
+            layout = "
+                [ username_label | <username_field ]
+                [ password_label | <password_field ]
+                [ _ | create ]
+            "
+
+            @controls = Profligacy::Swing::LEL.new(JPanel, layout) do |cc,ii|
+              cc.username_label = JLabel.new "PG&E Username:"
+              cc.username_field = JTextField.new
+              cc.username_field.maximum_size = Dimension.new(160,14)
+              ii.username_field = { :key => method(:validate) }
+
+              cc.password_label = JLabel.new "PG&E Password:"
+              cc.password_field = JPasswordField.new
+              cc.password_field.maximum_size = Dimension.new(160,14)
+              ii.password_field = { :key => method(:validate) }
+
+              cc.create = JButton.new "Create a PG&E Account"
+              ii.create = { :action => method(:open_pge_sign_up_flow) }
+            end
+            c.controls = @controls.build
+          end
+        end
+
+        # Public: Get the currently set username
+        def username
+          @controls.username_field.text
+        end
+
+        # Public: Get the currently set username
+        def password
+          @controls.password_field.text
+        end
+
+        # Determines whether a user has entered both a username and
+        # password. If they have then the next button is enabled.
+        #
+        # Returns nothing.
+        def validate(*ignored_args)
+          valid = @controls.password_field.text.size > 0 and @controls.username_field.text.size > 0
+          @global_buttons.next.enabled = valid
+        end
+
+        # Opens the PG&E sign up flow for a user to create an account online
+        # if they haven't already.
+        #
+        # type  - The symbol representing the name of the event called
+        # event - The Java::Awt::Event that was triggered.
+        #
+        # Returns nothing.
+        def open_pge_sign_up_flow(type, event)
+          desktop = Desktop.getDesktop()
+          uri = Java::JavaNet::URI.new("https://www.pge.com/eum/registration?TARGET=https://www.pge.com/csol")
+          desktop.browse(uri)
+        end
+      end
+
+      class GooglePowerMeterPage
+        include_package "javax.swing"
+        include_package "java.awt"
+        include WizardPage
+
+        def initialize(buttons)
+          @buttons = buttons
+
+          title = "<html><b>Connect to Google PowerMeter</b></html>"
+          message  = "In order to view your power data on Google PowerMeter you'll need to create an account."
+
+          header(title, message) do |c|
+            layout = "
+                [ create ]
+                [ auth_label ]
+                [ auth_field ]
+            "
+            @controls = Profligacy::Swing::LEL.new(JPanel, layout) do |cc,ii|
+              cc.create = JButton.new "Create a PowerMeter Account"
+              ii.create = { :action => method(:open_google_powermeter_registration) }
+              cc.auth_label = JLabel.new "Then, copy your Authorization Information below:"
+              cc.auth_field = JTextArea.new
+              cc.auth_field.line_wrap = true
+              cc.auth_field.minimum_size = Dimension.new(400, 80)
+              cc.auth_field.maximum_size = Dimension.new(400, 80)
+              ii.auth_field = { :key => method(:validate) }
+            end
+            c.controls = @controls.build
+          end
+        end
+
+        def token
+          CGI.parse(@controls.auth_field.text.strip)["token"][0]
+        end
+
+        def variable
+          CGI.parse(@controls.auth_field.text.strip)["path"][0]+".d1"
+        end
+
+        def auth
+          @controls.auth_field.text.strip
+        end
+
+        # Opens the Google Powermeter registration flow so that users can upload
+        # their data.
+        #
+        # Returns nothing.
+        def open_google_powermeter_registration(*ignored_args)
+            desktop = Desktop.getDesktop()
+            uri = Java::JavaNet::URI.new("https://www.google.com/powermeter/device/activate?mfg=SmarterMeter&model=SmarterMeter&did=PGE&dvars=1")
+            desktop.browse(uri)
+        end
+
+        # Determines whether a user has entered authorization information from
+        # Google.
+        #
+        # Returns nothing.
+        def validate(*ignored_args)
+          @buttons.next.enabled = @controls.auth_field.text.size > 0
+        end
+      end
+
+      class CompletePage
+        include_package "javax.swing"
+        include_package "java.awt"
+        include WizardPage
+
+        def initialize(buttons)
+          @buttons = buttons
+
+          title = "<html><b>SmarterMeter Setup Complete</b></html>"
+          message =  "SmarterMeter will now run in your taskbar and periodically check for new power data "
+          message += "and relay it to Google PowerMeter.<br><br>"
+          message += "If you encounter an issue or would like to help improve SmarterMeter visit <a href='http://github.com/mcolyer/smartermeter/'>http://github.com/mcolyer/smatermeter</a>"
+          message += "<br><br>Enjoy!"
+
+          header(title, message, false)
+        end
+
+        # Enable the next button
+        #
+        # Returns nothing.
+        def validate(*ignored_args)
+          @buttons.next.enabled = true
+        end
       end
     end
   end
