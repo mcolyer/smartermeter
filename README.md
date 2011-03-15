@@ -39,8 +39,9 @@ To Build the Windows Installer
 --------
 
 In order to build the self contained binaries, you'll need Java 1.6 and
-(NSIS)[1], both are available as packages in Ubuntu.
+(NSIS)[1], both of which are available as packages in Ubuntu.
 
+    apt-get install nsis sun-java6-jre
     git clone git://github.com/mcolyer/smartermeter.git
     cd smartermeter
     bundle install --path vendor/gems --without test
