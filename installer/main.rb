@@ -11,12 +11,10 @@ require 'smartermeter/interfaces/swing'
 
 # Force character sets of all retrieved documents so that we don't have to have
 # charsets.jar in the JRE
-module WWW
-  class Mechanize
-    class Util
-      def self.detect_charset(src)
-        "ISO-8859-1"
-      end
+class Mechanize
+  class Util
+    def self.detect_charset(src)
+      "ISO-8859-1"
     end
   end
 end
