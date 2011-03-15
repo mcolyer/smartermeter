@@ -120,6 +120,8 @@ end
 task :package_gems do
   specifications = Dir.glob(File.join(File.dirname(__FILE__), "vendor", "gems", "jruby", "1.8", "specifications", "*"))
   specifications.reject! { |s| s.include? "rspec" }
+  specifications.reject! { |s| s.include? "minitar" }
+  specifications.reject! { |s| s.include? "ruby-debug" }
   dest_dir = File.join(File.dirname(__FILE__), "pkg", "base", "gems", "specifications")
   FileUtils.rm_rf(dest_dir)
   FileUtils.mkdir_p(dest_dir)
@@ -127,6 +129,8 @@ task :package_gems do
 
   gems = Dir.glob(File.join(File.dirname(__FILE__), "vendor", "gems", "jruby", "1.8", "gems", "*"))
   gems.reject! { |s| s.include? "rspec" }
+  gems.reject! { |s| s.include? "minitar" }
+  gems.reject! { |s| s.include? "ruby-debug" }
   dest_dir = File.join(File.dirname(__FILE__), "pkg", "base", "gems", "gems")
   FileUtils.rm_rf(dest_dir)
   FileUtils.mkdir_p(dest_dir)
