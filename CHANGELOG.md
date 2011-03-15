@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1 (March 15th, 2011)
+* Changed name from "Smartermeter" to "SmarterMeter"
+* Updated the .detect\_charset monkeypatch for the newer mechanize
+* Removed unnecessary gems from the Windows package.
+
 ## 0.3.0 (March 14th, 2011)
 * Added a Windows version of SmarterMeter which runs from the taskbar
   and provides a wizard for easy configuration.

@@ -5,5 +5,5 @@ require 'smartermeter/transports/google_powermeter'
 require 'smartermeter/interfaces/cli'
 
 module SmarterMeter
-  VERSION = "0.3.0"
+  VERSION = "0.3.1"
 end
