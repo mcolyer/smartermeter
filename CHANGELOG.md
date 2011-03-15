@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.0 (March 14th, 2011)
+* Added a Windows version of SmarterMeter which runs from the taskbar
+  and provides a wizard for easy configuration.
+* Upgraded Mechanize to the latest released version.
+
 ## 0.2.1 (January 25th, 2011)
 * Fixed bugs in the sample parser
 
