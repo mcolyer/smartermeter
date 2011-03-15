@@ -19,8 +19,8 @@ Gem::Specification.new do |s|
 
   ## Make sure your summary is short. The description may be as long
   ## as you like.
-  s.summary     = "Fetches smartmeter data from PG&E"
-  s.description = "Fetches smartmeter data from PG&E and can upload to Google PowerMeter"
+  s.summary     = "Fetches SmartMeter data from PG&E"
+  s.description = "Fetches SmartMeter data from PG&E and can upload to Google PowerMeter"
 
   ## List the primary authors. If there are a bunch of authors, it's probably
   ## better to set the email to an email list or something. If you don't have

@@ -40,7 +40,7 @@ module SmarterMeter
         popup.add(exit_item)
 
         image = Toolkit::default_toolkit.get_image("icons/smartermeter-16x16.png")
-        tray_icon = TrayIcon.new(image, "Smartermeter", popup)
+        tray_icon = TrayIcon.new(image, "SmarterMeter", popup)
         tray_icon.image_auto_size = true
 
         tray = SystemTray::system_tray
@@ -96,7 +96,7 @@ module SmarterMeter
           }
         end
 
-        @frame = @ui.build(:args => "Smartermeter Settings")
+        @frame = @ui.build(:args => "SmarterMeter Settings")
         @frame.set_location_relative_to(nil)
         @frame.default_close_operation = JFrame::DISPOSE_ON_CLOSE
       end
@@ -141,7 +141,7 @@ module SmarterMeter
           end.build :auto_create_container_gaps => false
         end
 
-        @frame = @ui.build(:args => "Smartermeter Log")
+        @frame = @ui.build(:args => "SmarterMeter Log")
         @frame.set_location_relative_to(nil)
         @frame.default_close_operation = JFrame::DISPOSE_ON_CLOSE
       end

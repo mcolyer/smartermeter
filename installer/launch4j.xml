@@ -16,7 +16,7 @@
   <var>GEM_HOME=gems</var>
   <singleInstance>
     <mutexName>smartermeter</mutexName>
-    <windowTitle>Smartermeter</windowTitle>
+    <windowTitle>SmarterMeter</windowTitle>
   </singleInstance>
   <jre>
     <path></path>

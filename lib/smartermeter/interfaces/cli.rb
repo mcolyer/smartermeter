@@ -17,7 +17,7 @@ module SmarterMeter
       # Returns nothing
       def setup
         puts
-        puts "Smartermeter: Initial Configuration"
+        puts "SmarterMeter: Initial Configuration"
         puts "--------------------------------------------------------------------------------"
         puts "This program stores your PG&E account username and password on disk. The"
         puts "password is encrypted but could be retrieved fairly easily. If this makes you"

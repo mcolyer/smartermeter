@@ -7,14 +7,14 @@
 ;General
 
   ;Name and file
-  Name "Smartermeter (${VERSION})"
+  Name "SmarterMeter (${VERSION})"
   OutFile "../pkg/smartermeter-${VERSION}.exe"
 
   ;Default installation folder
-  InstallDir "$PROGRAMFILES\Smartermeter"
+  InstallDir "$PROGRAMFILES\SmarterMeter"
 
   ;Get installation folder from registry if available
-  InstallDirRegKey HKCU "Software\Smartermeter" ""
+  InstallDirRegKey HKCU "Software\SmarterMeter" ""
 
   ;Request application privileges for Windows Vista
   RequestExecutionLevel user
@@ -48,19 +48,19 @@
 ;--------------------------------
 ;Installer Sections
 
-Section "Smartermeter Base" SecBase
+Section "SmarterMeter Base" SecBase
 
   SetOutPath "$INSTDIR"
 
   ;ADD YOUR OWN FILES HERE...
   File /r "../pkg/base/*"
 
-  CreateDirectory "$SMPROGRAMS\Smartermeter"
-  CreateShortCut "$SMPROGRAMS\Smartermeter\Smartermeter.lnk" "$INSTDIR\smartermeter.exe"
-  CreateShortCut "$SMPROGRAMS\Smartermeter\Uninstall.lnk" "$INSTDIR\uninstall.exe"
+  CreateDirectory "$SMPROGRAMS\SmarterMeter"
+  CreateShortCut "$SMPROGRAMS\SmarterMeter\SmarterMeter.lnk" "$INSTDIR\smartermeter.exe"
+  CreateShortCut "$SMPROGRAMS\SmarterMeter\Uninstall.lnk" "$INSTDIR\uninstall.exe"
 
   ;Store installation folder
-  WriteRegStr HKCU "Software\Smartermeter" "" $INSTDIR
+  WriteRegStr HKCU "Software\SmarterMeter" "" $INSTDIR
 
   ;Create uninstaller
   WriteUninstaller "$INSTDIR\uninstall.exe"
@@ -70,7 +70,7 @@ SectionEnd
 ;Descriptions
 
   ;Language strings
-  LangString DESC_SecBase ${LANG_ENGLISH} "The smartermeter application."
+  LangString DESC_SecBase ${LANG_ENGLISH} "The SmarterMeter application."
 
   ;Assign language strings to sections
   !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
@@ -91,12 +91,12 @@ Section "Uninstall"
   RMDIR  /r "$INSTDIR\icons"
   RMDIR  /r "$INSTDIR\smartermeter"
 
-  Delete "$SMPROGRAMS\Smartermeter\Smartermeter.lnk"
-  Delete "$SMPROGRAMS\Smartermeter\Uninstall.lnk"
-  RMDIR "$SMPROGRAMS\Smartermeter"
+  Delete "$SMPROGRAMS\SmarterMeter\SmarterMeter.lnk"
+  Delete "$SMPROGRAMS\SmarterMeter\Uninstall.lnk"
+  RMDIR "$SMPROGRAMS\SmarterMeter"
 
   RMDir "$INSTDIR"
 
-  DeleteRegKey /ifempty HKCU "Software\Smartermeter"
+  DeleteRegKey /ifempty HKCU "Software\SmarterMeter"
 
 SectionEnd
