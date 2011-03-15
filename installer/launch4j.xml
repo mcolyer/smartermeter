@@ -1,6 +1,6 @@
 <launch4jConfig>
   <dontWrapJar>true</dontWrapJar>
-  <headerType>console</headerType>
+  <headerType>gui</headerType>
   <jar>jruby-complete.jar</jar>
   <outfile>../pkg/base/smartermeter.exe</outfile>
   <errTitle></errTitle>
