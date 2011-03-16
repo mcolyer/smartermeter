@@ -48,7 +48,7 @@ task :default => :test
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'
-  test.pattern = 'specs/**/*_spec.rb'
+  test.pattern = 'spec/**/*_spec.rb'
   test.verbose = true
 end
 
