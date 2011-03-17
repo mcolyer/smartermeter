@@ -56,6 +56,8 @@ Gem::Specification.new do |s|
   ## List your development dependencies here. Development dependencies are
   ## those that are only needed during development
   s.add_development_dependency('rspec', ["~> 2.5.0"])
+  s.add_development_dependency('vcr', ["~> 1.7.0"])
+  s.add_development_dependency('webmock', ["~> 1.6.2"])
   s.add_development_dependency('minitar', ["~> 0.5.2"])
 
   ## Leave this section as-is. It will be automatically generated from the
