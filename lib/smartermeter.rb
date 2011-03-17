@@ -1,4 +1,5 @@
 require 'smartermeter/sample'
+require 'smartermeter/samples'
 require 'smartermeter/service'
 require 'smartermeter/daemon'
 require 'smartermeter/transports/google_powermeter'

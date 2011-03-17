@@ -6,7 +6,7 @@ describe SmarterMeter::Transports::GooglePowerMeter do
     @subject = SmarterMeter::Transports::GooglePowerMeter.new(:token => "secret",
                                                               :variable => "/path")
     data = File.read(File.join($FIXTURES_DIR, 'data.csv'))
-    @results = SmarterMeter::Sample.parse_csv(data)
+    @results = SmarterMeter::Samples.parse_csv(data)
   end
 
   it "can format a request for the API" do

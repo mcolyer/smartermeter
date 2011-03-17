@@ -50,10 +50,12 @@ Gem::Specification.new do |s|
   ## that are needed for an end user to actually USE your code.
   s.add_dependency('mechanize', ["= 1.0.0"])
   s.add_dependency('crypt', ["= 1.1.4"])
+  s.add_dependency('rest-client', ["= 1.6.1"])
+  s.add_dependency('json_pure', ["= 1.5.1"])
 
   ## List your development dependencies here. Development dependencies are
   ## those that are only needed during development
-  s.add_development_dependency('rspec', ["~> 2.4.0"])
+  s.add_development_dependency('rspec', ["~> 2.5.0"])
   s.add_development_dependency('minitar', ["~> 0.5.2"])
 
   ## Leave this section as-is. It will be automatically generated from the
