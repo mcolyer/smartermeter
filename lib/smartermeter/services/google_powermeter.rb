@@ -2,7 +2,7 @@ require 'net/https'
 require 'erb'
 
 module SmarterMeter
-  module Transports
+  module Services
     class GooglePowerMeter
       def initialize(config)
         @config = config

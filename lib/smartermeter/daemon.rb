@@ -207,7 +207,7 @@ module SmarterMeter
       case @config[:transport]
       when :google_powermeter
         @ui.log.info("Uploading #{date} to Google PowerMeter")
-        transport = SmarterMeter::Transports::GooglePowerMeter.new(@config[:google_powermeter])
+        transport = SmarterMeter::Services::GooglePowerMeter.new(@config[:google_powermeter])
         if transport.upload(samples)
           @ui.log.info("Upload for #{date} complete")
         else

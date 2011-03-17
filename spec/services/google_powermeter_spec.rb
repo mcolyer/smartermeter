@@ -1,10 +1,10 @@
 $:.unshift File.join(File.dirname(__FILE__), "..")
 require 'spec_helper'
 
-describe SmarterMeter::Transports::GooglePowerMeter do
+describe SmarterMeter::Services::GooglePowerMeter do
   before(:each) do
-    @subject = SmarterMeter::Transports::GooglePowerMeter.new(:token => "secret",
-                                                              :variable => "/path")
+    @subject = SmarterMeter::Services::GooglePowerMeter.new(:token => "secret",
+                                                            :variable => "/path")
     data = File.read(File.join($FIXTURES_DIR, 'data.csv'))
     @results = SmarterMeter::Samples.parse_csv(data)
   end
