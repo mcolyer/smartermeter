@@ -44,7 +44,7 @@ module SmarterMeter
       # @param [Float] kwh the number of kilowatt hours consumed.
       # @return [Float] kilograms of carbon produced by this much energy.
       def calculate_kg_carbon(kwh)
-        response = RestClient.get 'http://carbon.brighterplanet.com/electricity_uses.json', :energy => kwh
+        response = RestClient.get 'http://carbon.brighterplanet.com/electricity_uses.json', :params => {:energy => kwh}
         JSON.parse(response.body)["emission"]
       end
     end
