@@ -4,6 +4,7 @@ require 'yaml'
 require 'date'
 
 module SmarterMeter
+  # @private
   class Daemon
 
     def initialize(interface)

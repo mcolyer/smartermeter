@@ -3,6 +3,7 @@ require 'profligacy/swing'
 require 'profligacy/lel'
 
 module SmarterMeter
+  # @private
   module Interfaces
     class Swing
       include_package "java.awt"
@@ -147,6 +148,7 @@ module SmarterMeter
       end
     end
 
+    # @private
     class Wizard
       include_package "javax.swing"
       include_package "java.awt"

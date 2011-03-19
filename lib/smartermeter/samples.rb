@@ -2,12 +2,13 @@ require 'date'
 require 'time'
 
 module SmarterMeter
+  # Represents a collection of samples. In some cases it's useful to operate on
+  # groups of samples and this class provides that functionality.
   class Samples < Hash
-    # Parses the CSV returned by PG&E
+    # Parses the CSV returned by PG&E and creates a Samples collection.
     #
-    # data - The string containing the CSV returned by PG&E
-    #
-    # Returns a Hash of with keys as Date objects and values of Arrays of samples.
+    # @param [String] data the string containing the CSV returned by PG&E
+    # @return [Samples] creates a Samples collection from the given data.
     def self.parse_csv(data)
       samples = Samples.new
       date_re = /([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/
@@ -41,21 +42,18 @@ module SmarterMeter
       samples
     end
 
-    # Public: Calculates the total number of kilowatt hours
+    # Calculates the total number of kilowatt hours for all samples.
     #
-    # Returns a floating point number representing the sum of kilowatt hours
-    #   for all samples within this collection. If no samples are found 0 is
-    #   returned.
+    # @return [Float] the sum of kilowatt hours for all samples within this collection. If no samples are found 0 is  returned.
     def total_kwh
       self.keys.reduce(0) { |sum, d| sum + total_kwh_on(d) }
     end
 
-    # Public: Calculates the total number of kilowatt hours
+    # Calculates the total number of kilowatt hours
     #
-    # date - The date of the samples to include within the total.
+    # @param [Date] date The date of the samples to include within the total.
     #
-    # Returns a floating point number representing the sum of kilowatt hours
-    #   for samples made of the given day. If none are found 0 is returned.
+    # @return [Float] the sum of kilowatt hours for samples made of the given day. If none are found 0 is returned.
     def total_kwh_on(date)
       if self[date]
         self[date].reduce(0) { |sum, s| sum + (s.kwh or 0) }

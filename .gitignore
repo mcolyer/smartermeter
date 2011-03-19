@@ -3,6 +3,8 @@
 .bundle/*
 .rvmrc
 docs/*
+doc/*
+.yardoc/*
 data/*
 pkg/*
 vendor/gems/*

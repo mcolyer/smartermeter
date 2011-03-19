@@ -15,6 +15,23 @@ Getting Started
     gem install smartermeter
     smartermeter
 
+Manipulating the data
+---------------------
+
+After you've successfully downloaded one set of data, you should be able
+to manipulate it using ruby like so:
+
+    require 'rubygems'
+    require 'smartermeter'
+
+    config = YAML.load_file(File.expand_path("~/.smartermeter"))
+    csv_file = Dir.glob(File.join(config[:data_dir], "*.csv")).last
+
+    samples = SmarterMeter::Samples.parse_csv(csv_file)
+    kwh_used = samples.total_kwh
+    api = SmarterMeter::Services::BrighterPlanet.new
+    puts api.calculate_kg_carbon(kwh_used)
+
 Google PowerMeter
 -----------------
 

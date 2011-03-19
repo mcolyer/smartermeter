@@ -2,12 +2,21 @@ require 'mechanize'
 require 'csv'
 
 module SmarterMeter
+  # Provides access to the PG&E SmartMeter data through a ruby interface. This
+  # class depends on the PG&E website to function the same that it does today,
+  # so if something stops working its likely that something changed on PG&E's
+  # site and this class will need to be adapted.
   class Service
     LOGIN_URL = "http://www.pge.com/myhome/"
     OVERVIEW_URL = "https://www.pge.com/csol/actions/login.do?aw"
     ENERGYGUIDE_AUTH_URL = "https://www.energyguide.com/LoadAnalysis/LoadAnalysis.aspx?Referrerid=154"
 
+    # Provides access to the last page retrieved by mechanize. Useful for
+    # debugging and reporting errors.
     attr_reader :last_page
+
+    # Provides access to the last exception thrown while accessing PG&E's site.
+    # Useful for debugging/error reporting.
     attr_reader :last_exception
 
     def initialize
@@ -16,7 +25,10 @@ module SmarterMeter
       }
     end
 
-    # Returns true upon succesful login and false otherwise
+    # Authenticates to the PG&E's website. Only needs to be performed once per
+    # instance of this class.
+    #
+    # @return [Boolean] true upon succesful login and false otherwise
     def login(username, password)
       begin
         @agent.get(LOGIN_URL) do |page|
@@ -61,6 +73,15 @@ module SmarterMeter
       end
     end
 
+    # Downloads a CSV containing hourly date on that date. Up to a week worth
+    # of other data will be included depending on which day of the week that
+    # you request.
+    #
+    # PG&E compiles this data on a weekly schedule so if you ask for Monday
+    # you'll get the previous Sunday and the following days upto the next
+    # Sunday.
+    #
+    # @return [String] the CSV data.
     def fetch_csv(date)
       raise RuntimeException, "login must be called before fetch_csv" unless @authenticated
 
