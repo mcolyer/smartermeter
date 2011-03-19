@@ -42,9 +42,16 @@ module SmarterMeter
       # accuracy include an optional zipcode of where this energy was consumed.
       #
       # @param [Float] kwh the number of kilowatt hours consumed.
+      # @params [Hash] opts can include `:zip_code` to increase the accuracy of the estimate.
       # @return [Float] kilograms of carbon produced by this much energy.
-      def calculate_kg_carbon(kwh)
-        response = RestClient.get 'http://carbon.brighterplanet.com/electricity_uses.json', :params => {:energy => kwh}
+      def calculate_kg_carbon(kwh, opts={})
+        allowed_keys = [:zip_code]
+        non_permitted_keys = opts.keys.reject { |k| allowed_keys.include? k }
+        raise ArgumentError, "opts contains keys not found in #{allowed_keys}" unless non_permitted_keys.empty?
+
+        params = {:energy => kwh}
+        params.merge!(opts)
+        response = RestClient.get 'http://carbon.brighterplanet.com/electricity_uses.json', :params => params
         JSON.parse(response.body)["emission"]
       end
     end

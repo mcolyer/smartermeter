@@ -8,5 +8,19 @@ describe SmarterMeter::Services::BrighterPlanet do
     end
   end
 
-  it "can query for electricity from a specific zipcode"
+  it "can query for electricity from a specific zipcode" do
+    VCR.use_cassette('brighterplanet', :record => :new_episodes) do
+      subject.calculate_kg_carbon(1, :zip_code => "94110").should be_within(0.1).of(0.34)
+    end
+  end
+
+  xit "can query for electricity on a specific date" do
+    VCR.use_cassette('brighterplanet', :record => :new_episodes) do
+      subject.calculate_kg_carbon(1, :date => "").should be_within(0.1).of(0.34)
+    end
+  end
+
+  it "doesn't allow electricity queries to include keys other than those specified" do
+    expect { subject.calculate_kg_carbon(1, :energy => 2) }.to raise_error(ArgumentError)
+  end
 end
