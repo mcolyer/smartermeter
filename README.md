@@ -32,6 +32,8 @@ to manipulate it using ruby like so:
     api = SmarterMeter::Services::BrighterPlanet.new
     puts api.calculate_kg_carbon(kwh_used)
 
+For futher information see the [API docs][rdoc]
+
 Google PowerMeter
 -----------------
 
@@ -93,3 +95,4 @@ part of their [Fellowship Program][3]
 [1]: http://nsis.sourceforge.net/
 [2]: http://brighterplanet.com/
 [3]: http://brighterplanet.github.com/fellowship.html
+[rdoc]: http://rdoc.info/github/mcolyer/smartermeter/master/frames
