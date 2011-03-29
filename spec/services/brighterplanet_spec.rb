@@ -14,9 +14,9 @@ describe SmarterMeter::Services::BrighterPlanet do
     end
   end
 
-  xit "can query for electricity on a specific date" do
+  it "can query for electricity on a specific date" do
     VCR.use_cassette('brighterplanet', :record => :new_episodes) do
-      subject.calculate_kg_carbon(1, :date => "").should be_within(0.1).of(0.34)
+      subject.calculate_kg_carbon(1, :date => "2011-03-29").should be_within(0.1).of(0.64)
     end
   end
 

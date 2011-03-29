@@ -42,10 +42,10 @@ module SmarterMeter
       # accuracy include an optional zipcode of where this energy was consumed.
       #
       # @param [Float] kwh the number of kilowatt hours consumed.
-      # @params [Hash] opts can include `:zip_code` to increase the accuracy of the estimate.
+      # @params [Hash] opts can include `:zip_code` and/or `:date` to increase the accuracy of the estimate. `:date` should be in the following form: YYYY-MM-DD.
       # @return [Float] kilograms of carbon produced by this much energy.
       def calculate_kg_carbon(kwh, opts={})
-        allowed_keys = [:zip_code]
+        allowed_keys = [:zip_code, :date]
         non_permitted_keys = opts.keys.reject { |k| allowed_keys.include? k }
         raise ArgumentError, "opts contains keys not found in #{allowed_keys}" unless non_permitted_keys.empty?
 
