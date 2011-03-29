@@ -63,7 +63,7 @@ In order to build the self contained binaries, you'll need Java 1.6 and
     apt-get install nsis sun-java6-jre
     git clone git://github.com/mcolyer/smartermeter.git
     cd smartermeter
-    bundle install --path vendor/gems --without test
+    bundle install --path vendor/gems
     rake package
 
 The installer will be generated in pkg/

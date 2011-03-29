@@ -122,6 +122,10 @@ task :package_gems do
   specifications.reject! { |s| s.include? "rspec" }
   specifications.reject! { |s| s.include? "minitar" }
   specifications.reject! { |s| s.include? "ruby-debug" }
+  specifications.reject! { |s| s.include? "addressable" }
+  specifications.reject! { |s| s.include? "diff-lcs" }
+  specifications.reject! { |s| s.include? "vcr" }
+  specifications.reject! { |s| s.include? "webmock" }
   dest_dir = File.join(File.dirname(__FILE__), "pkg", "base", "gems", "specifications")
   FileUtils.rm_rf(dest_dir)
   FileUtils.mkdir_p(dest_dir)
@@ -131,6 +135,10 @@ task :package_gems do
   gems.reject! { |s| s.include? "rspec" }
   gems.reject! { |s| s.include? "minitar" }
   gems.reject! { |s| s.include? "ruby-debug" }
+  gems.reject! { |s| s.include? "addressable" }
+  gems.reject! { |s| s.include? "diff-lcs" }
+  gems.reject! { |s| s.include? "vcr" }
+  gems.reject! { |s| s.include? "webmock" }
   dest_dir = File.join(File.dirname(__FILE__), "pkg", "base", "gems", "gems")
   FileUtils.rm_rf(dest_dir)
   FileUtils.mkdir_p(dest_dir)

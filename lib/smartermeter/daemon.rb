@@ -183,7 +183,7 @@ module SmarterMeter
           next if data.empty?
 
           @ui.log.info("Verifying #{date}")
-          samples = Sample.parse_csv(data).values.first
+          samples = Samples.parse_csv(data).values.first
           first_sample = samples.first
 
           if first_sample.kwh
