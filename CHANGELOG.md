@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.2 (March 29, 2011)
+* Added support for Brighter Planet's Electricity API.
+* Fixed encryption of passwords that had lengths other than multiples of
+  8.
+* Added more extensive documentation of the library.
+
 ## 0.3.1 (March 15th, 2011)
 * Changed name from "Smartermeter" to "SmarterMeter"
 * Updated the .detect\_charset monkeypatch for the newer mechanize
