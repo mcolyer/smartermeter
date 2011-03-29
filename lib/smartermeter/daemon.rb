@@ -64,6 +64,8 @@ module SmarterMeter
 
     # Takes the unencrypted password and encrypts it.
     def password=(unencrypted)
+      padding_length = 8 - (unencrypted.bytesize % 8)
+      unencrypted = unencrypted + ("\0" * padding_length)
       @config[:password] = cipher.encrypt_block(unencrypted)
     end
 
@@ -71,7 +73,7 @@ module SmarterMeter
     def password
       password = @config.fetch(:password, nil)
       if password
-        cipher.decrypt_block(password)
+        cipher.decrypt_block(password).gsub("\0", "")
       else
         password
       end
