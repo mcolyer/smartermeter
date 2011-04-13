@@ -21,7 +21,7 @@ module SmarterMeter
         http.use_ssl = true
         http.verify_mode = OpenSSL::SSL::VERIFY_PEER
         http.ca_file = File.join(File.dirname(__FILE__), "cacert.pem")
-        res, body = http.post(url.path, request_body(samples), {"Authorization" => 'AuthSub token="CMCc9puFFRDKivjpAhjgiZLuAg"', "Content-Type" => "application/atom+xml"})
+        res, body = http.post(url.path, request_body(samples), {"Authorization" => "AuthSub token=\"#{@config[:token]}\"", "Content-Type" => "application/atom+xml"})
         case res
         when Net::HTTPSuccess
           true
