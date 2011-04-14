@@ -87,7 +87,7 @@ task :fetch_jruby do
   jar_file = File.join(dir, "jruby-complete.jar")
   FileUtils.mkdir_p(dir)
   unless File.exists?(jar_file)
-    jruby_url = "http://jruby.org.s3.amazonaws.com/downloads/1.6.0.RC2/jruby-complete-1.6.0.RC2.jar"
+    jruby_url = "http://jruby.org.s3.amazonaws.com/downloads/1.6.1/jruby-complete-1.6.1.jar"
     puts "Fetching JRuby"
     File.open(jar_file, "wb") { |f| f.write(Net::HTTP.get(URI.parse(jruby_url))) }
     puts "Fetched JRuby"
