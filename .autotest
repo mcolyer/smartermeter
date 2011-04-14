@@ -1,7 +1,1 @@
-# Hack to work around https://github.com/dchelimsky/rspec/issues#issue/7
-class Autotest::Rspec2 < Autotest
-  def make_test_cmd(files_to_test)
-    files_to_test.empty? ? '' :
-      "bundle exec rspec --tty #{normalize(files_to_test).keys.flatten.map { |f| "'#{f}'"}.join(' ')}"
-  end
-end
+require 'autotest/bundler'
