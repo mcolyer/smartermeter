@@ -108,7 +108,7 @@ module SmarterMeter
         end.submit
 
         hourly_csv.body
-      rescue Timeout::Error => e
+      rescue Exception => e
         @last_exception = e
         return ""
       end
