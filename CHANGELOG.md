@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.3 (April 20, 2011)
+* Fixed a bug which prevent the proper Google PowerMeter authentication
+  information to be sent.
+* Fixed a bug in exception handling to make it a bit more resilient.
+* Fixed up some development nitpicks.
+
 ## 0.3.2 (March 29, 2011)
 * Added support for Brighter Planet's Electricity API.
 * Fixed encryption of passwords that had lengths other than multiples of
