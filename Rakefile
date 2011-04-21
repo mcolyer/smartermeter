@@ -173,7 +173,7 @@ task :nsis_installer do
 end
 
 desc "Package all required files into pkg/base"
-task :package => [:fetch_jruby, :fetch_launch4j, :package_gems, :create_launcher, :copy_smartermeter, :nsis_installer]
+task :package => [:build, :fetch_jruby, :fetch_launch4j, :package_gems, :create_launcher, :copy_smartermeter, :nsis_installer]
 
 #############################################################################
 #
