@@ -7,7 +7,7 @@ module SmarterMeter
   # so if something stops working its likely that something changed on PG&E's
   # site and this class will need to be adapted.
   class Service
-    LOGIN_URL = "http://www.pge.com/myhome/"
+    LOGIN_URL = "https://www.pge.com/csol"
     OVERVIEW_URL = "https://www.pge.com/csol/actions/login.do?aw"
     ENERGYGUIDE_AUTH_URL = "https://www.energyguide.com/LoadAnalysis/LoadAnalysis.aspx?Referrerid=154"
 
@@ -32,7 +32,7 @@ module SmarterMeter
     def login(username, password)
       begin
         @agent.get(LOGIN_URL) do |page|
-          logged_in_page = page.form_with(:action => 'https://www.pge.com/eum/login') do |login|
+          logged_in_page = page.form_with(:name => 'login') do |login|
             login.USER = username
             login.PASSWORD = password
           end.submit
