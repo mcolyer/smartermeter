@@ -187,11 +187,11 @@ module SmarterMeter
                   config = {
                     :username => @pages[0].username,
                     :password => @pages[0].password,
-                    :transport => :google_powermeter,
-                    :google_powermeter => {
-                      :token => @pages[1].token,
-                      :variable => @pages[1].variable,
-                      :auth => @pages[1].auth
+                    :transport => :pachube,
+                    :pachube => {
+                      :api_key => @pages[1].api_key,
+                      :feed_id => @pages[1].feed_id,
+                      :datastream_id => @pages[1].datastream_id
                     }
                   }
                 else
@@ -206,7 +206,7 @@ module SmarterMeter
           c.buttons = @buttons.build
 
           @panel = JPanel.new(CardLayout.new)
-          @pages = [PGEPage, GooglePowerMeterPage, CompletePage].map do |klass|
+          @pages = [PGEPage, PachubePage, CompletePage].map do |klass|
             page = klass.new(@buttons)
             @panel.add(page.build, klass.to_s)
             page
@@ -397,7 +397,7 @@ module SmarterMeter
         end
       end
 
-      class GooglePowerMeterPage
+      class PachubePage
         include_package "javax.swing"
         include_package "java.awt"
         include WizardPage
@@ -405,48 +405,51 @@ module SmarterMeter
         def initialize(buttons)
           @buttons = buttons
 
-          title = "<html><b>Connect to Google PowerMeter</b></html>"
-          message  = "In order to view your power data on Google PowerMeter you'll need to create an account."
+          title = "<html><b>Connect to Pachube</b></html>"
+          message  = "In order to view your power data on Pachube you'll need to create an account."
 
           header(title, message) do |c|
             layout = "
                 [ create ]
-                [ auth_label ]
-                [ auth_field ]
+                [ api_key_label | <api_key ]
+                [ feed_id_label | <feed_id ]
+                [ datastream_id_label | <datastream_id ]
             "
             @controls = Profligacy::Swing::LEL.new(JPanel, layout) do |cc,ii|
-              cc.create = JButton.new "Create a PowerMeter Account"
-              ii.create = { :action => method(:open_google_powermeter_registration) }
-              cc.auth_label = JLabel.new "Then, copy your Authorization Information below:"
-              cc.auth_field = JTextArea.new
-              cc.auth_field.line_wrap = true
-              cc.auth_field.minimum_size = Dimension.new(400, 80)
-              cc.auth_field.maximum_size = Dimension.new(400, 80)
-              ii.auth_field = { :key => method(:validate) }
+              cc.create = JButton.new "Create a Pachube Account"
+              ii.create = { :action => method(:open_pachube_registration) }
+              cc.api_key_label = JLabel.new "Api Key:"
+              cc.api_key_field = JTextField.new
+              ii.api_key_field = { :key => method(:validate) }
+              cc.feed_id_label = JLabel.new "Feed id:"
+              cc.feed_id_field = JTextField.new
+              ii.feed_id_field = { :key => method(:validate) }
+              cc.datastream_id_label = JLabel.new "Datastream Name:"
+              cc.datastream_id_field = JTextField.new
+              ii.datastream_id_field = { :key => method(:validate) }
             end
             c.controls = @controls.build
           end
         end
 
-        def token
-          CGI.parse(@controls.auth_field.text.strip)["token"][0]
+        def api_key
+          @controls.api_key.text.strip
         end
 
-        def variable
-          CGI.parse(@controls.auth_field.text.strip)["path"][0]+".d1"
+        def feed_id
+          @controls.feed_id.text.strip
         end
 
-        def auth
-          @controls.auth_field.text.strip
+        def datastream_id
+          @controls.datastream_id.text.strip
         end
 
-        # Opens the Google Powermeter registration flow so that users can upload
-        # their data.
+        # Opens the Pachube plans page so that users can register
         #
         # Returns nothing.
-        def open_google_powermeter_registration(*ignored_args)
+        def open_pachube_registration(*ignored_args)
             desktop = Desktop.getDesktop()
-            uri = Java::JavaNet::URI.new("https://www.google.com/powermeter/device/activate?mfg=SmarterMeter&model=SmarterMeter&did=PGE&dvars=1")
+            uri = Java::JavaNet::URI.new("https://pachube.com/plans")
             desktop.browse(uri)
         end
 
@@ -455,7 +458,9 @@ module SmarterMeter
         #
         # Returns nothing.
         def validate(*ignored_args)
-          @buttons.next.enabled = @controls.auth_field.text.size > 0
+          if api_key.any? && feed_id.any? && datastream_id.any?
+            @buttons.next.enabled = true
+          end
         end
       end
 

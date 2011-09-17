@@ -34,25 +34,25 @@ to manipulate it using ruby like so:
 
 For futher information see the [API docs][rdoc]
 
-Google PowerMeter
+Pachube
 -----------------
 
 Once you've configured SmarterMeter once, you might want to use it with
-Google PowerMeter.
+Pachube, so you can visualize the results.
 
-1. Visit: https://www.google.com/powermeter/device/activate?mfg=Ruby&model=SmarterMeter&did=PGE&dvars=1
-1. Then sign in with your desired Google Account.
-1. Follow the directions on screen.
-1. On the final screen copy the entire "authInfo" into your favorite editor.
-   Pull out the "token" and the "path" from the string.
-1. Take the "path" you collected previously and append ".d1" to the end of it.
+1. Visit http://pachube.com and sign up for an account.
+1. Create a feed and a datastream.
+1. Copy the feed id (the last item in a feed url like 123 in
+   https://pachube.com/feeds/123) and the datastream id (which is the
+   name that you enter)
 1. Then append the following to your ~/.smartermeter file to
-   automatically upload data as it's retrieved from PG&E.
+automatically upload data as it's retrieved from PG&E.
 
-       :transport: :google_powermeter
-       :google_powermeter:
-         :token: "your-token"
-         :variable: "your-path-with.d1-appended"
+       :transport: :pachube
+       :pachube:
+         :api_key: "your-api-key"
+         :feed_id: "your-feed-id"
+         :datastream_id: "your-datastream-id"
 
 To Build the Windows Installer
 --------

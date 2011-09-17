@@ -206,14 +206,6 @@ module SmarterMeter
 
     def upload(date, samples)
       case @config[:transport]
-      when :google_powermeter
-        @ui.log.info("Uploading #{date} to Google PowerMeter")
-        transport = SmarterMeter::Services::GooglePowerMeter.new(@config[:google_powermeter])
-        if transport.upload(samples)
-          @ui.log.info("Upload for #{date} complete")
-        else
-          @ui.log.info("Upload for #{date} failed")
-        end
       when :pachube
         @ui.log.info("Uploading #{date} to Pachube")
         transport = SmarterMeter::Services::Pachube.new(@config[:pachube])

@@ -30,9 +30,9 @@ module SmarterMeter
         end
       end
 
-      # Creates the proper XML request to send to Google.
+      # Creates the proper XML request to send to Pachube
       #
-      # Returns the proper atom/xml response to send to google
+      # Returns the proper text/csv request to send to pachube
       def request_body(samples)
         template = ERB.new(File.read(File.join(File.dirname(__FILE__), "pachube.erb")))
         template.result(binding).gsub(/^\n/, '')
