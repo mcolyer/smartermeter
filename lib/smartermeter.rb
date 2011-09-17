@@ -3,6 +3,7 @@ require 'smartermeter/samples'
 require 'smartermeter/service'
 require 'smartermeter/daemon'
 require 'smartermeter/services/google_powermeter'
+require 'smartermeter/services/pachube'
 require 'smartermeter/services/brighterplanet'
 require 'smartermeter/interfaces/cli'
 

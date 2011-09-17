@@ -214,6 +214,14 @@ module SmarterMeter
         else
           @ui.log.info("Upload for #{date} failed")
         end
+      when :pachube
+        @ui.log.info("Uploading #{date} to Pachube")
+        transport = SmarterMeter::Services::Pachube.new(@config[:pachube])
+        if transport.upload(samples)
+          @ui.log.info("Upload for #{date} complete")
+        else
+          @ui.log.info("Upload for #{date} failed")
+        end
       end
     end
 

@@ -1,0 +1,2 @@
+<% samples.select { |s| s.kwh }.each do |sample| %>
+<%= sample.time.utc.iso8601 %>,<%= sample.kwh %><% end %>
