@@ -2,6 +2,11 @@ require 'date'
 require 'time'
 
 module SmarterMeter
+  DATE_COL = 1
+  HOUR_COL = 2
+  USAGE_COL = 4
+  UNITS_COL = 5
+
   # Represents a collection of samples. In some cases it's useful to operate on
   # groups of samples and this class provides that functionality.
   class Samples < Hash
@@ -12,33 +17,44 @@ module SmarterMeter
     def self.parse_csv(data)
       samples = Samples.new
       date_re = /([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/
+      date_re = /([0-9]{4})-([0-9]{2})-([0-9]{2})/
+      hour_re = /([0-9]{2}):[0-9]{2}/
 
       # Apparently they felt the need to put a = outside of the correct place
-      data = data.gsub('=','')
+      #data = data.gsub('=','')
 
-      hour_increment = 60*60
+      #hour_increment = 60*60
+      cur_date = nil
+      year, month, day = nil, nil, nil
+      hourly_samples = nil
+
       CSV.parse(data) do |row|
-        next unless row.length > 0 and date_re.match row[0]
+        next unless row.length > 0 and date_re.match row[DATE_COL]
 
-        month, day, year = date_re.match(row[0]).captures
-        month = month.to_i
-        day = day.to_i
-        year = year.to_i
-
-        timestamp = Time.local(year, month, day, 0) - hour_increment
-        next if row[1].include? "$"
-        hourly_samples = row[1..24].map do |v|
-          if v == "-"
-            kwh = nil
-          else
-            kwh = v.to_f
+        if cur_date != row[DATE_COL] then
+          if cur_date != nil then
+            samples[Date.new(year, month, day)] = hourly_samples
           end
 
-          timestamp = timestamp + hour_increment
-          Sample.new(timestamp, kwh)
+          cur_date = row[DATE_COL]
+          hourly_samples = Array.new
+
+          year, month, day = date_re.match(row[DATE_COL]).captures
+          month = month.to_i
+          day = day.to_i
+          year = year.to_i
         end
+
+        hour = hour_re.match(row[HOUR_COL]).captures[0].to_i
+        timestamp = Time.local(year, month, day, hour)
+
+        hourly_samples << Sample.new(timestamp, row[USAGE_COL].to_f)
+      end
+
+      if hourly_samples != nil then
         samples[Date.new(year, month, day)] = hourly_samples
       end
+
       samples
     end
 

@@ -1,5 +1,7 @@
 require 'mechanize'
 require 'csv'
+require 'tempfile'
+require 'zip/zip'
 
 module SmarterMeter
   # Provides access to the PG&E SmartMeter data through a ruby interface. This
@@ -8,7 +10,7 @@ module SmarterMeter
   # site and this class will need to be adapted.
   class Service
     LOGIN_URL = "https://www.pge.com/csol"
-    OVERVIEW_URL = "https://www.pge.com/csol/actions/login.do?aw"
+    OVERVIEW_URL = "https://www.pge.com/myenergyweb/appmanager/pge/customer?_nfpb=true&_pageLabel=MyUsage"
     ENERGYGUIDE_AUTH_URL = "https://www.energyguide.com/LoadAnalysis/LoadAnalysis.aspx?Referrerid=154"
 
     # Provides access to the last page retrieved by mechanize. Useful for
@@ -22,7 +24,10 @@ module SmarterMeter
     def initialize
       @agent = Mechanize.new { |agent|
         agent.user_agent_alias = 'Mac Safari'
+        agent.log = Logger.new("mech.log")
       }
+      @logger = Logger.new STDOUT
+      @logger.level = Logger::INFO
     end
 
     # Authenticates to the PG&E's website. Only needs to be performed once per
@@ -44,27 +49,11 @@ module SmarterMeter
 
           return false if page.title =~ /PG&E Login/
 
-          # Load the PG&E Terms of Use page
-          tou_link = page.link_with(:href => '/csol/actions/billingDisclaimer.do?actionType=hourly')
-          unless tou_link
-            @last_page = page
-            return false
-          end
-          tou_page = @agent.click(tou_link)
-          form = tou_page.forms().first
-          agree_button = form.button_with(:value => 'I Understand - Proceed')
-
-          # Agree to the terms of use
-          form['agreement'] = 'yes'
-
-          # Load up the PG&E frame page for historical data
-          hourly_usage_container = form.submit(agree_button)
-
-          # Now load up the frame with the content
-          hourly_usage = @agent.click(hourly_usage_container.frames.select{|f| f.href == "/csol/nexus/content.jsp"}.first)
-
           # Now post the authentication information from PG&E to energyguide.com
-          @data_page = hourly_usage.form_with(:action => ENERGYGUIDE_AUTH_URL).submit
+          saml_page = page.forms().first.submit
+          overview_page = saml_page.forms().first.submit
+
+          @data_page = @agent.click(overview_page.link_with(:text => /Export your data/))
         end
         @authenticated = true
       rescue Exception => e
@@ -73,13 +62,12 @@ module SmarterMeter
       end
     end
 
-    # Downloads a CSV containing hourly date on that date. Up to a week worth
-    # of other data will be included depending on which day of the week that
-    # you request.
+    # Downloads a CSV containing hourly data on that date. Up to a month worth
+    # of other data will be included depending on which day you request.
     #
     # PG&E compiles this data on a weekly schedule so if you ask for Monday
     # you'll get the previous Sunday and the following days upto the next
-    # Sunday.
+    # Sunday. [is this still true?]
     #
     # @return [String] the CSV data.
     def fetch_csv(date)
@@ -89,25 +77,31 @@ module SmarterMeter
       # parameters first before we can get the exportable data. This really shouldn't
       # be necessary.
       begin
-        hourly_data = @data_page.form_with(:action => "LoadAnalysis.aspx") do |form|
-          form['__EVENTTARGET'] = "objChartSelect$butSubmit"
-          form['objTimePeriods$objExport$hidChart'] = "Hourly Usage"
-          form['objTimePeriods$objExport$hidChartID'] = 8
-          form['objChartSelect$ddChart'] = 8 # Hourly usage
+        form = @data_page.forms().first
+        begin
+          form.radiobuttons_with(:value => 'CSV_INTERVAL').each { |f| f.click }
+          form.field_with(:name => 'bill').value = date.strftime("%Y-%m")
+        end
+        hourly_csv = form.submit
 
-          form['objTimePeriods$objExport$hidTimePeriod'] = "Week"
-          form['objTimePeriods$objExport$hidTimePeriodID'] = 3
-          form['objTimePeriods$rlPeriod'] = 3
+        file = Tempfile.new('hourly')
+        begin
+          file.binmode
+          file << hourly_csv.body.strip
+          file.flush
+          file.close
 
-          form['objChartSelect$ccSelectedDate1'] = date.strftime("%m/%d/%Y")
-        end.submit
-
-        # Now the beautiful data...
-        hourly_csv = hourly_data.form_with(:action => "LoadAnalysis.aspx") do |form|
-          form['__EVENTTARGET'] = "objTimePeriods$objExport$butExport"
-        end.submit
-
-        hourly_csv.body
+          Zip::ZipInputStream::open(file.path()) do |contents|
+            while (entry = contents.get_next_entry)
+              if (entry.name =~ /DailyElectricUsage/) then
+                return contents.read
+              end
+            end
+          end
+        ensure
+          file.close
+          file.unlink
+        end
       rescue Exception => e
         @last_exception = e
         return ""
