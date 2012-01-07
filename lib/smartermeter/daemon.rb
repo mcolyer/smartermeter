@@ -2,6 +2,7 @@ require 'fileutils'
 require 'crypt/blowfish'
 require 'yaml'
 require 'date'
+require 'base64'
 
 module SmarterMeter
   # @private
@@ -64,12 +65,12 @@ module SmarterMeter
 
     # Takes the unencrypted password and encrypts it.
     def password=(unencrypted)
-      @config[:password] = cipher.encrypt_string(unencrypted)
+      @config[:password] = Base64.encode64(cipher.encrypt_string(unencrypted))
     end
 
     # Returns the clear-text password or nil if it isn't set.
     def password
-      password = @config.fetch(:password, nil)
+      password = Base64.decode64(@config.fetch(:password, nil))
       if password
         cipher.decrypt_string(password).gsub("\0", "")
       else
