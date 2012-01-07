@@ -178,11 +178,11 @@ module SmarterMeter
         dates.each do |date|
           @ui.log.info("Fetching #{date}")
 
-          data = service.fetch_csv(date)
+          data = service.fetch_espi(date)
           next if data.empty?
 
           @ui.log.info("Verifying #{date}")
-          samples = Samples.parse_csv(data).values.first
+          samples = Samples.parse_espi(data).values.first
           first_sample = samples.first
 
           if first_sample.kwh

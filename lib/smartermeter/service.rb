@@ -2,6 +2,7 @@ require 'mechanize'
 require 'csv'
 require 'tempfile'
 require 'zip/zip'
+require 'uri'
 
 module SmarterMeter
   # Provides access to the PG&E SmartMeter data through a ruby interface. This
@@ -9,9 +10,11 @@ module SmarterMeter
   # so if something stops working its likely that something changed on PG&E's
   # site and this class will need to be adapted.
   class Service
-    LOGIN_URL = "https://www.pge.com/csol"
-    OVERVIEW_URL = "https://www.pge.com/myenergyweb/appmanager/pge/customer?_nfpb=true&_pageLabel=MyUsage"
-    ENERGYGUIDE_AUTH_URL = "https://www.energyguide.com/LoadAnalysis/LoadAnalysis.aspx?Referrerid=154"
+    LOGIN_FORM_URL = "http://www.pge.com/"
+    LOGIN_URL = "https://www.pge.com/eum/login"
+    MY_USAGE_URL = "https://www.pge.com/myenergyweb/appmanager/pge/customer?_nfpb=true&_pageLabel=MyUsage"
+    SAML_URL = "https://sso.opower.com/sp/ACS.saml2"
+    MY_ENERGY_USE_URL = "https://pge.opower.com/ei/app/myEnergyUse"
 
     # Provides access to the last page retrieved by mechanize. Useful for
     # debugging and reporting errors.
@@ -24,10 +27,7 @@ module SmarterMeter
     def initialize
       @agent = Mechanize.new { |agent|
         agent.user_agent_alias = 'Mac Safari'
-        agent.log = Logger.new("mech.log")
       }
-      @logger = Logger.new STDOUT
-      @logger.level = Logger::INFO
     end
 
     # Authenticates to the PG&E's website. Only needs to be performed once per
@@ -36,24 +36,15 @@ module SmarterMeter
     # @return [Boolean] true upon succesful login and false otherwise
     def login(username, password)
       begin
-        @agent.get(LOGIN_URL) do |page|
-          logged_in_page = page.form_with(:name => 'login') do |login|
+        @agent.get(LOGIN_FORM_URL) do |page|
+          saml_page = page.form_with(:action => LOGIN_URL) do |login|
             login.USER = username
             login.PASSWORD = password
+            login.TARGET = MY_USAGE_URL
           end.submit
-        end
-
-        # There is a crazy meta-reload thing here that mechanize doesn't handle
-        # correctly by itself so let's help it along...
-        @agent.get(OVERVIEW_URL) do |page|
-
-          return false if page.title =~ /PG&E Login/
-
-          # Now post the authentication information from PG&E to energyguide.com
-          saml_page = page.forms().first.submit
-          overview_page = saml_page.forms().first.submit
-
-          @data_page = @agent.click(overview_page.link_with(:text => /Export your data/))
+          token = saml_page.form_with(:action => SAML_URL).submit
+          usage_page = token.form_with(:action => MY_ENERGY_USE_URL).submit
+          @data_page = usage_page.link_with(:text => "Green Button").click
         end
         @authenticated = true
       rescue Exception => e
@@ -62,38 +53,36 @@ module SmarterMeter
       end
     end
 
-    # Downloads a CSV containing hourly data on that date. Up to a month worth
-    # of other data will be included depending on which day you request.
+    # Downloads an ESPI file containing data in 15 minute windows on the
+    # given date.
     #
-    # PG&E compiles this data on a weekly schedule so if you ask for Monday
-    # you'll get the previous Sunday and the following days upto the next
-    # Sunday. [is this still true?]
-    #
-    # @return [String] the CSV data.
-    def fetch_csv(date)
-      raise RuntimeException, "login must be called before fetch_csv" unless @authenticated
+    # @param [Time] date - The day of the data you wish to fetch.
+    # @return [String] the XML data.
+    def fetch_espi(date)
+      raise RuntimeException, "login must be called before fetch_espi" unless @authenticated
 
-      # Now we almost actually have data. However we need to setup the desired
-      # parameters first before we can get the exportable data. This really shouldn't
-      # be necessary.
       begin
-        form = @data_page.forms().first
+        form = @data_page.forms.first
         begin
-          form.radiobuttons_with(:value => 'CSV_INTERVAL').each { |f| f.click }
-          form.field_with(:name => 'bill').value = date.strftime("%Y-%m")
+          form.radiobutton_with(:value => 'ESPI_INTERVAL').click
+          form.field_with(:name => 'from').value = date.strftime("%m/%d/%Y")
+          form.field_with(:name => 'to').value = date.strftime("%m/%d/%Y")
         end
-        hourly_csv = form.submit
+        espi_xml_zip = form.submit
 
-        file = Tempfile.new('hourly')
+        # This has to be one of the stupidest implementations I've seen
+        # of a ruby library. Why on earth can you not pass in an IO
+        # object to the rubyzip library?
+        file = Tempfile.new('espi-zip')
         begin
           file.binmode
-          file << hourly_csv.body.strip
+          file << espi_xml_zip.body
           file.flush
           file.close
 
-          Zip::ZipInputStream::open(file.path()) do |contents|
+          Zip::ZipInputStream::open(file.path) do |contents|
             while (entry = contents.get_next_entry)
-              if (entry.name =~ /DailyElectricUsage/) then
+              if (entry.name =~ /pge_electric_interval_data/) then
                 return contents.read
               end
             end

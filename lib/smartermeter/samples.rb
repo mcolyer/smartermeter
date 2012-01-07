@@ -1,58 +1,38 @@
 require 'date'
 require 'time'
+require 'nokogiri'
 
 module SmarterMeter
-  DATE_COL = 1
-  HOUR_COL = 2
-  USAGE_COL = 4
-  UNITS_COL = 5
-
   # Represents a collection of samples. In some cases it's useful to operate on
   # groups of samples and this class provides that functionality.
   class Samples < Hash
-    # Parses the CSV returned by PG&E and creates a Samples collection.
+    # Parses the XML returned by PG&E and creates a Samples collection.
     #
-    # @param [String] data the string containing the CSV returned by PG&E
+    # @param [String] data the string containing the XML returned by PG&E
     # @return [Samples] creates a Samples collection from the given data.
-    def self.parse_csv(data)
+    def self.parse_espi(data)
       samples = Samples.new
-      date_re = /([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/
-      date_re = /([0-9]{4})-([0-9]{2})-([0-9]{2})/
-      hour_re = /([0-9]{2}):[0-9]{2}/
 
-      # Apparently they felt the need to put a = outside of the correct place
-      #data = data.gsub('=','')
+      doc = Nokogiri::HTML(data)
 
-      #hour_increment = 60*60
-      cur_date = nil
-      year, month, day = nil, nil, nil
-      hourly_samples = nil
+      doc.xpath("//intervalreading").each do |reading|
+        # NOTE: This is a hack, the ESPI data seems to be assuming that
+        # all users live in the Eastern Time Zone. The timestamps
+        # returned in the ESPI should really be in UTC and not in local
+        # time. I'm going to assume all PG&E customers are in the
+        # pacific timezone and since the eastern timezone has the same
+        # daylight savings time rules then we can use a constant
+        # difference to correct the problem.
+        pacific_timezone_correction = 60*60*3
 
-      CSV.parse(data) do |row|
-        next unless row.length > 0 and date_re.match row[DATE_COL]
+        timestamp = Time.at(reading.xpath("./timeperiod/start").first.content.to_i + pacific_timezone_correction)
+        value = reading.xpath("./value").first.content.to_i / 900.0
 
-        if cur_date != row[DATE_COL] then
-          if cur_date != nil then
-            samples[Date.new(year, month, day)] = hourly_samples
-          end
+        year = timestamp.year
+        month = timestamp.month
+        day = timestamp.day
 
-          cur_date = row[DATE_COL]
-          hourly_samples = Array.new
-
-          year, month, day = date_re.match(row[DATE_COL]).captures
-          month = month.to_i
-          day = day.to_i
-          year = year.to_i
-        end
-
-        hour = hour_re.match(row[HOUR_COL]).captures[0].to_i
-        timestamp = Time.local(year, month, day, hour)
-
-        hourly_samples << Sample.new(timestamp, row[USAGE_COL].to_f)
-      end
-
-      if hourly_samples != nil then
-        samples[Date.new(year, month, day)] = hourly_samples
+        (samples[Date.new(year, month, day)] ||= []) << Sample.new(timestamp, value)
       end
 
       samples

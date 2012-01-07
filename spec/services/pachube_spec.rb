@@ -6,8 +6,8 @@ describe SmarterMeter::Services::Pachube do
     @subject = SmarterMeter::Services::Pachube.new(:api_key => "secret",
                                                    :feed_id => "1",
                                                    :datastream_id => "1")
-    data = File.read(File.join($FIXTURES_DIR, 'data.csv'))
-    @results = SmarterMeter::Samples.parse_csv(data)
+    data = File.read(File.join($FIXTURES_DIR, 'data.xml'))
+    @results = SmarterMeter::Samples.parse_espi(data)
   end
 
   it "can format a request for the API" do
