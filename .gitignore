@@ -1,7 +1,6 @@
 *.swp
 *.png
 .bundle/*
-.rvmrc
 docs/*
 doc/*
 .yardoc/*
