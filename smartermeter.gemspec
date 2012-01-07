@@ -52,6 +52,7 @@ Gem::Specification.new do |s|
   s.add_dependency('crypt19', ["= 1.2.1"])
   s.add_dependency('rest-client', ["= 1.6.1"])
   s.add_dependency('json_pure', ["= 1.5.1"])
+  s.add_dependency('rubyzip', ["= 0.9.5"])
 
   ## List your development dependencies here. Development dependencies are
   ## those that are only needed during development
