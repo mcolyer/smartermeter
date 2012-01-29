@@ -6,8 +6,8 @@ really want to jump through 37 hoops to see the data on PG&E's website.
 So I made this.
 
 While making this library I discovered that PG&E doesn't even manage the
-software for the energy reporting. It's all done by energyguide.com. Not
-terribly useful but an interesting piece of trivia.
+software for the energy reporting. It's all done by OPower, not terribly
+useful but an interesting piece of trivia.
 
 Getting Started
 ---------------
