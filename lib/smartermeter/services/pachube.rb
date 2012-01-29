@@ -10,7 +10,7 @@ module SmarterMeter
         raise "The Pachube datastream id must be configured" unless @config[:datastream_id]
       end
 
-      # Public: Uploads an array of Samples to Google PowerMeter
+      # Public: Uploads an array of Samples to Pachube
       #
       # samples - An array of samples to upload
       #
