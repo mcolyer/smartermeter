@@ -215,6 +215,7 @@ task :gemspec => :validate do
     reject { |file| file =~ /^\./ }.
     reject { |file| file =~ /^(rdoc|pkg)/ }.
     reject { |file| file =~ /\.jar$/ }.
+    reject { |file| file =~ /^spec\// }.
     map { |file| "    #{file}" }.
     join("\n")
 
