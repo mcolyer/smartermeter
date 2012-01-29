@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   ## If your rubyforge_project name is different, then edit it and comment out
   ## the sub! line in the Rakefile
   s.name              = 'smartermeter'
-  s.version           = '0.3.3'
-  s.date              = '2011-04-21'
+  s.version           = '0.4.0'
+  s.date              = '2012-01-28'
   s.rubyforge_project = 'smartermeter'
 
   ## Make sure your summary is short. The description may be as long
@@ -88,18 +88,9 @@ Gem::Specification.new do |s|
     lib/smartermeter/service.rb
     lib/smartermeter/services/brighterplanet.rb
     lib/smartermeter/services/cacert.pem
-    lib/smartermeter/services/google_powermeter.erb
-    lib/smartermeter/services/google_powermeter.rb
+    lib/smartermeter/services/pachube.erb
+    lib/smartermeter/services/pachube.rb
     smartermeter.gemspec
-    spec/fixtures/data.csv
-    spec/fixtures/expected_google_request.xml
-    spec/fixtures/vcr_cassettes/brighterplanet.yml
-    spec/sample_spec.rb
-    spec/samples_spec.rb
-    spec/service_spec.rb
-    spec/services/brighterplanet_spec.rb
-    spec/services/google_powermeter_spec.rb
-    spec/spec_helper.rb
   ]
   # = MANIFEST =
 

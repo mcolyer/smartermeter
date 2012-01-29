@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0 (January 28, 2012)
+* Removed Google PowerMeter as it no longer exists
+* Rewrote PG&E scraper to work with OPower, their new web data provider.
+* Handle passwords greater than 8 characters.
+* Remove spec files from the gem.
+
 ## 0.3.3 (April 20, 2011)
 * Fixed a bug which prevent the proper Google PowerMeter authentication
   information to be sent.
