@@ -63,11 +63,9 @@ module SmarterMeter
 
       begin
         form = @data_page.forms.first
-        begin
-          form.radiobutton_with(:value => 'ESPI_INTERVAL').click
-          form.field_with(:name => 'from').value = date.strftime("%m/%d/%Y")
-          form.field_with(:name => 'to').value = date.strftime("%m/%d/%Y")
-        end
+        form.radiobutton_with(:name => 'exportFormat', :value => 'ESPI_INTERVAL').check
+        form['from'] = date.strftime("%m/%d/%Y")
+        form['to'] = date.strftime("%m/%d/%Y")
         espi_xml_zip = form.submit
 
         # This has to be one of the stupidest implementations I've seen
