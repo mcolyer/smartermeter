@@ -7,5 +7,5 @@ require 'smartermeter/services/brighterplanet'
 require 'smartermeter/interfaces/cli'
 
 module SmarterMeter
-  VERSION = "0.4.0"
+  VERSION = "0.4.1"
 end
