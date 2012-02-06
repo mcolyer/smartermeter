@@ -182,10 +182,9 @@ module SmarterMeter
           next if data.empty?
 
           @ui.log.info("Verifying #{date}")
-          samples = Samples.parse_espi(data).values.first
-          first_sample = samples.first
+          samples = Samples.parse_espi(data).values
 
-          if first_sample.kwh
+          if samples.any?
             @ui.log.info("Saving #{date}")
             FileUtils.mkdir_p(File.dirname(data_file(date)))
             File.open(data_file(date), "w") do |f|
