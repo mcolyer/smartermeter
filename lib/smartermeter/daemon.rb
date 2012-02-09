@@ -220,7 +220,7 @@ module SmarterMeter
     # Returns an Array of Date objects containing all dates since start_date
     # missing power data.
     def dates_requiring_data
-      collected = Dir.glob(File.join(@config[:data_dir], "*-*-*.csv")).map { |f| File.basename(f, ".csv") }
+      collected = Dir.glob(File.join(@config[:data_dir], "*-*-*.{csv,espi}")).map { |f| File.basename(f).split(".")[0] }
       all_days = []
 
       count_of_days = (Date.today - @config[:start_date]).to_i
