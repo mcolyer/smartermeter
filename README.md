@@ -27,7 +27,7 @@ to manipulate it using ruby like so:
     config = YAML.load_file(File.expand_path("~/.smartermeter"))
     csv_file = Dir.glob(File.join(config[:data_dir], "*.csv")).last
 
-    samples = SmarterMeter::Samples.parse_csv(csv_file)
+    samples = SmarterMeter::Samples.parse_espi(csv_file)
     kwh_used = samples.total_kwh
     api = SmarterMeter::Services::BrighterPlanet.new
     puts api.calculate_kg_carbon(kwh_used)
