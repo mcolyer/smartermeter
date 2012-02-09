@@ -27,7 +27,7 @@ to manipulate it using ruby like so:
     config = YAML.load_file(File.expand_path("~/.smartermeter"))
     csv_file = Dir.glob(File.join(config[:data_dir], "*.csv")).last
 
-    samples = SmarterMeter::Samples.parse_csv(csv_file)
+    samples = SmarterMeter::Samples.parse_espi(csv_file)
     kwh_used = samples.total_kwh
     api = SmarterMeter::Services::BrighterPlanet.new
     puts api.calculate_kg_carbon(kwh_used)
@@ -48,11 +48,13 @@ Pachube, so you can visualize the results.
 1. Then append the following to your ~/.smartermeter file to
 automatically upload data as it's retrieved from PG&E.
 
-       :transport: :pachube
-       :pachube:
-         :api_key: "your-api-key"
-         :feed_id: "your-feed-id"
-         :datastream_id: "your-datastream-id"
+```
+    :transport: :pachube
+    :pachube:
+        :api_key: "your-api-key"
+        :feed_id: "your-feed-id"
+        :datastream_id: "your-datastream-id"
+```
 
 To Build the Windows Installer
 --------
