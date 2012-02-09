@@ -182,7 +182,7 @@ module SmarterMeter
           next if data.empty?
 
           @ui.log.info("Verifying #{date}")
-          samples = Samples.parse_espi(data).values
+          samples = Samples.parse_espi(data)
 
           if samples.any?
             @ui.log.info("Saving #{date}")
@@ -191,7 +191,7 @@ module SmarterMeter
               f.write(data)
             end
 
-            upload(date, samples)
+            upload(date, samples[date])
 
             @ui.log.info("Completed #{date}")
             completed << date
