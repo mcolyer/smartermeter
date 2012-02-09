@@ -48,11 +48,13 @@ Pachube, so you can visualize the results.
 1. Then append the following to your ~/.smartermeter file to
 automatically upload data as it's retrieved from PG&E.
 
-       :transport: :pachube
-       :pachube:
-         :api_key: "your-api-key"
-         :feed_id: "your-feed-id"
-         :datastream_id: "your-datastream-id"
+```
+    :transport: :pachube
+    :pachube:
+        :api_key: "your-api-key"
+        :feed_id: "your-feed-id"
+        :datastream_id: "your-datastream-id"
+```
 
 To Build the Windows Installer
 --------
