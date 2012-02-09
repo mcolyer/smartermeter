@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.2 (February 9, 2012)
+* Fixed an issue with uploading data to pachube.
+* Fixed README to accurately reflect the new API.
+* Save files with the proper extension (ESPI)
+
 ## 0.4.1 (February 5, 2012)
 * Fixed an issue with downloading multiple days at the same time.
 * Fixed an issue with detecting incomplete data.
