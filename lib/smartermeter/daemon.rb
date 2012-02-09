@@ -31,7 +31,7 @@ module SmarterMeter
 
     # Returns a filename for the data belonging to the given date.
     def data_file(date)
-      File.expand_path(File.join(@config[:data_dir], date.strftime("%Y-%m-%d.csv")))
+      File.expand_path(File.join(@config[:data_dir], date.strftime("%Y-%m-%d.espi")))
     end
 
     # Loads the configuration and prompts for required settings if they are
