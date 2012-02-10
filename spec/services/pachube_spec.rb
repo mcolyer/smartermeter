@@ -3,7 +3,9 @@ require 'spec_helper'
 
 describe SmarterMeter::Services::Pachube do
   before(:each) do
-    @subject = SmarterMeter::Services::Pachube.new(:api_key => "secret",
+    @ui = mock("UI")
+    @subject = SmarterMeter::Services::Pachube.new(@ui,
+                                                   :api_key => "secret",
                                                    :feed_id => "1",
                                                    :datastream_id => "1")
     data = File.read(File.join($FIXTURES_DIR, 'data.xml'))

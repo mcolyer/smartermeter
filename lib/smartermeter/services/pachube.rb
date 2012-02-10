@@ -3,7 +3,8 @@ require 'net/https'
 module SmarterMeter
   module Services
     class Pachube
-      def initialize(config)
+      def initialize(ui, config)
+        @ui = ui
         @config = config
         raise "The Pachube token must be configured" unless @config[:api_key]
         raise "The Pachube feed id must be configured" unless @config[:feed_id]
@@ -22,6 +23,7 @@ module SmarterMeter
         http.verify_mode = OpenSSL::SSL::VERIFY_PEER
         http.ca_file = File.join(File.dirname(__FILE__), "cacert.pem")
         res, body = http.post(url.path, request_body(samples), {"X-PachubeApiKey" => @config[:api_key], "Content-Type" => "text/csv"})
+        @ui.log.debug("Pacube Response: #{res}")
         case res
         when Net::HTTPSuccess
           true

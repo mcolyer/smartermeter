@@ -6,6 +6,11 @@ begin
 rescue Exception
 end
 require 'smartermeter'
+require 'trollop'
 
-interface = SmarterMeter::Interfaces::CLI.new
+options = Trollop::options do
+  opt :debug, "Enable debugging statements", :default => false
+end
+
+interface = SmarterMeter::Interfaces::CLI.new(options)
 SmarterMeter::Daemon.new(interface).start

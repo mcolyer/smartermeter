@@ -208,7 +208,7 @@ module SmarterMeter
       case @config[:transport]
       when :pachube
         @ui.log.info("Uploading #{date} to Pachube")
-        transport = SmarterMeter::Services::Pachube.new(@config[:pachube])
+        transport = SmarterMeter::Services::Pachube.new(@ui, @config[:pachube])
         if transport.upload(samples)
           @ui.log.info("Upload for #{date} complete")
         else

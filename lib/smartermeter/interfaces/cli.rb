@@ -3,11 +3,21 @@ require 'logger'
 module SmarterMeter
   module Interfaces
     class CLI
+      def initialize(options)
+        @options = options
+      end
+
       # Returns a logger like interface to log errors and warnings to.
       def log
         return @logger if @logger
         @logger = Logger.new STDOUT
-        @logger.level = Logger::INFO
+
+        if @options[:debug]
+          @logger.level = Logger::DEBUG
+        else
+          @logger.level = Logger::INFO
+        end
+
         @logger
       end
 
