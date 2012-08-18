@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.3 (August 18, 2012)
+* Fixed an issue with downloading data from PG&E.
+
 ## 0.4.2 (February 9, 2012)
 * Fixed an issue with uploading data to pachube.
 * Fixed README to accurately reflect the new API.
