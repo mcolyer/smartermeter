@@ -1,6 +1,8 @@
 SmarterMeter - the smarter way to read your PG&E SmartMeter
 =========================================================
 
+[![Build Status](https://travis-ci.org/mcolyer/smartermeter.png?branch=master)](https://travis-ci.org/mcolyer/smartermeter)
+
 So I have PG&E SmartMeter and I like playing with data. However I didn't
 really want to jump through 37 hoops to see the data on PG&E's website.
 So I made this.
