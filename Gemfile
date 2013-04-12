@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 gemspec
 
 # Used only in the Java client, which isn't distributed as a gem
