@@ -46,7 +46,7 @@ module SmarterMeter
     # @return [Float] the sum of kilowatt hours for samples made of the given day. If none are found 0 is returned.
     def total_kwh_on(date)
       if self[date]
-        self[date].reduce(0) { |sum, s| sum + (s.kwh or 0) }
+        self[date].map { |s| s.kwh || 0 }.reduce(:+)
       else
         0
       end
