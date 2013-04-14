@@ -16,17 +16,11 @@ module SmarterMeter
       doc = Nokogiri::HTML(data)
 
       doc.xpath("//intervalreading").each do |reading|
-        # NOTE: This is a hack, the ESPI data seems to be assuming that
-        # all users live in the Eastern Time Zone. The timestamps
-        # returned in the ESPI should really be in UTC and not in local
-        # time. I'm going to assume all PG&E customers are in the
-        # pacific timezone and since the eastern timezone has the same
-        # daylight savings time rules then we can use a constant
-        # difference to correct the problem.
-        pacific_timezone_correction = 60*60*3
+        timestamp = reading.xpath("./timeperiod/start").first.content.to_i
+        timestamp = Time.at(timestamp).utc
 
-        timestamp = Time.at(reading.xpath("./timeperiod/start").first.content.to_i + pacific_timezone_correction)
         value = reading.xpath("./value").first.content.to_i / 900.0
+        value = ((value * 100).truncate / 100.0)
 
         year = timestamp.year
         month = timestamp.month
