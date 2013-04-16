@@ -191,7 +191,7 @@ module SmarterMeter
               f.write(data)
             end
 
-            upload(date, samples[date])
+            upload(date, samples.on(date))
 
             @ui.log.info("Completed #{date}")
             completed << date
