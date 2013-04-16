@@ -23,7 +23,7 @@ module SmarterMeter
         http.verify_mode = OpenSSL::SSL::VERIFY_PEER
         http.ca_file = File.join(File.dirname(__FILE__), "cacert.pem")
         res, body = http.post(url.path, request_body(samples), {"X-PachubeApiKey" => @config[:api_key], "Content-Type" => "text/csv"})
-        @ui.log.debug("Pacube Response: #{res}")
+        @ui.log.debug("Pachube Response: #{res}")
         case res
         when Net::HTTPSuccess
           true
