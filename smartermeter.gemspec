@@ -50,18 +50,18 @@ Gem::Specification.new do |s|
   ## that are needed for an end user to actually USE your code.
   s.add_dependency('mechanize', ["= 2.6.0"])
   s.add_dependency('crypt19-rb', ["= 1.2.1"])
-  s.add_dependency('rest-client', ["= 1.6.1"])
-  s.add_dependency('json_pure', ["= 1.5.1"])
-  s.add_dependency('rubyzip', ["= 0.9.5"])
-  s.add_dependency('trollop', ["= 1.16.2"])
+  s.add_dependency('rest-client', ["= 1.6.7"])
+  s.add_dependency('json_pure', ["= 1.7.7"])
+  s.add_dependency('rubyzip', ["= 0.9.9"])
+  s.add_dependency('trollop', ["= 2.0"])
 
   ## List your development dependencies here. Development dependencies are
   ## those that are only needed during development
   s.add_development_dependency('rake', ["~> 10.0.0"])
-  s.add_development_dependency('rspec', ["~> 2.8.0"])
-  s.add_development_dependency('vcr', ["~> 1.11.3"])
-  s.add_development_dependency('webmock', ["~> 1.7.10"])
-  s.add_development_dependency('minitar', ["~> 0.5.2"])
+  s.add_development_dependency('rspec', ["~> 2.13.0"])
+  s.add_development_dependency('vcr', ["~> 2.4.0"])
+  s.add_development_dependency('webmock', ["~> 1.9.0"])
+  s.add_development_dependency('minitar', ["~> 0.5.4"])
 
   ## Leave this section as-is. It will be automatically generated from the
   ## contents of your Git repository via the gemspec task. DO NOT REMOVE

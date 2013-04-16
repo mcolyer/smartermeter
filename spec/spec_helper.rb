@@ -9,7 +9,7 @@ require 'smartermeter'
 
 $FIXTURES_DIR = File.expand_path(File.join(File.dirname(__FILE__), "fixtures"))
 
-VCR.config do |c|
+VCR.configure do |c|
   c.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
-  c.stub_with :webmock
+  c.hook_into :webmock
 end
