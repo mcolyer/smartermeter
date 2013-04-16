@@ -48,7 +48,7 @@ Gem::Specification.new do |s|
 
   ## List your runtime dependencies here. Runtime dependencies are those
   ## that are needed for an end user to actually USE your code.
-  s.add_dependency('mechanize', ["= 1.0.0"])
+  s.add_dependency('mechanize', ["= 2.6.0"])
   s.add_dependency('crypt19-rb', ["= 1.2.1"])
   s.add_dependency('rest-client', ["= 1.6.1"])
   s.add_dependency('json_pure', ["= 1.5.1"])
