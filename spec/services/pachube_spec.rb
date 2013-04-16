@@ -16,7 +16,7 @@ describe SmarterMeter::Services::Pachube do
     fixture_file = File.join(File.dirname(__FILE__), "..", "fixtures", "expected_pachube_request.csv")
     expected_result = File.read(fixture_file)
 
-    samples = @results.values.first
+    samples = @results.on(DateTime.new(2013, 4, 9, 0, 0, 0, -7))
     @subject.request_body(samples).should == expected_result
   end
 end
