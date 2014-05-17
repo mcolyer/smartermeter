@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.4 (May 17, 2014)
+* Fixed an issue with downloading data from PG&E.
+
 ## 0.4.3 (August 18, 2012)
 * Fixed an issue with downloading data from PG&E.
 
