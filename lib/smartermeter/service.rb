@@ -44,7 +44,7 @@ module SmarterMeter
           end.submit
           token = saml_page.form_with(:action => SAML_URL).submit
           usage_page = token.form_with(:action => MY_ENERGY_USE_URL).submit
-          @data_page = usage_page.link_with(:text => "Green Button").click
+          @data_page = usage_page.link_with(:text => "Green Button - Download my data").click
         end
         @authenticated = true
       rescue Exception => e
