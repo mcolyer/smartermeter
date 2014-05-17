@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   ## If your rubyforge_project name is different, then edit it and comment out
   ## the sub! line in the Rakefile
   s.name              = 'smartermeter'
-  s.version           = '0.4.3'
-  s.date              = '2012-08-18'
+  s.version           = '0.4.4'
+  s.date              = '2014-05-17'
   s.rubyforge_project = 'smartermeter'
 
   ## Make sure your summary is short. The description may be as long
