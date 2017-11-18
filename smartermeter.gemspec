@@ -61,7 +61,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rspec', ["~> 2.13.0"])
   s.add_development_dependency('vcr', ["~> 2.4.0"])
   s.add_development_dependency('webmock', ["~> 1.9.0"])
-  s.add_development_dependency('minitar', ["~> 0.5.4"])
+  s.add_development_dependency('minitar', ["~> 0.6.0"])
 
   ## Leave this section as-is. It will be automatically generated from the
   ## contents of your Git repository via the gemspec task. DO NOT REMOVE
