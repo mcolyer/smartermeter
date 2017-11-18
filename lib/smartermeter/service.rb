@@ -1,7 +1,7 @@
 require 'mechanize'
 require 'csv'
 require 'tempfile'
-require 'zip/zip'
+require 'zip'
 require 'uri'
 
 module SmarterMeter
