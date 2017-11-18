@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   ## the sub! line in the Rakefile
   s.name              = 'smartermeter'
   s.version           = '0.4.5'
-  s.date              = '2017-11-17'
+  s.date              = '2017-11-18'
   s.rubyforge_project = 'smartermeter'
 
   ## Make sure your summary is short. The description may be as long
