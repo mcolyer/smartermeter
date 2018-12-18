@@ -5,6 +5,6 @@ workflow "Run tests" {
 
 action "docker://ruby" {
   uses = "docker://ruby"
-  runs = "ruby"
-  args = "-v"
+  runs = "rake"
+  args = "spec"
 }
