@@ -59,7 +59,7 @@ Gem::Specification.new do |s|
   ## those that are only needed during development
   s.add_development_dependency('rake', ["~> 10.0.0"])
   s.add_development_dependency('rspec', ["~> 2.13.0"])
-  s.add_development_dependency('vcr', ["~> 2.4.0"])
+  s.add_development_dependency('vcr', ["~> 5.0.0"])
   s.add_development_dependency('webmock', ["~> 1.9.0"])
   s.add_development_dependency('minitar', ["~> 0.6.0"])
 
