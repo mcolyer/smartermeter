@@ -60,7 +60,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rake', ["~> 10.0.0"])
   s.add_development_dependency('rspec', ["~> 2.13.0"])
   s.add_development_dependency('vcr', ["~> 5.0.0"])
-  s.add_development_dependency('webmock', ["~> 1.9.0"])
+  s.add_development_dependency('webmock', ["~> 3.7.0"])
   s.add_development_dependency('minitar', ["~> 0.6.0"])
 
   ## Leave this section as-is. It will be automatically generated from the
