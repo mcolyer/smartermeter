@@ -50,7 +50,7 @@ Gem::Specification.new do |s|
   ## that are needed for an end user to actually USE your code.
   s.add_dependency('mechanize', ["= 2.6.0"])
   s.add_dependency('crypt19-rb', ["= 1.3.1"])
-  s.add_dependency('rest-client', ["= 1.7.3"])
+  s.add_dependency('rest-client', ["= 2.1.0"])
   s.add_dependency('json_pure', ["= 1.7.7"])
   s.add_dependency('rubyzip', ["= 1.2.1"])
   s.add_dependency('trollop', ["= 2.0"])
@@ -59,8 +59,8 @@ Gem::Specification.new do |s|
   ## those that are only needed during development
   s.add_development_dependency('rake', ["~> 10.0.0"])
   s.add_development_dependency('rspec', ["~> 2.13.0"])
-  s.add_development_dependency('vcr', ["~> 2.4.0"])
-  s.add_development_dependency('webmock', ["~> 1.9.0"])
+  s.add_development_dependency('vcr', ["~> 5.0.0"])
+  s.add_development_dependency('webmock', ["~> 3.7.0"])
   s.add_development_dependency('minitar', ["~> 0.6.0"])
 
   ## Leave this section as-is. It will be automatically generated from the
