@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.6 (Aug 27, 2019)
+* Updated out of date gems
+
 ## 0.4.4 (May 17, 2014)
 * Fixed an issue with downloading data from PG&E.
 
