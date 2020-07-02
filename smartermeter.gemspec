@@ -57,7 +57,7 @@ Gem::Specification.new do |s|
 
   ## List your development dependencies here. Development dependencies are
   ## those that are only needed during development
-  s.add_development_dependency('rake', ["~> 10.0.0"])
+  s.add_development_dependency('rake', ["~> 12.3.3"])
   s.add_development_dependency('rspec', ["~> 2.13.0"])
   s.add_development_dependency('vcr', ["~> 5.0.0"])
   s.add_development_dependency('webmock', ["~> 3.7.0"])
