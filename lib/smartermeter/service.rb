@@ -78,7 +78,7 @@ module SmarterMeter
           file.flush
           file.close
 
-          Zip::ZipInputStream::open(file.path) do |contents|
+          Zip::InputStream.open(file.path) do |contents|
             while (entry = contents.get_next_entry)
               if (entry.name =~ /pge_electric_interval_data/) then
                 return contents.read
