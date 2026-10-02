@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+* Update rubyzip to 3.4 to address CVE-2026-85396.
+
 ## 0.4.6 (Aug 27, 2019)
 * Updated out of date gems
 
