@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe SmarterMeter::Services::Pachube do
   before(:each) do
-    @ui = mock("UI")
+    @ui = double("UI")
     @subject = SmarterMeter::Services::Pachube.new(@ui,
                                                    :api_key => "secret",
                                                    :feed_id => "1",

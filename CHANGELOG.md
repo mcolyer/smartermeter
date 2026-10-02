@@ -2,6 +2,8 @@
 
 ## Unreleased
 * Update rubyzip to 3.4 to address CVE-2026-85396.
+* Run CI on Ruby 3.2 with current Rake and RSpec versions.
+* Update the JSON dependency for Ruby 3 compatibility.
 
 ## 0.4.6 (Aug 27, 2019)
 * Updated out of date gems
